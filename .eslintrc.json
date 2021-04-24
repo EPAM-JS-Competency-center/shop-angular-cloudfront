@@ -31,7 +31,8 @@
             "prefix": "app",
             "style": "camelCase"
           }
-        ]
+        ],
+        "rxjs/no-subject-value": [0]
       }
     },
     {

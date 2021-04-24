@@ -16,12 +16,41 @@
   </mat-card-content>
 
   <mat-card-actions>
+    <!-- Add to cart btn -->
     <button
+      #cartBtn
+      *ngIf="(countInCart$ | async) === 0"
+      (click)="add()"
       color="accent"
       matTooltip="Add {{ product.title }} to cart"
       mat-icon-button
     >
       <mat-icon>shopping_cart</mat-icon>
     </button>
+
+    <ng-container *ngIf="(countInCart$ | async)! > 0">
+      <!-- Remove from cart btn -->
+      <button
+        (click)="remove()"
+        color="accent"
+        matTooltip="Remove {{ product.title }} from cart"
+        mat-icon-button
+      >
+        <mat-icon>remove</mat-icon>
+      </button>
+
+      {{ countInCart$ | async }}
+
+      <!-- Add to cart btn -->
+      <button
+        #addBtn
+        (click)="add()"
+        color="accent"
+        matTooltip="Add {{ product.title }} to cart"
+        mat-icon-button
+      >
+        <mat-icon>add</mat-icon>
+      </button>
+    </ng-container>
   </mat-card-actions>
 </mat-card>
