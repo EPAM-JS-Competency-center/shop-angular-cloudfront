@@ -1,0 +1,24 @@
+<mat-toolbar color="primary">
+  <span>E-shop</span>
+
+  <div class="d-flex flex-fill"></div>
+
+  <!-- Account btn -->
+  <button
+    [matMenuTriggerFor]="menu"
+    matTooltip="Open account menu"
+    mat-icon-button
+  >
+    <mat-icon>account_circle</mat-icon>
+  </button>
+
+  <!-- Cart btn -->
+  <button routerLink="/" matTooltip="Go to cart" mat-icon-button>
+    <mat-icon>shopping_cart</mat-icon>
+  </button>
+</mat-toolbar>
+
+<mat-menu #menu="matMenu">
+  <a routerLink="/" mat-menu-item>Manage orders</a>
+  <a routerLink="/" mat-menu-item>Manage products</a>
+</mat-menu>

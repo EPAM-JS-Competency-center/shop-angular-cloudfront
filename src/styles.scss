@@ -1,1 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+
+@import "~bootstrap/scss/bootstrap-reboot";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/utilities";
+
+.mat-icon-button {
+  // Fix vertical alignment for Firefox
+  line-height: 1 !important;
+}
