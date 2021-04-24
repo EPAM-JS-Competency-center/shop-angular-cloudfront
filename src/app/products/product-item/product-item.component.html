@@ -1,0 +1,27 @@
+<mat-card>
+  <div mat-card-image class="img-container">
+    <div class="img-container__inner">
+      <img src="https://source.unsplash.com/random?sig={{ index }}" alt="" />
+    </div>
+  </div>
+
+  <header>
+    <mat-card-title>
+      {{ product.title }}
+    </mat-card-title>
+  </header>
+
+  <mat-card-content>
+    <p>{{ product.price | number: "1.2-2" | currency }}</p>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button
+      color="accent"
+      matTooltip="Add {{ product.title }} to cart"
+      mat-icon-button
+    >
+      <mat-icon>shopping_cart</mat-icon>
+    </button>
+  </mat-card-actions>
+</mat-card>
