@@ -13,6 +13,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { ProductsModule } from './products/products.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
+import { CartModule } from './cart/cart.module';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -26,6 +27,7 @@ import { MatBadgeModule } from '@angular/material/badge';
     MatMenuModule,
     MatTooltipModule,
     ProductsModule,
+    CartModule,
     HttpClientModule,
     MatBadgeModule,
   ],

@@ -2,7 +2,8 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { Product } from '../product.interface';
 import { CartService } from '../../cart/cart.service';
 import { Observable } from 'rxjs';
-import { map, pairwise, shareReplay, startWith } from 'rxjs/operators';
+import { map, shareReplay, tap } from 'rxjs/operators';
+import { CartCountControlsComponent } from '../../core/cart-count-controls/cart-count-controls.component';
 
 @Component({
   selector: 'app-product-item',
@@ -16,8 +17,8 @@ export class ProductItemComponent implements OnInit {
   @ViewChild('cartBtn', { static: false, read: ElementRef }) cartBtn:
     | ElementRef<HTMLButtonElement>
     | undefined;
-  @ViewChild('addBtn', { static: false, read: ElementRef }) addBtn:
-    | ElementRef<HTMLButtonElement>
+  @ViewChild('controls', { static: false }) countControls:
+    | CartCountControlsComponent
     | undefined;
 
   countInCart$!: Observable<number>;
@@ -55,18 +56,18 @@ export class ProductItemComponent implements OnInit {
 
   /** Move focus to a corresponding control when controls switch */
   private updateFocusIfNeeded() {
+    let prev: number;
+
     return (observable: Observable<number>): Observable<number> =>
       observable.pipe(
-        startWith(0),
-        pairwise(),
-        map(([prev, curr]) => {
+        tap((curr) => {
           if (prev === 0 && curr === 1) {
-            setTimeout(() => this.addBtn?.nativeElement.focus());
-          } else if (prev > 1 && curr === 1) {
+            setTimeout(() => this.countControls?.focusAddBtn());
+          } else if (prev === 1 && curr === 0) {
             setTimeout(() => this.cartBtn?.nativeElement.focus());
           }
 
-          return curr;
+          prev = curr;
         })
       );
   }

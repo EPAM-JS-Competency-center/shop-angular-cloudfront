@@ -9,6 +9,12 @@ body {
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/utilities";
+@import "~bootstrap/scss/bootstrap-grid";
+@import "~bootstrap/scss/type";
+
+body {
+  overflow-y: scroll;
+}
 
 .mat-icon-button {
   // Fix vertical alignment for Firefox

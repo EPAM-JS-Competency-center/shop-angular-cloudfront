@@ -1,1 +1,124 @@
-<p>cart works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col mx-auto py-3 py-md-5">
+      <mat-card>
+        <h1 class="text-center pt-4" mat-card-title>Checkout</h1>
+
+        <mat-card-content>
+          <mat-vertical-stepper #stepper [linear]="true">
+            <!-- Review your cart STEP -->
+            <mat-step label="Review your cart" [completed]="cartEmpty$ | async">
+              <ng-container *ngIf="cartEmpty$ | async; else emptyCartTemplate">
+                <ng-container
+                  *ngIf="(loading$ | async) === false"
+                  [ngTemplateOutlet]="orderSummaryTemplate"
+                  [ngTemplateOutletContext]="{ showControls: true }"
+                ></ng-container>
+
+                <div *ngIf="loading$ | async" class="py-5">
+                  <mat-spinner [diameter]="40" class="mx-auto"></mat-spinner>
+                </div>
+
+                <div class="text-right">
+                  <button
+                    color="primary"
+                    class="text-uppercase"
+                    mat-flat-button
+                    matStepperNext
+                  >
+                    next
+                  </button>
+                </div>
+              </ng-container>
+            </mat-step>
+
+            <!-- Shipping address STEP -->
+            <mat-step label="Shipping address" [stepControl]="shippingInfo">
+              <h2>Shipping address</h2>
+
+              <app-cart-shipping-form
+                (nextStep)="stepper.next()"
+                [shippingInfo]="shippingInfo"
+              ></app-cart-shipping-form>
+
+              <div class="text-right">
+                <button class="text-uppercase" mat-button matStepperPrevious>
+                  back
+                </button>
+                <button
+                  color="primary"
+                  class="text-uppercase"
+                  mat-flat-button
+                  matStepperNext
+                >
+                  next
+                </button>
+              </div>
+            </mat-step>
+
+            <!-- Review your order STEP -->
+            <mat-step label="Review your order">
+              <ng-container
+                [ngTemplateOutlet]="orderSummaryTemplate"
+                [ngTemplateOutletContext]="{ showControls: false }"
+              ></ng-container>
+
+              <div class="row">
+                <div class="col col-md-6">
+                  <h2>Shipping</h2>
+                  <p>{{ fullName }}</p>
+                  <p>{{ address }}</p>
+                </div>
+                <div class="col col-md-6">
+                  <h2>Comment</h2>
+                  <p>{{ comment }}</p>
+                </div>
+              </div>
+
+              <div class="text-right">
+                <button class="text-uppercase" mat-button matStepperPrevious>
+                  back
+                </button>
+                <button color="primary" class="text-uppercase" mat-flat-button>
+                  place order
+                </button>
+              </div>
+            </mat-step>
+          </mat-vertical-stepper>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<ng-template #orderSummaryTemplate let-showControls="showControls">
+  <h2>Order summary</h2>
+
+  <ng-container>
+    <app-product-item-checkout
+      *ngFor="let product of products$ | async"
+      (add)="add(product.id)"
+      (remove)="remove(product.id)"
+      [product]="product"
+      [hideControls]="!showControls"
+    ></app-product-item-checkout>
+  </ng-container>
+
+  <div class="row">
+    <h3 class="col flex-grow-1">Shipping</h3>
+    <span class="col flex-grow-0">Free</span>
+  </div>
+
+  <div class="row">
+    <h3 class="col flex-grow-1">Total</h3>
+    <b class="col flex-grow-0" style="font-size: 18px">{{
+      totalPrice$ | async | number: "1.2-2" | currency
+    }}</b>
+  </div>
+</ng-template>
+
+<ng-template #emptyCartTemplate>
+  <div class="lead">
+    The cart is empty. Didn't you like anything in our shop?
+  </div>
+</ng-template>

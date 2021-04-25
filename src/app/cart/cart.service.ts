@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +20,10 @@ export class CartService {
       }
 
       return values.reduce((acc, val) => acc + val, 0);
+    }),
+    shareReplay({
+      refCount: true,
+      bufferSize: 1,
     })
   );
 
