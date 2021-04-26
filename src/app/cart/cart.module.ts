@@ -12,12 +12,14 @@ import { ProductItemCheckoutComponent } from './product-item-checkout/product-it
 import { CartCountControlsModule } from '../core/cart-count-controls/cart-count-controls.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CartShippingFormComponent } from './cart-shipping-form/cart-shipping-form.component';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 @NgModule({
   declarations: [
     CartComponent,
     ProductItemCheckoutComponent,
     CartShippingFormComponent,
+    OrderSummaryComponent,
   ],
   imports: [
     CommonModule,

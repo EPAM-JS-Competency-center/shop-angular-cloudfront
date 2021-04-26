@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CheckoutService } from './checkout.service';
 import { ProductCheckout } from '../products/product.interface';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Observable } from 'rxjs';
 import { CartService } from './cart.service';
-import { map, shareReplay, tap } from 'rxjs/operators';
+import { map, shareReplay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-cart',
@@ -19,7 +19,6 @@ import { map, shareReplay, tap } from 'rxjs/operators';
   ],
 })
 export class CartComponent implements OnInit {
-  loading$ = new BehaviorSubject(true);
   products$!: Observable<ProductCheckout[]>;
   totalPrice$!: Observable<number>;
   totalInCart$!: Observable<number>;
@@ -55,7 +54,6 @@ export class CartComponent implements OnInit {
     });
 
     this.products$ = this.checkoutService.getProductsForCheckout().pipe(
-      tap(() => this.loading$.next(false)),
       shareReplay({
         refCount: true,
         bufferSize: 1,

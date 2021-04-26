@@ -1,4 +1,11 @@
-<div class="container">
+<div
+  *ngIf="{
+    products: products$ | async,
+    totalPrice: totalPrice$ | async,
+    cartEmpty: cartEmpty$ | async
+  } as state"
+  class="container"
+>
   <div class="row">
     <div class="col mx-auto py-3 py-md-5">
       <mat-card>
@@ -7,17 +14,22 @@
         <mat-card-content>
           <mat-vertical-stepper #stepper [linear]="true">
             <!-- Review your cart STEP -->
-            <mat-step label="Review your cart" [completed]="cartEmpty$ | async">
-              <ng-container *ngIf="cartEmpty$ | async; else emptyCartTemplate">
-                <ng-container
-                  *ngIf="(loading$ | async) === false"
-                  [ngTemplateOutlet]="orderSummaryTemplate"
-                  [ngTemplateOutletContext]="{ showControls: true }"
-                ></ng-container>
+            <mat-step label="Review your cart" [completed]="state.cartEmpty">
+              <ng-container *ngIf="state.cartEmpty; else emptyCartTemplate">
+                <app-order-summary
+                  *ngIf="state.products; else loaderTemplate"
+                  (add)="add($event)"
+                  (remove)="remove($event)"
+                  [products]="state.products"
+                  [totalPrice]="state.totalPrice!"
+                  [showControls]="true"
+                ></app-order-summary>
 
-                <div *ngIf="loading$ | async" class="py-5">
-                  <mat-spinner [diameter]="40" class="mx-auto"></mat-spinner>
-                </div>
+                <ng-template #loaderTemplate>
+                  <div class="py-5">
+                    <mat-spinner [diameter]="40" class="mx-auto"></mat-spinner>
+                  </div>
+                </ng-template>
 
                 <div class="text-right">
                   <button
@@ -58,10 +70,12 @@
 
             <!-- Review your order STEP -->
             <mat-step label="Review your order">
-              <ng-container
-                [ngTemplateOutlet]="orderSummaryTemplate"
-                [ngTemplateOutletContext]="{ showControls: false }"
-              ></ng-container>
+              <app-order-summary
+                *ngIf="state.products"
+                [products]="state.products"
+                [totalPrice]="state.totalPrice!"
+                [showControls]="false"
+              ></app-order-summary>
 
               <div class="row">
                 <div class="col col-md-6">
@@ -90,32 +104,6 @@
     </div>
   </div>
 </div>
-
-<ng-template #orderSummaryTemplate let-showControls="showControls">
-  <h2>Order summary</h2>
-
-  <ng-container>
-    <app-product-item-checkout
-      *ngFor="let product of products$ | async"
-      (add)="add(product.id)"
-      (remove)="remove(product.id)"
-      [product]="product"
-      [hideControls]="!showControls"
-    ></app-product-item-checkout>
-  </ng-container>
-
-  <div class="row">
-    <h3 class="col flex-grow-1">Shipping</h3>
-    <span class="col flex-grow-0">Free</span>
-  </div>
-
-  <div class="row">
-    <h3 class="col flex-grow-1">Total</h3>
-    <b class="col flex-grow-0" style="font-size: 18px">{{
-      totalPrice$ | async | number: "1.2-2" | currency
-    }}</b>
-  </div>
-</ng-template>
 
 <ng-template #emptyCartTemplate>
   <div class="lead">
