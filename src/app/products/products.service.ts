@@ -1,17 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { Product } from './product.interface';
 import { map } from 'rxjs/operators';
+import { ApiService } from '../core/api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ProductsService {
-  constructor(private readonly http: HttpClient) {}
-
+export class ProductsService extends ApiService {
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('/assets/products.json');
+    if (!this.endpointEnabled('bff')) {
+      return this.http.get<Product[]>('/assets/products.json');
+    }
+
+    const url = this.getUrl('bff', 'products');
+    return this.http.get<Product[]>(url);
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {

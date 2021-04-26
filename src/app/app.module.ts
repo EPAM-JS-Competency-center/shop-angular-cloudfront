@@ -14,6 +14,8 @@ import { ProductsModule } from './products/products.module';
 import { HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CartModule } from './cart/cart.module';
+import { CONFIG_TOKEN } from './core/injection-tokens/config.token';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -31,7 +33,12 @@ import { CartModule } from './cart/cart.module';
     HttpClientModule,
     MatBadgeModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: CONFIG_TOKEN,
+      useValue: environment,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
