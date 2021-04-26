@@ -3,21 +3,16 @@
 @import "~bootstrap/scss/mixins/breakpoints";
 
 .container {
-  --gap: 10px;
-
   display: grid;
   grid-template-columns: 1fr;
 
-  grid-gap: var(--gap);
-  padding: var(--gap);
+  grid-gap: 30px;
 
   @include media-breakpoint-up(md) {
     grid-template-columns: 1fr 1fr;
-    --gap: 20px;
   }
 
   @include media-breakpoint-up(lg) {
     grid-template-columns: 1fr 1fr 1fr;
-    --gap: 30px;
   }
 }
