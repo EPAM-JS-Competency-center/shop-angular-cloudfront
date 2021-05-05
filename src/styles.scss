@@ -20,3 +20,14 @@ body {
   // Fix vertical alignment for Firefox
   line-height: 1 !important;
 }
+
+// snackbar styles
+.shop-snackbar-error {
+  background-color: #ff0015;
+  color: white;
+
+  button {
+    color: white;
+    border: 1px solid;
+  }
+}
