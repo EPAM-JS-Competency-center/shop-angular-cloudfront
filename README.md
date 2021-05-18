@@ -8,7 +8,7 @@ Repo maintainers:
 
 ## The purpose
 
-The repository was created to have an Angular version of e-shop for RS School's NodeJS AWS course. At the same time we strive to make this repository follow best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
+The repository was created to have an Angular version of e-shop for EPAM NodeJS AWS course. At the same time we strive to make this repository follows best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
 
 ## NodeJS AWS course integration
 
