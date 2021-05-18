@@ -1,27 +1,31 @@
-# App
+# Shop Angular Cloudfront
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.10.
+Angular version: ~12.
 
-## Development server
+Repo maintainers:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- [Sergey Gultyayev](https://github.com/gultyaev)
 
-## Code scaffolding
+## The purpose
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The repository was created to have an Angular version of e-shop for RS School's NodeJS AWS course. At the same time we strive to make this repository follow best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
 
-## Build
+## NodeJS AWS course integration
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+All the necessary API endpoints are in the environments files `environment.ts` (for dev builds). Also it contains feature flags to enable/disable endpoints invocations from within the app so to ensure that you don't get errors for not implemented API endpoints.
 
-## Running unit tests
+## Contribution
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Create an issue with the detailed description of the improvement/issue.
 
-## Running end-to-end tests
+If you would like to help implementing some feature, you should ask the maintainers for approval so to ensure that the feature is desired in the repository and no efforts go wasted.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Get up and running
 
-## Further help
+Prerequisites: NodeJS v14
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Follow the steps:
+
+- git clone
+- npm i
+- ng serve
