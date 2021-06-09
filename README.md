@@ -1,3 +1,6 @@
+[CloudFront URL](https://dmnmkzmivl5ru.cloudfront.net/)
+[S3-website](http://my-front-app4.s3-website-eu-west-1.amazonaws.com/)
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
