@@ -20,7 +20,7 @@ export class ProductItemComponent implements OnInit {
   @ViewChild('controls', { static: false }) countControls:
     | CartCountControlsComponent
     | undefined;
-
+  readonly assets: string = '/assets/img/';
   countInCart$!: Observable<number>;
 
   constructor(private readonly cartService: CartService) {}
