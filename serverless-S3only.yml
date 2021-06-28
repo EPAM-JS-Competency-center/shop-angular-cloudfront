@@ -1,0 +1,19 @@
+service: shop-angular-cloudfront
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  region: eu-west-1
+
+plugins:
+  - serverless-finch
+
+custom:
+  ## Serverless-finch configuration
+  client:
+    bucketName: my-app-node
+    distributionFolder: dist/app
+    indexDocument: index.html
+    manageResources: false

@@ -1,10 +1,12 @@
-# Shop Angular Cloudfront
+# Pixel Shop - Angular Cloudfront
 
 Angular version: ~12.
 
-Repo maintainers:
+## CloudFront URL and S3-website
 
-- [Sergey Gultyayev](https://github.com/gultyaev)
+https://dnt9xyt7ssggy.cloudfront.net
+
+http://my-app-node.s3-website-eu-west-1.amazonaws.com/
 
 ## The purpose
 
@@ -13,12 +15,6 @@ The repository was created to have an Angular version of e-shop for EPAM NodeJS 
 ## NodeJS AWS course integration
 
 All the necessary API endpoints are in the environments files `environment.ts` (for dev builds). Also it contains feature flags to enable/disable endpoints invocations from within the app so to ensure that you don't get errors for not implemented API endpoints.
-
-## Contribution
-
-Create an issue with the detailed description of the improvement/issue.
-
-If you would like to help implementing some feature, you should ask the maintainers for approval so to ensure that the feature is desired in the repository and no efforts go wasted.
 
 ## Get up and running
 
