@@ -1,7 +1,11 @@
-S3 website:
+**Manual deployment**
 
-http://serguntchik-nodejs-aws-manual.s3-website-eu-west-1.amazonaws.com/
+S3 (403 response, as required): http://serguntchik-nodejs-aws-manual.s3-website-eu-west-1.amazonaws.com/
 
-CloudFront website:
+CloudFront: https://d2emszb5mio4o2.cloudfront.net/
 
-https://d23x533cdax2wv.cloudfront.net/
+**Automatic deployment**
+
+S3 (403 response, as required): http://serguntchik-shop-service-bucket.s3-website-eu-west-1.amazonaws.com/
+
+CloudFront: https://d23x533cdax2wv.cloudfront.net/
