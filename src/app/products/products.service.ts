@@ -9,15 +9,17 @@ import { ApiService } from '../core/api.service';
 })
 export class ProductsService extends ApiService {
   getProducts(): Observable<Product[]> {
-    if (!this.endpointEnabled('bff')) {
+    if (!this.endpointEnabled('products')) {
       console.warn(
-        'Endpoint "bff" is disabled. To enable change your environment.ts config'
+        'Endpoint "products" is disabled. To enable change your environment.ts config'
       );
       return this.http.get<Product[]>('/assets/products.json');
     }
 
-    const url = this.getUrl('bff', 'products');
-    return this.http.get<Product[]>(url);
+    const url = this.getUrl('products', 'products');
+    return this.http
+      .get<{ products: Product[] }>(url)
+      .pipe(map((resp) => resp.products));
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {
