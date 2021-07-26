@@ -1,3 +1,11 @@
+# CloudFront URL
+
+https://d2gev20tf1hiaz.cloudfront.net/
+
+# S3-website
+
+http://pavel-backet.s3-website-eu-west-1.amazonaws.com/
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.

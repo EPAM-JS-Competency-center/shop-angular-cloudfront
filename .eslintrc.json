@@ -1,6 +1,10 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "dist/**/*"],
+  "ignorePatterns": [
+    "projects/**/*",
+    "dist/**/*",
+    "serverless-single-page-app-plugin/**/*"
+  ],
   "overrides": [
     {
       "files": ["*.ts"],
