@@ -5,6 +5,10 @@
   (uploadClick)="onUploadCSV()"
 ></app-file-picker>
 
+<button routerLink="new" class="text-uppercase" color="accent" mat-flat-button>
+  Add product
+</button>
+
 <table class="w-100" [dataSource]="products$" mat-table>
   <ng-container matColumnDef="from">
     <th mat-header-cell *matHeaderCellDef>Title</th>
@@ -19,7 +23,7 @@
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef>Price</th>
     <td mat-cell *matCellDef="let product">
-      {{ product.price | number: "1.2-2" | currency }}
+      {{ product.price | currency: "USD":"symbol":"1.2-2" }}
     </td>
   </ng-container>
   <ng-container matColumnDef="count">

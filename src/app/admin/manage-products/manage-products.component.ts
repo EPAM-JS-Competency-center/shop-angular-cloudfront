@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Product } from '../../products/product.interface';
+import { Product } from '../../products/product.model';
 import { ProductsService } from '../../products/products.service';
 import { ManageProductsService } from './manage-products.service';
 
