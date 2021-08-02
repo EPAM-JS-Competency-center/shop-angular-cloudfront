@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Product } from '../product.interface';
+import { Product } from '../product.model';
 import { CartService } from '../../cart/cart.service';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { ProductCheckout } from '../../products/product.interface';
+import { ProductCheckout } from '../../products/product.model';
 
 @Component({
   selector: 'app-order-summary',

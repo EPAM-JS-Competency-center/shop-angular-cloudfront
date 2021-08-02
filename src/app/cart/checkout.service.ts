@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CartService } from './cart.service';
 import { ProductsService } from '../products/products.service';
 import { Observable } from 'rxjs';
-import { ProductCheckout } from '../products/product.interface';
+import { ProductCheckout } from '../products/product.model';
 import { map, switchMap } from 'rxjs/operators';
 
 @Injectable({

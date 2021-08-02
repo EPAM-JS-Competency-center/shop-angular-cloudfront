@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CheckoutService } from './checkout.service';
-import { ProductCheckout } from '../products/product.interface';
+import { ProductCheckout } from '../products/product.model';
 import { Observable } from 'rxjs';
 import { CartService } from './cart.service';
 import { map, shareReplay } from 'rxjs/operators';
