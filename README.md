@@ -1,3 +1,7 @@
+link to manual s3 - http://task-2-manual.s3-website-eu-west-1.amazonaws.com/
+link to manual cloudfront - https://d6ufe39m0xn94.cloudfront.net/
+link to automated cloudfront - https://digb3wr9jkbxm.cloudfront.net/
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
