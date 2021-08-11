@@ -1,5 +1,12 @@
 # Shop Angular Cloudfront
 
+## Manual deploy:
+AWS S3:  
+http://shop-angular-cloudfront.s3-website-eu-west-1.amazonaws.com/ (403 - Forbidden - Access Denied)
+
+AWS CloudFront:  
+https://d236jnb5b51m1q.cloudfront.net
+
 Angular version: ~12.
 
 Repo maintainers:
