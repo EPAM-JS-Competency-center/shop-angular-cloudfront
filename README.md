@@ -29,3 +29,17 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Task - 2
+
+### Manual configured s3/cloudfront resources:
+
+[S3 link](http://e-shop-app.s3-website-eu-west-1.amazonaws.com/)
+
+[Cloud front link](https://d1taxiphm4h47w.cloudfront.net/)
+
+### Automated configured s3/cloudfront resources:
+
+[S3 link](http://e-shop-app-second.s3-website-us-east-1.amazonaws.com/)
+
+[CloudFront website](https://dzpd8sa6fgkcp.cloudfront.net/)
