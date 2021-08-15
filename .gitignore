@@ -44,3 +44,9 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+package-lock.json
+
+jspm_packages
+
+# Serverless directories
+.serverless

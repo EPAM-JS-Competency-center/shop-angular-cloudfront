@@ -1,0 +1,4 @@
+{
+  "cSpell.words": ["tamiko"],
+  "yaml.customTags": ["!Ref", "!Sub"]
+}
