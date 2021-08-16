@@ -1,31 +1,24 @@
 # Shop Angular Cloudfront
 
-Angular version: ~12.
+## Description
 
-Repo maintainers:
+A global mentoring project program to develop hands-on, full-service development skills with a primary focus on NodeJS in the AWS Cloud from an e2e application perspective.
+Presented a full-stack application (**Brickage**) store for the sale of Lego construction kits
 
-- [Sergey Gultyayev](https://github.com/gultyaev)
+## Install deps
 
-## The purpose
+- `npm ci` - install all required modules for the development
 
-The repository was created to have an Angular version of e-shop for EPAM NodeJS AWS course. At the same time we strive to make this repository follows best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
+## Running locally
 
-## NodeJS AWS course integration
+- `npm run-script start`
 
-All the necessary API endpoints are in the environments files `environment.ts` (for dev builds). Also it contains feature flags to enable/disable endpoints invocations from within the app so to ensure that you don't get errors for not implemented API endpoints.
+## Deployment
 
-## Contribution
+- `sls:cloud:update:build:deploy:nc` - production build and deploy with serverless framework
 
-Create an issue with the detailed description of the improvement/issue.
+## Prerequesties
 
-If you would like to help implementing some feature, you should ask the maintainers for approval so to ensure that the feature is desired in the repository and no efforts go wasted.
-
-## Get up and running
-
-Prerequisites: NodeJS v14
-
-Follow the steps:
-
-- git clone
-- npm i
-- ng serve
+- NodeJS v14
+- Serverless Framework v2
+- Angular v12
