@@ -29,3 +29,9 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+TASK 2:
+Link to S3 bucket/website: http://emotions-shop.s3-website.eu-central-1.amazonaws.com/
+CloudFront: https://d2oqbg8tfzzq5m.cloudfront.net/
+
+Automated Deploy: https://d1vzvrfcz08s75.cloudfront.net/
