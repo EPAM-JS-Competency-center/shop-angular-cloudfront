@@ -5,6 +5,11 @@
 - S3 bucket: http://rs-school-task2-manual.s3-website-eu-west-1.amazonaws.com
 - Cloudfront: https://d37hyp9gyurmif.cloudfront.net
 
+## Auto deployment links:
+
+- S3 bucket: http://rs-school-task2-auto.s3-website-eu-west-1.amazonaws.com
+- Cloudfront: https://d7m9em9zfm8h7.cloudfront.net/
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
