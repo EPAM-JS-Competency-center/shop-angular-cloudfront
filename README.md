@@ -6,6 +6,11 @@ Repo maintainers:
 
 - [Sergey Gultyayev](https://github.com/gultyaev)
 
+# Automated deployment links:
+
+- [ S3 bucket: https://myshop-app-second.s3.amazonaws.com/](https://myshop-app-second.s3.amazonaws.com/)
+- [ Cloudfront: d1ovhkyz9wrpfu.cloudfront.net](d1ovhkyz9wrpfu.cloudfront.net)
+
 ## The purpose
 
 The repository was created to have an Angular version of e-shop for EPAM NodeJS AWS course. At the same time we strive to make this repository follows best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
