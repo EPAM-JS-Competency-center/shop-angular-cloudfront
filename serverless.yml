@@ -30,7 +30,7 @@ plugins:
 
 custom:
   client:
-    bucketName: someqa-aws-manual # (see Configuration Parameters below)
+    bucketName: someqa-task2-manual # (see Configuration Parameters below)
     distributionFolder: dist/app
 # you can overwrite defaults here
 #  stage: dev
