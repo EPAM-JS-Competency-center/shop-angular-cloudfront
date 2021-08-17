@@ -4,7 +4,7 @@ Angular version: ~12.
 
 ## CloudFront URL and S3-website
 
-https://dnt9xyt7ssggy.cloudfront.net
+https://d2ee84u7135hoo.cloudfront.net/
 
 http://my-app-node.s3-website-eu-west-1.amazonaws.com/
 
