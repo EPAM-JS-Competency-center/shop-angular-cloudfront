@@ -17,3 +17,10 @@
     object-position: center center;
   }
 }
+
+.name-overflow {
+  max-width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
