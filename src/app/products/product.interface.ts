@@ -1,10 +1,17 @@
 export interface Product {
-  /** Available count */
-  count: number;
-  description: string;
-  id: string;
+  actors: string;
+  country: string;
+  director: string;
+  duration: string;
+  genre: string;
+  id: number;
+  originalName: string;
   price: number;
-  title: string;
+  quality: string;
+  rating: number;
+  russianName: string;
+  translation: string;
+  year: number;
 }
 
 export interface ProductCheckout extends Product {

@@ -25,7 +25,7 @@ export class ProductItemComponent implements OnInit {
 
   constructor(private readonly cartService: CartService) {}
 
-  get id(): string {
+  get id(): number {
     return this.product.id;
   }
 

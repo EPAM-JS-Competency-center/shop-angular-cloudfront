@@ -26,7 +26,9 @@ export class ProductsService extends ApiService {
     }
 
     return this.getProducts().pipe(
-      map((products) => products.filter((product) => ids.includes(product.id)))
+      map((products) =>
+        products.filter((product) => ids.includes(product.id.toString()))
+      )
     );
   }
 }

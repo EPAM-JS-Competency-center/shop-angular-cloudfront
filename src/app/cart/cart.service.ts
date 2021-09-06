@@ -29,11 +29,11 @@ export class CartService {
 
   constructor() {}
 
-  addItem(id: string): void {
+  addItem(id: number): void {
     this.updateCount(id, 1);
   }
 
-  removeItem(id: string): void {
+  removeItem(id: number): void {
     this.updateCount(id, -1);
   }
 
@@ -41,7 +41,7 @@ export class CartService {
     this.#cartSource.next({});
   }
 
-  private updateCount(id: string, type: 1 | -1): void {
+  private updateCount(id: number, type: 1 | -1): void {
     const val = this.#cartSource.getValue();
     const newVal = {
       ...val,

@@ -7,14 +7,14 @@
 
 <table class="w-100" [dataSource]="products$" mat-table>
   <ng-container matColumnDef="from">
-    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <th mat-header-cell *matHeaderCellDef>Name</th>
     <td mat-cell *matCellDef="let product">
-      {{ product.title }}
+      {{ product.originalName }}
     </td>
   </ng-container>
   <ng-container matColumnDef="description">
     <th mat-header-cell *matHeaderCellDef>Description</th>
-    <td mat-cell *matCellDef="let product">{{ product.description }}</td>
+    <td mat-cell *matCellDef="let product">{{ product.rating }}</td>
   </ng-container>
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef>Price</th>
@@ -23,8 +23,8 @@
     </td>
   </ng-container>
   <ng-container matColumnDef="count">
-    <th mat-header-cell *matHeaderCellDef>Count</th>
-    <td mat-cell *matCellDef="let product">{{ product.count }}</td>
+    <th mat-header-cell *matHeaderCellDef>Translation</th>
+    <td mat-cell *matCellDef="let product">{{ product.translation }}</td>
   </ng-container>
   <ng-container matColumnDef="action">
     <th mat-header-cell *matHeaderCellDef>Action</th>
