@@ -25,8 +25,14 @@ export class ProductItemComponent implements OnInit {
 
   constructor(private readonly cartService: CartService) {}
 
-  get id(): number {
+  get id(): string {
     return this.product.id;
+  }
+
+  get shortTitle(): string {
+    return this.product.description.length < 120
+      ? this.product.description
+      : this.product.description.slice(0, 120) + '...';
   }
 
   ngOnInit(): void {

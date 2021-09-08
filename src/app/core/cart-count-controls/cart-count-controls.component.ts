@@ -15,6 +15,7 @@ import {
 })
 export class CartCountControlsComponent {
   @Input() count!: number;
+  @Input() available!: number;
   @Input() productName!: string;
 
   @Output() increment = new EventEmitter<void>();
@@ -22,8 +23,6 @@ export class CartCountControlsComponent {
 
   @ViewChild('addBtn', { read: ElementRef })
   addBtn!: ElementRef<HTMLButtonElement>;
-
-  available = 1;
 
   focusAddBtn(): void {
     this.addBtn.nativeElement.focus();
