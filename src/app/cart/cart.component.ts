@@ -75,11 +75,11 @@ export class CartComponent implements OnInit {
     this.cartEmpty$ = this.totalInCart$.pipe(map((count) => count > 0));
   }
 
-  add(id: number): void {
+  add(id: string): void {
     this.cartService.addItem(id);
   }
 
-  remove(id: number): void {
+  remove(id: string): void {
     this.cartService.removeItem(id);
   }
 }

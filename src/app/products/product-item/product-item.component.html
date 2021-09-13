@@ -2,25 +2,21 @@
   <div mat-card-image class="img-container">
     <div class="img-container__inner">
       <img
-        src="https://source.unsplash.com/collection/28346982?sig={{ index }}"
-        alt=""
+        src="https://source.unsplash.com/collection/1158549?sig={{ index }}"
+        [attr.alt]="product.title"
       />
     </div>
   </div>
 
   <header>
-    <div>
-      <h3 class="name-overflow">
-        {{ product.originalName }}
-      </h3>
-    </div>
+    <mat-card-title>
+      {{ product.title }}
+    </mat-card-title>
   </header>
 
   <mat-card-content>
-    <p class="name-overflow text-muted">Country: {{ product.country }}</p>
-    <p class="name-overflow text-muted">Director: {{ product.director }}</p>
-    <p class="name-overflow text-muted">Genre: {{ product.genre }}</p>
-    <p>{{ product.price | number: "1.2-2" | currency }}</p>
+    <p>{{ product.price | currency }}</p>
+    <p class="description" [title]="product.description">{{ shortTitle }}</p>
   </mat-card-content>
 
   <mat-card-actions>
@@ -30,7 +26,7 @@
       *ngIf="(countInCart$ | async) === 0"
       (click)="add()"
       color="accent"
-      matTooltip="Add {{ product.originalName }} to cart"
+      matTooltip="Add {{ product.title }} to cart"
       mat-icon-button
     >
       <mat-icon>shopping_cart</mat-icon>
@@ -41,8 +37,9 @@
       *ngIf="(countInCart$ | async)! > 0"
       (increment)="add()"
       (decrement)="remove()"
-      [productName]="product.originalName"
+      [productName]="product.title"
       [count]="(countInCart$ | async)!"
+      [available]="product.count"
     ></app-cart-count-controls>
   </mat-card-actions>
 </mat-card>

@@ -7,8 +7,9 @@
       <app-cart-count-controls
         (decrement)="remove.emit()"
         (increment)="add.emit()"
-        [productName]="product.originalName"
+        [productName]="product.title"
         [count]="product.orderedCount"
+        [available]="product.count"
       ></app-cart-count-controls>
     </div>
     <div
@@ -16,15 +17,12 @@
       [class.col-md-9]="hideControls"
       class="col-12 col-md-6"
     >
-      <h3 class="font-weight-bold mb-1">{{ product.originalName }}</h3>
-      <p class="text-muted">Country: {{ product.country }}</p>
-      <p class="text-muted">Director: {{ product.director }}</p>
-      <p class="text-muted">Genre: {{ product.genre }}</p>
+      <h3 class="font-weight-bold mb-1">{{ product.title }}</h3>
+      <p class="text-muted">{{ product.description }}</p>
     </div>
     <div class="col-12 col-md-3">
-      {{ product.price | number: "1.2-2" | currency }} x
-      {{ product.orderedCount }} =
-      {{ product.totalPrice | number: "1.2-2" | currency }}
+      {{ product.price | currency }} x {{ product.orderedCount }} =
+      {{ product.totalPrice | currency }}
     </div>
   </div>
 </mat-card>

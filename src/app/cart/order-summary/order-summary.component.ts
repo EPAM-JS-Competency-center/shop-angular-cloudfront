@@ -12,7 +12,7 @@ export class OrderSummaryComponent {
   @Input() totalPrice!: number;
 
   /** Add productId */
-  @Output() add = new EventEmitter<number>();
+  @Output() add = new EventEmitter<string>();
   /** Remove productId */
-  @Output() remove = new EventEmitter<number>();
+  @Output() remove = new EventEmitter<string>();
 }
