@@ -36,6 +36,10 @@ export class ManageProductsService extends ApiService {
       params: {
         name: fileName,
       },
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Authorization: `Basic ${localStorage.getItem('authorization_token')}`,
+      },
     });
   }
 }

@@ -1,9 +1,11 @@
 import { Injectable } from '@angular/core';
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpStatusCode,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NotificationService } from '../notification.service';
@@ -19,7 +21,21 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
-        error: () => {
+        error: (err: unknown) => {
+          if (
+            (err as HttpErrorResponse).status === HttpStatusCode.Unauthorized
+          ) {
+            return this.notificationService.showError(
+              '401 - Unauthorized, try to setup valid authorization_token key via localStorage'
+            );
+          } else if (
+            (err as HttpErrorResponse).status === HttpStatusCode.Forbidden
+          ) {
+            return this.notificationService.showError(
+              '403 Forbidden: try to setup valid authorization_token key via localStorage'
+            );
+          }
+
           const url = new URL(request.url);
 
           this.notificationService.showError(
