@@ -1,0 +1,64 @@
+<mat-card *ngIf="form$ | async as form">
+  <h1 class="text-center pt-4" mat-card-title>
+    {{ product ? "Edit product" : "Create new product" }}
+  </h1>
+
+  <mat-card-content>
+    <form class="row" [formGroup]="form">
+      <div class="col-12">
+        <mat-form-field class="w-100">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+          <mat-error *ngIf="form.hasError('required', 'title')">
+            Product title is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <mat-form-field class="w-100">
+          <mat-label>Description</mat-label>
+          <textarea matInput formControlName="description"></textarea>
+          <mat-error *ngIf="form.hasError('required', 'description')">
+            Product description is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Price ($)</mat-label>
+          <input type="number" matInput formControlName="price" />
+          <mat-error *ngIf="form.hasError('required', 'price')">
+            Product price is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col col-md-6">
+        <mat-form-field class="w-100">
+          <mat-label>Count</mat-label>
+          <input type="number" matInput formControlName="count" />
+          <mat-error *ngIf="form.hasError('required', 'count')">
+            Product count is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+  </mat-card-content>
+
+  <mat-card-actions>
+    <button class="text-uppercase mr-2" mat-flat-button routerLink="..">
+      cancel
+    </button>
+    <button
+      class="text-uppercase"
+      color="primary"
+      mat-flat-button
+      [disabled]="form.invalid || requestInProgress"
+      (click)="editProduct()"
+    >
+      save product
+    </button>
+  </mat-card-actions>
+</mat-card>
