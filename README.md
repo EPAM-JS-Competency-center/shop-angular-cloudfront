@@ -1,3 +1,7 @@
+# task - 8
+
+update card endpoint (logic was not implemented in source angular repo)
+
 # authorization_token example
 
 `localStorage.setItem('authorization_token', 'bHVja3lkZXZpbDEzOlRFU1RfUEFTU1dPUkQ==')`
