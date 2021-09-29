@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  Input,
+  Output,
+  ViewChild,
+} from '@angular/core';
 
 @Component({
   selector: 'app-file-picker',
@@ -6,10 +13,22 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrls: ['./file-picker.component.scss'],
 })
 export class FilePickerComponent {
-  @Input() file: File | null = null;
+  @Input() set file(file: File | null) {
+    this.#file = file || null;
+    if (this.#file === null && this.fileInput) {
+      this.fileInput.nativeElement.value = '';
+    }
+  }
+  get file(): File | null {
+    return this.#file;
+  }
+
+  @ViewChild('fileInput') fileInput: ElementRef | null = null;
 
   @Output() fileChange = new EventEmitter<File | null>();
   @Output() uploadClick = new EventEmitter<void>();
+
+  #file: File | null = null;
 
   selectFile(files: FileList | null): void {
     if (!files?.length) {
@@ -18,11 +37,6 @@ export class FilePickerComponent {
     }
 
     const file = files.item(0) as File;
-
-    if (!['text/csv', 'application/vnd.ms-excel'].includes(file.type)) {
-      this.removeFile();
-      return;
-    }
 
     this.fileChange.emit(file);
     this.file = file;

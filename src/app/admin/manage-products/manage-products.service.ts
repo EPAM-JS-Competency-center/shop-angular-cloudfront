@@ -31,11 +31,11 @@ export class ManageProductsService extends ApiService {
 
   private getPreSignedUrl(fileName: string): Observable<string> {
     const url = this.getUrl('import', 'import');
-
-    return this.http.get<string>(url, {
+    return this.http.get(url, {
       params: {
         name: fileName,
       },
+      responseType: 'text',
     });
   }
 }
