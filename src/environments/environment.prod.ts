@@ -5,14 +5,14 @@ export const environment: Config = {
   apiEndpoints: {
     product: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
     order: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
-    import: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
-    bff: 'https://i6big9ofob.execute-api.eu-west-1.amazonaws.com/dev',
+    import: 'https://i9avghzhe6.execute-api.eu-west-1.amazonaws.com/dev',
+    bff: ' https://s3xahfblr8.execute-api.eu-west-1.amazonaws.com/dev',
     cart: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
   },
   apiEndpointsEnabled: {
-    product: false,
+    product: true,
     order: false,
-    import: false,
+    import: true,
     bff: false,
     cart: false,
   },

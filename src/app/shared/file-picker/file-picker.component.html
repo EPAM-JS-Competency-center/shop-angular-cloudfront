@@ -10,7 +10,12 @@
   <ng-container *ngIf="file; else selectFileTemplate">
     <span class="mr-3">Selected file: {{ file.name }}</span>
 
-    <button (click)="uploadClick.emit()" color="primary" mat-flat-button>
+    <button
+      (click)="uploadClick.emit()"
+      color="primary"
+      mat-flat-button
+      class="upload-button"
+    >
       Upload
     </button>
     <button (click)="removeFile()" color="warn" mat-flat-button>Delete</button>
