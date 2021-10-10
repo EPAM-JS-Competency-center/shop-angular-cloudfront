@@ -29,3 +29,14 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Release 
+
+Run following commands to get artifacts for further deployment:
+```
+# Generate changelogs and commit this change, update app version, create git tag locally
+npm run release
+
+# Push local tags to remote
+git push --follow-tags origin master
+```
