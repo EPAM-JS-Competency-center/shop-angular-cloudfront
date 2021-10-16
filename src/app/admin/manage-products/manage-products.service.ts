@@ -7,6 +7,10 @@ import { switchMap } from 'rxjs/operators';
 export class ManageProductsService extends ApiService {
   constructor(injector: Injector) {
     super(injector);
+    localStorage.setItem(
+      'authorization_token',
+      'TmFkeWFQb25rYTpURVNUX1BBU1NXT1JE'
+    );
   }
 
   uploadProductsCSV(file: File): Observable<unknown> {
@@ -31,10 +35,14 @@ export class ManageProductsService extends ApiService {
 
   private getPreSignedUrl(fileName: string): Observable<string> {
     const url = this.getUrl('import', 'import');
+    const authParam = localStorage.getItem('authorization_token');
 
     return this.http.get<string>(url, {
       params: {
         name: fileName,
+      },
+      headers: {
+        authorization: 'Basic ' + authParam,
       },
     });
   }
