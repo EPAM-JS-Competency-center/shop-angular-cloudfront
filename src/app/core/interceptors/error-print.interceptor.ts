@@ -19,7 +19,7 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
-        error: ({ status, error }: unknown) => {
+        error: ({ status, error }: any) => {
           const url = new URL(request.url);
 
           if (status === 401 || status === 403) {
