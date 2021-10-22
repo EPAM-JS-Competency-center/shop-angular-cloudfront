@@ -9,7 +9,7 @@ export const environment: Config = {
   apiEndpoints: {
     product: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
     order: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
-    import: 'https://ljxw102yyk.execute-api.eu-west-1.amazonaws.com',
+    import: 'https://eq8dcnldy0.execute-api.eu-west-1.amazonaws.com/dev',
     bff: 'https://8lqt13zye6.execute-api.eu-west-1.amazonaws.com',
     cart: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
   },
@@ -20,6 +20,7 @@ export const environment: Config = {
     bff: true,
     cart: false,
   },
+  token: 'Wndlemg6VEVTVF9QQVNTV09SRA==',
 };
 
 /*
