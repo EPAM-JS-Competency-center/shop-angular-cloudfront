@@ -28,6 +28,15 @@ module.exports = function (config) {
       dir: require("path").join(__dirname, "./coverage/app"),
       subdir: ".",
       reporters: [{ type: "html" }, { type: "text-summary" }],
+      check: {
+        emitWarning: false,
+        global: {
+          statements: 10,
+          branches: 10,
+          functions: 10,
+          lines: 10,
+        },
+      }
     },
     reporters: ["spec"],
     port: 9876,

@@ -1,14 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ManageProductsComponent } from './manage-products.component';
+import { mockProductsServiceProvider } from '../../products/products.service.mock';
+import { mockManageProductsServiceProvider } from './manage-products.service.mock';
+import { MatTableModule } from '@angular/material/table';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
-describe('ProductsComponent', () => {
+describe('ManageProductsComponent', () => {
   let component: ManageProductsComponent;
   let fixture: ComponentFixture<ManageProductsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ManageProductsComponent],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA],
+      declarations: [
+        ManageProductsComponent,
+      ],
+      providers: [
+        mockProductsServiceProvider,
+        mockManageProductsServiceProvider,
+      ],
+      imports: [MatTableModule],
     }).compileComponents();
   });
 

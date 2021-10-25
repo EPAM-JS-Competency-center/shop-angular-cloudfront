@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly checkoutService: CheckoutService,
-    private readonly cartService: CartService
+    private readonly cartService: CartService,
   ) {}
 
   get fullName(): string {
