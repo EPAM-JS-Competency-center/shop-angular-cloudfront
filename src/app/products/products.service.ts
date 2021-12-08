@@ -13,12 +13,9 @@ import { ApiService } from '../core/api.service';
 export class ProductsService extends ApiService {
   createNewProduct(product: Product): Observable<Product> {
     if (!this.endpointEnabled('bff')) {
-      return throwError({
-        error: {
-          message:
-            'Endpoint "bff" is disabled. To enable change your environment.ts config',
-        },
-      });
+      return throwError(
+        'Endpoint "bff" is disabled. To enable change your environment.ts config'
+      );
     }
 
     const url = this.getUrl('bff', 'products');
@@ -27,20 +24,17 @@ export class ProductsService extends ApiService {
 
   editProduct(id: string, changedProduct: Product): Observable<Product> {
     if (!this.endpointEnabled('bff')) {
-      return throwError({
-        error: {
-          message:
-            'Endpoint "bff" is disabled. To enable change your environment.ts config',
-        },
-      });
+      return throwError(
+        'Endpoint "bff" is disabled. To enable change your environment.ts config'
+      );
     }
 
-    const url = this.getUrl('bff', 'products', id);
+    const url = this.getUrl('bff', `products/${id}`);
     return this.http.put<Product>(url, changedProduct);
   }
 
-  getProductById(productId: string): Observable<Product | null> {
-    if (!this.endpointEnabled('product')) {
+  getProductById(id: string): Observable<Product | null> {
+    if (!this.endpointEnabled('bff')) {
       console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
@@ -48,13 +42,12 @@ export class ProductsService extends ApiService {
         .get<Product[]>('/assets/products.json')
         .pipe(
           map(
-            (products) =>
-              products.find((product) => product.id === productId) || null
+            (products) => products.find((product) => product.id === id) || null
           )
         );
     }
 
-    const url = this.getUrl('bff', 'products', productId);
+    const url = this.getUrl('bff', `products/${id}`);
     return this.http
       .get<{ product: Product }>(url)
       .pipe(map((resp) => resp.product));

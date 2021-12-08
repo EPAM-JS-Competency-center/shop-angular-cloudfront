@@ -4,16 +4,19 @@ import {
   OnDestroy,
   OnInit,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, of, Subject } from 'rxjs';
-import { switchMap, takeUntil } from 'rxjs/operators';
+import { BehaviorSubject, Subject } from 'rxjs';
+import { finalize, takeUntil } from 'rxjs/operators';
 
 import { Product } from '../../products/product.interface';
 import { ProductsService } from '../../products/products.service';
-import { NotificationService } from '../../core/notification.service';
-import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-edit-product',
@@ -22,34 +25,59 @@ import { HttpErrorResponse } from '@angular/common/http';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditProductComponent implements OnInit, OnDestroy {
-  form$: BehaviorSubject<FormGroup | null> =
-    new BehaviorSubject<FormGroup | null>(null);
+  form: FormGroup;
   product: Product | null = null;
   requestInProgress = false;
+
+  loaded$ = new BehaviorSubject(false);
+
+  countCtrl: FormControl;
+  descriptionCtrl: FormControl;
+  priceCtrl: FormControl;
+  titleCtrl: FormControl;
 
   private readonly onDestroy$: Subject<void> = new Subject();
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly fb: FormBuilder,
-    private readonly notificationService: NotificationService,
     private readonly productsService: ProductsService,
     private readonly router: Router
-  ) {}
+  ) {
+    this.titleCtrl = this.fb.control(null, Validators.required);
+    this.descriptionCtrl = this.fb.control(null, Validators.required);
+    this.priceCtrl = this.fb.control(null, Validators.required);
+    this.countCtrl = this.fb.control(null, Validators.required);
+    this.form = this.fb.group({
+      title: this.titleCtrl,
+      description: this.descriptionCtrl,
+      price: this.priceCtrl,
+      count: this.countCtrl,
+    });
+  }
 
   ngOnInit(): void {
-    this.activatedRoute.paramMap
+    const productId = this.activatedRoute.snapshot.paramMap.get('productId');
+
+    if (!productId) {
+      this.loaded$.next(true);
+      return;
+    }
+
+    this.productsService
+      .getProductById(productId)
       .pipe(
-        switchMap((paramMap) =>
-          paramMap.has('productId')
-            ? this.productsService.getProductById(paramMap.get('productId')!)
-            : of(null)
-        ),
+        finalize(() => this.loaded$.next(true)),
         takeUntil(this.onDestroy$)
       )
       .subscribe((product) => {
+        this.form.patchValue({
+          title: product?.title,
+          description: product?.description,
+          price: product?.price,
+          count: product?.count,
+        });
         this.product = product;
-        this.buildForm();
       });
   }
 
@@ -59,7 +87,11 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   editProduct(): void {
-    const product: Product = this.form$.value!.value;
+    const product: Product = this.form.value;
+    if (!product) {
+      return;
+    }
+
     const editProduct$ = this.product
       ? this.productsService.editProduct(this.product.id, product)
       : this.productsService.createNewProduct(product);
@@ -67,21 +99,9 @@ export class EditProductComponent implements OnInit, OnDestroy {
     this.requestInProgress = true;
     editProduct$.subscribe(
       () => this.router.navigate(['../'], { relativeTo: this.activatedRoute }),
-      (error: HttpErrorResponse) => {
+      () => {
         this.requestInProgress = false;
-        this.notificationService.showError(error.error.message);
       }
-    );
-  }
-
-  private buildForm(): void {
-    this.form$.next(
-      this.fb.group({
-        title: [this.product?.title, Validators.required],
-        description: [this.product?.description, Validators.required],
-        price: [this.product?.price, Validators.required],
-        count: [this.product?.count, Validators.required],
-      })
     );
   }
 }

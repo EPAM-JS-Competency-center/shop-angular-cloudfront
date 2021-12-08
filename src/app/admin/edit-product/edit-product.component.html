@@ -1,4 +1,4 @@
-<mat-card *ngIf="form$ | async as form">
+<mat-card *ngIf="loaded$ | async; else loaderTemplate">
   <h1 class="text-center pt-4" mat-card-title>
     {{ product ? "Edit product" : "Create new product" }}
   </h1>
@@ -9,7 +9,9 @@
         <mat-form-field class="w-100">
           <mat-label>Title</mat-label>
           <input matInput formControlName="title" />
-          <mat-error *ngIf="form.hasError('required', 'title')">
+          <mat-error
+            *ngIf="titleCtrl.touched && titleCtrl.hasError('required')"
+          >
             Product title is required
           </mat-error>
         </mat-form-field>
@@ -19,7 +21,11 @@
         <mat-form-field class="w-100">
           <mat-label>Description</mat-label>
           <textarea matInput formControlName="description"></textarea>
-          <mat-error *ngIf="form.hasError('required', 'description')">
+          <mat-error
+            *ngIf="
+              descriptionCtrl.touched && descriptionCtrl.hasError('required')
+            "
+          >
             Product description is required
           </mat-error>
         </mat-form-field>
@@ -29,7 +35,9 @@
         <mat-form-field class="w-100">
           <mat-label>Price ($)</mat-label>
           <input type="number" matInput formControlName="price" />
-          <mat-error *ngIf="form.hasError('required', 'price')">
+          <mat-error
+            *ngIf="priceCtrl.touched && priceCtrl.hasError('required')"
+          >
             Product price is required
           </mat-error>
         </mat-form-field>
@@ -39,7 +47,9 @@
         <mat-form-field class="w-100">
           <mat-label>Count</mat-label>
           <input type="number" matInput formControlName="count" />
-          <mat-error *ngIf="form.hasError('required', 'count')">
+          <mat-error
+            *ngIf="countCtrl.touched && countCtrl.hasError('required')"
+          >
             Product count is required
           </mat-error>
         </mat-form-field>
@@ -62,3 +72,9 @@
     </button>
   </mat-card-actions>
 </mat-card>
+
+<ng-template #loaderTemplate>
+  <div class="py-5">
+    <mat-spinner [diameter]="40" class="mx-auto"></mat-spinner>
+  </div>
+</ng-template>

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { OrdersComponent } from './orders/orders.component';
@@ -28,6 +29,7 @@ import { EditProductComponent } from './edit-product/edit-product.component';
     MatInputModule,
     MatTableModule,
     MatButtonModule,
+    MatProgressSpinnerModule,
     ReactiveFormsModule,
   ],
   providers: [OrdersService, ManageProductsService],
