@@ -5,8 +5,8 @@ import {
   OnInit,
 } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
@@ -17,6 +17,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 
 import { Product } from '../../products/product.interface';
 import { ProductsService } from '../../products/products.service';
+import { NotificationService } from '../../core/notification.service';
 
 @Component({
   selector: 'app-edit-product',
@@ -31,28 +32,33 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   loaded$ = new BehaviorSubject(false);
 
-  countCtrl: FormControl;
-  descriptionCtrl: FormControl;
-  priceCtrl: FormControl;
-  titleCtrl: FormControl;
+  get countCtrl(): AbstractControl {
+    return this.form.get('count') as AbstractControl;
+  }
+  get descriptionCtrl(): AbstractControl {
+    return this.form.get('description') as AbstractControl;
+  }
+  get priceCtrl(): AbstractControl {
+    return this.form.get('price') as AbstractControl;
+  }
+  get titleCtrl(): AbstractControl {
+    return this.form.get('title') as AbstractControl;
+  }
 
   private readonly onDestroy$: Subject<void> = new Subject();
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
     private readonly fb: FormBuilder,
+    private readonly notificationService: NotificationService,
     private readonly productsService: ProductsService,
     private readonly router: Router
   ) {
-    this.titleCtrl = this.fb.control(null, Validators.required);
-    this.descriptionCtrl = this.fb.control(null, Validators.required);
-    this.priceCtrl = this.fb.control(null, Validators.required);
-    this.countCtrl = this.fb.control(null, Validators.required);
     this.form = this.fb.group({
-      title: this.titleCtrl,
-      description: this.descriptionCtrl,
-      price: this.priceCtrl,
-      count: this.countCtrl,
+      title: ['', Validators.required],
+      description: ['', Validators.required],
+      price: ['', Validators.required],
+      count: ['', Validators.required],
     });
   }
 
@@ -96,8 +102,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
     this.requestInProgress = true;
     editProduct$.subscribe(
       () => this.router.navigate(['../'], { relativeTo: this.activatedRoute }),
-      () => {
+      (error: unknown) => {
+        console.warn(error);
         this.requestInProgress = false;
+        this.notificationService.showError(
+          `Failed to ${this.productId ? 'edit' : 'create'} product`
+        );
       }
     );
   }
