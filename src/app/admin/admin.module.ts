@@ -1,5 +1,9 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { OrdersComponent } from './orders/orders.component';
@@ -9,15 +13,24 @@ import { ManageProductsComponent } from './manage-products/manage-products.compo
 import { MatButtonModule } from '@angular/material/button';
 import { FilePickerModule } from '../shared/file-picker/file-picker.module';
 import { ManageProductsService } from './manage-products/manage-products.service';
+import { EditProductComponent } from './edit-product/edit-product.component';
 
 @NgModule({
-  declarations: [OrdersComponent, ManageProductsComponent],
+  declarations: [
+    OrdersComponent,
+    ManageProductsComponent,
+    EditProductComponent,
+  ],
   imports: [
-    CommonModule,
     AdminRoutingModule,
+    CommonModule,
+    FilePickerModule,
+    MatCardModule,
+    MatInputModule,
     MatTableModule,
     MatButtonModule,
-    FilePickerModule,
+    MatProgressSpinnerModule,
+    ReactiveFormsModule,
   ],
   providers: [OrdersService, ManageProductsService],
 })
