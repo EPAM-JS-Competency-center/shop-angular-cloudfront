@@ -26,7 +26,7 @@ import { ProductsService } from '../../products/products.service';
 })
 export class EditProductComponent implements OnInit, OnDestroy {
   form: FormGroup;
-  product: Product | null = null;
+  productId: string | null = null;
   requestInProgress = false;
 
   loaded$ = new BehaviorSubject(false);
@@ -71,13 +71,10 @@ export class EditProductComponent implements OnInit, OnDestroy {
         takeUntil(this.onDestroy$)
       )
       .subscribe((product) => {
-        this.form.patchValue({
-          title: product?.title,
-          description: product?.description,
-          price: product?.price,
-          count: product?.count,
-        });
-        this.product = product;
+        if (product) {
+          this.form.patchValue(product);
+          this.productId = product.id;
+        }
       });
   }
 
@@ -92,8 +89,8 @@ export class EditProductComponent implements OnInit, OnDestroy {
       return;
     }
 
-    const editProduct$ = this.product
-      ? this.productsService.editProduct(this.product.id, product)
+    const editProduct$ = this.productId
+      ? this.productsService.editProduct(this.productId, product)
       : this.productsService.createNewProduct(product);
 
     this.requestInProgress = true;

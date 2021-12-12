@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Observable, of, throwError } from 'rxjs';
+import { EMPTY, Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { Product } from './product.interface';
@@ -13,9 +13,10 @@ import { ApiService } from '../core/api.service';
 export class ProductsService extends ApiService {
   createNewProduct(product: Product): Observable<Product> {
     if (!this.endpointEnabled('bff')) {
-      return throwError(
+      console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
+      return EMPTY;
     }
 
     const url = this.getUrl('bff', 'products');
@@ -24,9 +25,10 @@ export class ProductsService extends ApiService {
 
   editProduct(id: string, changedProduct: Product): Observable<Product> {
     if (!this.endpointEnabled('bff')) {
-      return throwError(
+      console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
+      return EMPTY;
     }
 
     const url = this.getUrl('bff', `products/${id}`);

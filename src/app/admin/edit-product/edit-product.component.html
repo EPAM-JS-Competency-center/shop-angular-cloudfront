@@ -1,6 +1,6 @@
 <mat-card *ngIf="loaded$ | async; else loaderTemplate">
   <h1 class="text-center pt-4" mat-card-title>
-    {{ product ? "Edit product" : "Create new product" }}
+    {{ productId ? "Edit product" : "Create new product" }}
   </h1>
 
   <mat-card-content>
