@@ -1,11 +1,15 @@
 import { TestBed } from '@angular/core/testing';
 
 import { ErrorPrintInterceptor } from './error-print.interceptor';
+import {mockNotificationServiceProvider} from "../notification.service.mock";
 
 describe('ErrorPrintInterceptor', () => {
   beforeEach(() =>
     TestBed.configureTestingModule({
-      providers: [ErrorPrintInterceptor],
+      providers: [
+        ErrorPrintInterceptor,
+        mockNotificationServiceProvider,
+      ],
     })
   );
 
