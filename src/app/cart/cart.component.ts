@@ -3,9 +3,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CheckoutService } from './checkout.service';
 import { ProductCheckout } from '../products/product.interface';
-import { Observable } from 'rxjs';
+import { Observable, of } from "rxjs";
 import { CartService } from './cart.service';
-import { map, shareReplay } from 'rxjs/operators';
+import { map, shareReplay, switchMap, take, tap, withLatestFrom } from "rxjs/operators";
 
 @Component({
   selector: 'app-cart',
@@ -29,7 +29,7 @@ export class CartComponent implements OnInit {
   constructor(
     private readonly fb: FormBuilder,
     private readonly checkoutService: CheckoutService,
-    private readonly cartService: CartService
+    private readonly cartService: CartService,
   ) {}
 
   get fullName(): string {
@@ -41,6 +41,10 @@ export class CartComponent implements OnInit {
     return this.shippingInfo.value.address;
   }
 
+  get email(): string {
+    return this.shippingInfo.value.email;
+  }
+
   get comment(): string {
     return this.shippingInfo.value.comment;
   }
@@ -50,6 +54,7 @@ export class CartComponent implements OnInit {
       lastName: ['', Validators.required],
       firstName: ['', Validators.required],
       address: ['', Validators.required],
+      email: ['', Validators.required],
       comment: '',
     });
 
@@ -81,5 +86,20 @@ export class CartComponent implements OnInit {
 
   remove(id: string): void {
     this.cartService.removeItem(id);
+  }
+
+  submit() {
+    this.products$.pipe(
+      take(1),
+      withLatestFrom(this.totalPrice$, this.totalInCart$, of(this.shippingInfo.value)),
+      switchMap(([ products, totalPrice, totalInCart, shipping ]) => this.checkoutService.placeOrder({
+          products,
+          totalPrice,
+          totalInCart,
+          shipping,
+        })),
+      // tap(() => this.cartService.empty()),
+      take(1),
+    ).subscribe();
   }
 }

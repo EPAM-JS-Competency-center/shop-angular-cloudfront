@@ -81,6 +81,7 @@
                 <h2>Shipping</h2>
                 <p>{{ fullName }}</p>
                 <p>{{ address }}</p>
+                <p>{{ email }}</p>
               </div>
               <div class="col col-md-6">
                 <h2>Comment</h2>
@@ -92,7 +93,9 @@
               <button class="text-uppercase" mat-button matStepperPrevious>
                 back
               </button>
-              <button color="primary" class="text-uppercase" mat-flat-button>
+              <button
+                (click)="submit()"
+                color="primary" class="text-uppercase" mat-flat-button>
                 place order
               </button>
             </div>
