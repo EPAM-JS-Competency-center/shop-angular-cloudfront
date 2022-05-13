@@ -1,5 +1,5 @@
 {
-  "name": "app",
+  "name": "gamertic",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
@@ -68,5 +68,9 @@
     "*.{ts,html}": [
       "eslint --fix"
     ]
+  },
+  "serverless": {
+    "app": "gamertic",
+    "org": "dymitr"
   }
 }
