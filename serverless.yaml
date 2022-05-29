@@ -1,0 +1,18 @@
+service: andreygp5-rs-shop
+
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  region: eu-central-1
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: andreygp5
+    distributionFolder: ./dist/app
+    indexDocument: index.html
+    manageResources: false
