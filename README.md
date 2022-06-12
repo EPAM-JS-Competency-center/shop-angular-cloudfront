@@ -1,5 +1,10 @@
 # Shop Angular Cloudfront
 
+## For task-2:
+
+- S3 bucket/website link (403 error): http://game-consoles-shop-app.s3-website-eu-west-1.amazonaws.com/
+- CloudFront website link: https://d2sqr7ze13s3vc.cloudfront.net/
+
 Angular version: ~12.
 
 Repo maintainers:
