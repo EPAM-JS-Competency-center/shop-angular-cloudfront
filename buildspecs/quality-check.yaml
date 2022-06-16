@@ -1,0 +1,51 @@
+version: 0.2
+
+env:
+  variables:
+    PROJECT_NAME: ""
+    BUILD_CONFIGURATION: "production"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+
+    commands:
+      - echo Updating and Installing system dependencies...
+      - apt-get update -y -q
+
+      - echo Installing Google Chrome for testing
+      - wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+      - dpkg -i google-chrome-stable_current_amd64.deb
+      - apt -f install
+
+      # Install all necessary dependencies:
+      - echo Installing NPM dependencies...
+      - npm install
+
+  build:
+    commands:
+      # Perform Code quality checks:
+      - echo Checking code style...
+      - npm run lint
+
+      - echo Running unit tests...
+      - npm run test:ci
+
+      - echo Running unit tests over serverless app...
+      - npm run sam:test
+
+      - echo Building a project...
+      - npm run build --configuration=${BUILD_CONFIGURATION}
+
+      - Echo running npm audit
+#      - npm audit
+
+  post_build:
+    commands:
+      # Perform static code analysis with SonarScanner or similar
+      - echo Performing static code analysis with...
+
+      - echo OK
+
+      - echo All code quality checks are successfully completed on `date`

@@ -1,0 +1,175 @@
+# This is the SAM template that represents the architecture of your serverless application
+# https://docs.aws.amazon.com/serverless-application-model/latest/developerguide/serverless-sam-template-basics.html
+
+# The AWSTemplateFormatVersion identifies the capabilities of the template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/format-version-structure.html
+AWSTemplateFormatVersion: 2010-09-09
+
+# Transform section specifies one or more macros that AWS CloudFormation uses to process your template
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/transform-section-structure.html
+Transform:
+  - AWS::Serverless-2016-10-31
+
+Description: >-
+  An Amazon API Gateway HTTP API and an AWS Lambda functions.
+
+# Global values that are applied to all applicable resources in this template
+Globals:
+  Function:
+    Runtime: nodejs16.x
+    MemorySize: 128
+    Timeout: 100
+
+Parameters:
+  AppName:
+    Description: Name of Application
+    Type: String
+    Default: shop-http-api
+  StageName:
+    Description: Name of Http stage
+    Type: String
+    Default: prod
+
+# Resources declares the AWS resources that you want to include in the stack
+# https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html
+Resources:
+
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      StageName: !Ref StageName
+      Tags:
+        Tag: Value
+      AccessLogSettings:
+        DestinationArn: !GetAtt AccessLogs.Arn
+        Format: $context.requestId
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 200
+      CorsConfiguration:
+        AllowOrigins:
+          - '*'
+        AllowMethods:
+          - GET
+          - HEAD
+          - OPTIONS
+          - POST
+      StageVariables:
+        StageVar: Value
+      FailOnWarnings: true
+
+  AccessLogs:
+    Type: AWS::Logs::LogGroup
+
+  # Each Lambda function is defined by properties:
+  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+
+  # This is a Lambda function config associated with the source code: get-all-items.js
+  getAllProductsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/get-all-products.getAllItemsHandler
+      Architectures:
+        - x86_64
+      Description: A simple example includes a HTTP get method to get all items from mock or a DynamoDB table.
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+#        - DynamoDBCrudPolicy:
+#            TableName: !Ref SampleTable
+      Environment:
+#        Variables:
+          # Make table name accessible as environment variable from function code during execution
+#          SAMPLE_TABLE: !Ref SampleTable
+      Events:
+        ExplicitApi: # warning: creates a public endpoint
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Method: GET
+            Path: /products
+            TimeoutInMillis: 15000
+            PayloadFormatVersion: "2.0"
+            RouteSettings:
+              ThrottlingBurstLimit: 600
+  # Each Lambda function is defined by properties:
+  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+
+  # This is a Lambda function config associated with the source code: get-product-by-id.js
+  getByIdFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/get-product-by-id.getByIdHandler
+      Architectures:
+        - x86_64
+      Description: A simple example includes a HTTP get method to get one item by id from mock or a DynamoDB table.
+      Policies:
+        # Give Create/Read/Update/Delete Permissions to the SampleTable
+#        - DynamoDBCrudPolicy:
+#            TableName: !Ref SampleTable
+      Environment:
+#        Variables:
+          # Make table name accessible as environment variable from function code during execution
+#          SAMPLE_TABLE: !Ref SampleTable
+      Events:
+        ExplicitApi: # warning: creates a public endpoint
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Method: GET
+            Path: /products/{id}
+            TimeoutInMillis: 15000
+            PayloadFormatVersion: "2.0"
+            RouteSettings:
+              ThrottlingBurstLimit: 600
+  # Each Lambda function is defined by properties:
+  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+
+  # This is a Lambda function config associated with the source code: put-item.js
+#  putItemFunction:
+#    Type: AWS::Serverless::Function
+#    Properties:
+  #      Handler: src/handlers/put-item.putItemHandler
+#      Architectures:
+#        - x86_64
+#      Description: A simple example includes a HTTP post method to add one item to a DynamoDB table.
+#      Policies:
+#        # Give Create/Read/Update/Delete Permissions to the SampleTable
+#        - DynamoDBCrudPolicy:
+#            TableName: !Ref SampleTable
+#      Environment:
+#        #Variables:
+#          # Make table name accessible as environment variable from function code during execution
+#          SAMPLE_TABLE: !Ref SampleTable
+#      Events:
+#        ExplicitApi: # warning: creates a public endpoint
+#          Type: HttpApi
+#          Properties:
+#            ApiId: !Ref HttpApi
+#            Method: POST
+#            Path: /products
+#            TimeoutInMillis: 15000
+#            PayloadFormatVersion: "2.0"
+#            RouteSettings:
+#              ThrottlingBurstLimit: 600
+  # Simple syntax to create a DynamoDB table with a single attribute primary key, more in
+  # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
+
+  # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
+#  SampleTable:
+#    Type: AWS::Serverless::SimpleTable
+#    Properties:
+#      PrimaryKey:
+#        Name: id
+#        Type: String
+#      ProvisionedThroughput:
+#        ReadCapacityUnits: 2
+#        WriteCapacityUnits: 2
+
+Outputs:
+  HttpApiUrl:
+    Description: URL of your API endpoint
+    Value:
+      Fn::Sub: 'https://${HttpApi}.execute-api.${AWS::Region}.${AWS::URLSuffix}/${StageName}/'
+  HttpApiId:
+    Description: Api id of HttpApi
+    Value:
+      Ref: HttpApi

@@ -1,0 +1,187 @@
+AWSTemplateFormatVersion: '2010-09-09'
+
+Description: CloudFront Redirect to SSL, Custom DomainName, Edge Gzip, Angular Redirects, S3 origin bucket, Cors, WebAcl, HSTS
+
+Parameters:
+  Environment:
+    Description: Environment
+    Type: String
+    Default: 'develop'
+  AppName:
+    Description: Application name to concat with HostedZoneResourceUrl
+    Type: String
+    Default: 'static-web-app'
+  S3BucketName:
+    Description: S3 bucket name
+    Type: String
+    Default: ''
+  CertificateArn:
+    Description: The ARN of a certificate from AWS Certificate Manager (ACM)
+    Type: String
+    Default: ''
+  HostedZoneResourceUrl:
+#    AllowedPattern: (([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.){1,}([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9]){1,}
+    Description: 'Must be a valid DNS zone name WITHOUT trailing period'
+    Type: String
+    Default: ''
+  WebACL:
+    Description: Restriction for access to CloudFrond. Empty line allow access from anywhere
+    Type: String
+    Default: ''
+  HSTSLambdaARN:
+    Description: The ARN of the Lambda function. You must specify the ARN of a function version; you can't specify a Lambda alias or $LATEST
+    Type: String
+    Default: ''
+  S3CorsAllowedHeaders:
+    Description: Amazon S3 returns any requested headers that are allowed.
+    Type: CommaDelimitedList
+    Default: '*'
+  S3CorsAllowedMethods:
+    Description: HTTP methods that you allow the origin to run.
+    Type: CommaDelimitedList
+    Default: 'GET'
+  S3CorsAllowedOrigins:
+    Description: One or more origins you want to be able to access the bucket from.
+    Type: CommaDelimitedList
+    Default: '*'
+
+Conditions:
+  HasAppName: !Not [ !Equals [ !Ref AppName, '' ] ]
+  HasS3BucketName: !Not [ !Equals [ !Ref S3BucketName, '' ] ]
+  HasWebACL: !Not [ !Equals [ !Ref WebACL, '' ] ]
+  HasHSTSLambdaARN: !Not [ !Equals [ !Ref HSTSLambdaARN, '' ] ]
+  HasCertificateArn: !Not [ !Equals [ !Ref CertificateArn, '' ] ]
+
+Resources:
+  AppBucket:
+    Type: AWS::S3::Bucket
+    DeletionPolicy: 'Delete'
+    Properties:
+      BucketName: !If [ HasS3BucketName, !Ref S3BucketName, !Ref 'AWS::StackName' ]
+      WebsiteConfiguration:
+        IndexDocument: index.html
+      CorsConfiguration:
+         CorsRules:
+          - AllowedHeaders: !Ref S3CorsAllowedHeaders
+            AllowedMethods: !Ref S3CorsAllowedMethods
+            AllowedOrigins: !Ref S3CorsAllowedOrigins
+
+  AppBucketPolicy:
+    Type: AWS::S3::BucketPolicy
+    Properties:
+      Bucket: !Ref AppBucket
+      PolicyDocument:
+        Id: WebAppBucketPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: 'AllowCloudFrontAccessIdentity'
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+              - 's3:ListBucket'
+            Resource:
+              - !Join [ '', [ 'arn:aws:s3:::', !Ref 'AppBucket', /* ] ]
+              - !Join [ '', [ 'arn:aws:s3:::', !Ref 'AppBucket' ] ]
+            Principal:
+              AWS:
+                Fn::Join:
+                  - ' '
+                  -
+                    - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity'
+                    -
+                      !Ref OriginAccessIdentity
+
+  OriginAccessIdentity:
+    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+    Properties:
+      CloudFrontOriginAccessIdentityConfig:
+        Comment: Access identity between CloudFront and S3 bucket
+
+  CloudFront:
+    Type: AWS::CloudFront::Distribution
+    DependsOn: AppBucket
+    Properties:
+      DistributionConfig:
+        WebACLId: !If [ HasWebACL, !Ref WebACL, !Ref 'AWS::NoValue' ]
+        Enabled: true
+        IPV6Enabled: true
+        HttpVersion: http2
+        DefaultRootObject: index.html
+        Comment: !Join [ '', [ !If [ HasAppName, !Ref AppName, !Ref 'AWS::StackName' ], ' app CloudFront distribution for ', !Ref Environment, ' environment' ] ]
+        Aliases:
+          - !If [ HasCertificateArn, !Join [ '.', [ !If [ HasAppName, !Ref AppName, !Ref 'AWS::StackName' ], !Ref HostedZoneResourceUrl ] ] , !Ref 'AWS::NoValue']
+        ViewerCertificate: !If
+          - HasCertificateArn
+          - AcmCertificateArn: !Ref CertificateArn
+            SslSupportMethod: sni-only
+            MinimumProtocolVersion: TLSv1.2_2019
+          - CloudFrontDefaultCertificate: true
+        Origins:
+          - DomainName: !Sub ${AppBucket}.s3.amazonaws.com
+            Id: myS3Origin
+            S3OriginConfig:
+              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${OriginAccessIdentity}
+        DefaultCacheBehavior:
+          AllowedMethods: [ 'GET', 'HEAD', 'OPTIONS' ]
+          CachedMethods: [ 'GET', 'HEAD', 'OPTIONS' ]
+          ForwardedValues:
+            Headers:
+              - Access-Control-Request-Headers
+              - Access-Control-Request-Method
+              - Origin
+              - Authorization
+            QueryString: false
+            Cookies:
+              Forward: none
+          TargetOriginId: myS3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          DefaultTTL: 0
+          LambdaFunctionAssociations:
+            !If
+            - HasHSTSLambdaARN
+            - - EventType: 'origin-response'
+                LambdaFunctionARN: !Ref HSTSLambdaARN
+                IncludeBody: false
+            - [ ]
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponsePagePath: /index.html
+            ResponseCode: 200
+            ErrorCachingMinTTL: 300
+          - ErrorCode: 400
+            ErrorCachingMinTTL: 0
+          - ErrorCode: 403
+            ErrorCachingMinTTL: 1
+          - ErrorCode: 500
+            ErrorCachingMinTTL: 5
+
+  Route53Alias:
+    Condition: HasCertificateArn
+    Type: AWS::Route53::RecordSet
+    DependsOn: CloudFront
+    Properties:
+      HostedZoneName: !Join [ '', [ !Ref HostedZoneResourceUrl, '.' ] ]
+      Name: !Join
+        - '.'
+        - - !If [ HasAppName, !Ref AppName, !Ref 'AWS::StackName' ]
+          - !Join [ '', [ !Ref HostedZoneResourceUrl, '.' ] ]
+      Type: A
+      AliasTarget:
+        DNSName: !GetAtt CloudFront.DomainName
+        EvaluateTargetHealth: false
+        HostedZoneId: 'Z2FDTNDATAQYW2'
+
+Outputs:
+  CloudFront:
+    Description: CloudFront ID
+    Value: !Ref CloudFront
+  CloudFrontDomainName:
+    Description: CloudFront domain name
+    Value: !GetAtt CloudFront.DomainName
+  S3Bucket:
+    Description: S3 Bucket name
+    Value: !Ref AppBucket
+  Environment:
+    Description: Environment name
+    Value: !Ref Environment

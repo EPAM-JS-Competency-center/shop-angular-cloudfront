@@ -1,0 +1,27 @@
+version: 0.2
+
+env:
+  variables:
+    SOURCE_OUTPUT_BUCKET: ""
+    SOURCE_PATH: "source"
+    APP_NAME: "shop"
+    TARGET_BRANCH: "develop"
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 14
+
+  build:
+    commands:
+      # Update system packages
+      - apt-get update -y -q
+      # Install dependencies
+      - npm install --no-progress
+      - SOURCE_BRANCH=$(echo $CODEBUILD_WEBHOOK_TRIGGER | awk '{split($0, a,"/"); print a[2]}')
+      # Clean-up workspace
+      - rm -rf ./node_modules ./dist
+      # Archive workspace
+      - zip -qr source.zip .
+      # Upload workspace archive to S3
+      - aws s3 cp source.zip s3://${SOURCE_OUTPUT_BUCKET}/${SOURCE_PATH}/${APP_NAME}/${APP_NAME}.zip --metadata CommitID="${CODEBUILD_RESOLVED_SOURCE_VERSION}",BranchName="${CODEBUILD_SOURCE_VERSION}",RepoURL="${CODEBUILD_SOURCE_REPO_URL}"
