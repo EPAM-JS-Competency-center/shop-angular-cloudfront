@@ -40,10 +40,11 @@ phases:
       - aws configure set preview.cloudfront true
 
       # Invalidate CloudFront cache
-      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/index.html"
+#      - aws cloudfront create-invalidation --distribution-id ${CLOUDFRONT_DISTRIBUTION_ID} --paths "/index.html"
 
       # Clear S3 bucket:
-      - aws s3 rm s3://${S3_BUCKET} --recursive --exclude "index.html"
+      - aws s3 rm s3://${S3_BUCKET} --recursive
+#      - aws s3 rm s3://${S3_BUCKET} --recursive --exclude "index.html"
       - echo S3 bucket is cleared.
 
       # Show maintenance page while app is loaded
