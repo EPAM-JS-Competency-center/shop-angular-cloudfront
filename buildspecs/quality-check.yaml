@@ -38,7 +38,7 @@ phases:
       - echo Building a project...
       - npm run build --configuration=${BUILD_CONFIGURATION}
 
-      - Echo running npm audit
+      - echo Running npm audit
 #      - npm audit
 
   post_build:
