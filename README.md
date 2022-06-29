@@ -1,4 +1,4 @@
-# Shop Angular Cloudfront
+# Water Shop Angular Cloudfront
 
 Angular version: ~12.
 
