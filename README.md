@@ -1,3 +1,8 @@
+# Results HW-2 
+
+- S3 Bucket: http://cloud-aws-course-epam.s3-website-eu-west-1.amazonaws.com/
+- CloudFront: https://d2q3ccwwopalnd.cloudfront.net/
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
