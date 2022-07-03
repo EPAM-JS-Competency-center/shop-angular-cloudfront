@@ -1,7 +1,10 @@
 <mat-card>
   <div mat-card-image class="img-container">
     <div class="img-container__inner">
-      <img src="https://source.unsplash.com/random?sig={{ index }}" alt="" />
+      <img
+        src="https://source.unsplash.com/collection/4827617?sig={{ index }}"
+        alt=""
+      />
     </div>
   </div>
 
@@ -12,7 +15,7 @@
   </header>
 
   <mat-card-content>
-    <p>{{ product.price | number: "1.2-2" | currency }}</p>
+    <p>{{ product.price | currency: "USD":"symbol":"2.0-0" }}</p>
   </mat-card-content>
 
   <mat-card-actions>
