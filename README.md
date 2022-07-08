@@ -1,3 +1,12 @@
+# S3 bucket:
+
+https://my-awesome-aws-shop.s3.amazonaws.com/index.html
+http://my-awesome-aws-shop.s3-website-us-east-1.amazonaws.com/index.html
+
+# CloudFront:
+
+https://d7iamcvw3abb0.cloudfront.net/
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.

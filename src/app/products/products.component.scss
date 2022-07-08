@@ -2,6 +2,16 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins/breakpoints";
 
+.title {
+  font-size: 60px;
+  line-height: normal;
+  text-align: center;
+  border: 6px solid #212529;
+  border-left: 0;
+  border-right: 0;
+  margin-bottom: 46px;
+}
+
 .container {
   display: grid;
   grid-template-columns: 1fr;
