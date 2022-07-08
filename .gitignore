@@ -44,3 +44,10 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+
+
+# package directories
+jspm_packages
+
+# Serverless directories
+.serverless
