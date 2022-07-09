@@ -1,3 +1,7 @@
+ervice is done
+http://angularaws123.s3-website.us-east-2.amazonaws.com/
+https://d3mlc491807bq5.cloudfront.net
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
