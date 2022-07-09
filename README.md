@@ -29,3 +29,13 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Task 2 Homework
+
+CloudFront URL => https://d27km4tu190sr6.cloudfront.net/
+S3-website => http://ek-shop-angular-cloudfront.s3-website-us-east-1.amazonaws.com/
+
+## Additional Info
+
+Manual Practices were done successfully, then tested all the Automated Build and Deployment process.
+Everything mentioned in the homework/assignment was executed properly.

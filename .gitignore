@@ -40,6 +40,7 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+/.serverless
 
 # System Files
 .DS_Store
