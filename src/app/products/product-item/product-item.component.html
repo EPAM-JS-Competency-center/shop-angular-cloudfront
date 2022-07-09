@@ -21,7 +21,7 @@
       #cartBtn
       *ngIf="(countInCart$ | async) === 0"
       (click)="add()"
-      color="accent"
+      color="primary"
       matTooltip="Add {{ product.title }} to cart"
       mat-icon-button
     >
