@@ -1,3 +1,8 @@
+# App URLs
+
+- CloudFront [https://d31vfpmw4lhe5l.cloudfront.net](https://d31vfpmw4lhe5l.cloudfront.net)
+- S3 [https://shop-angular-cloudfront-ivan-second.s3.amazonaws.com/index.html](https://shop-angular-cloudfront-ivan-second.s3.amazonaws.com/index.html) (not available. to access the app use cloudfront url that is above)
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
