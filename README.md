@@ -29,3 +29,9 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Application links
+
+S3: http://pc-expert-shop.s3-website-eu-west-1.amazonaws.com/
+
+Cloudfront: Not ready yet because account is pending verification
