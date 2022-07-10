@@ -25,6 +25,8 @@
     "@angular/router": "~12.0.0",
     "bootstrap": "^4.6.0",
     "rxjs": "~6.6.0",
+    "serverless": "^3.20.0",
+    "serverless-finch": "^4.0.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
   },
