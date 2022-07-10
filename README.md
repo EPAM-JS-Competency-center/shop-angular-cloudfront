@@ -2,10 +2,6 @@
 
 Angular version: ~12.
 
-Repo maintainers:
-
-- [Sergey Gultyayev](https://github.com/gultyaev)
-
 ## The purpose
 
 The repository was created to have an Angular version of e-shop for EPAM NodeJS AWS course. At the same time we strive to make this repository follows best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
@@ -29,3 +25,8 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Usefull Links
+
+S3 website https://js-shop-angular-cloudfront.s3.amazonaws.com/index.html
+CloudFront UR https://d2r2ilupi58td7.cloudfront.net/
