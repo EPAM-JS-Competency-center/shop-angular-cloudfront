@@ -116,17 +116,21 @@ provider:
 plugins:
   - serverless-finch
   - serverless-single-page-app-plugin
+  - serverless-cloudfront-invalidate
 
 custom:
   client:
     bucketName: pc-expert-shop
     distributionFolder: dist/app
-    indexDocument: index.html
-    errorDocument: index.html
-    manageResources: false
 
   s3LocalPath: ${self:custom.client.distributionFolder}/
   s3BucketName: ${self:custom.client.bucketName}
+
+  cloudfrontInvalidate:
+    - distributionIdKey: 'PCExpertCloudFrontDistribution'
+      autoInvalidate: true
+      items:
+        - '/*'
 
 # you can add CloudFormation resource templates here
 resources:
@@ -233,3 +237,6 @@ resources:
     WebAppCloudFrontDistributionOutput:
       Value:
         'Fn::GetAtt': [ WebAppCloudFrontDistribution, DomainName ]
+    PCExpertCloudFrontDistribution:
+      Value:
+        Ref: WebAppCloudFrontDistribution
