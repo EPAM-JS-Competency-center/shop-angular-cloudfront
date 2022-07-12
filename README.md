@@ -29,4 +29,4 @@ Follow the steps:
 ## Usefull Links
 
 S3 website https://js-shop-angular-cloudfront.s3.amazonaws.com/index.html
-CloudFront UR https://d2r2ilupi58td7.cloudfront.net/
+CloudFront UR https://d1elzs5l7k5p48.cloudfront.net/

@@ -144,7 +144,12 @@ resources:
               Effect: Allow
               Action: s3:GetObject
               Resource: arn:aws:s3:::${self:custom.s3BucketName}/*
-              Principal: "*"
+              Principal:
+                AWS:
+                  Fn::Join:
+                    - " "
+                    - - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity"
+                      - !Ref OriginAccessIdentity
 
     OriginAccessIdentity:
       Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
