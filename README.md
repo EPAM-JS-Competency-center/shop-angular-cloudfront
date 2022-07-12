@@ -29,3 +29,15 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Task2
+
+### Manual
+
+Cloudfront: d1pk9fq22epw7s.cloudfront.net
+S3: https://shop-angular-cloudfront-klinton.s3.us-east-2.amazonaws.com/index.html
+
+### Auto
+
+Cloudfront: https://d1x64q46xs1snw.cloudfront.net
+S3: https://shop-angular-cloudfront-klinton-auto.s3.amazonaws.com/
