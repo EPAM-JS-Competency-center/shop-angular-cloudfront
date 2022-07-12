@@ -32,6 +32,6 @@ Follow the steps:
 
 ## Application links
 
-S3: http://pc-expert-shop.s3-website-eu-west-1.amazonaws.com/
+S3 (403 due to restriction policy): http://pc-expert-shop.s3-website-eu-west-1.amazonaws.com/
 
-Cloudfront: Not ready yet because account is pending verification
+Cloudfront: https://d1d4yhbzq6pepb.cloudfront.net
