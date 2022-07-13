@@ -29,3 +29,6 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+S3: https://my-shop-task.s3.eu-west-1.amazonaws.com/
+CloudFront: https://d2m53ogeuwi5od.cloudfront.net/
