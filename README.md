@@ -32,5 +32,5 @@ Follow the steps:
 
 ## Links
 
-- CloudFront: [d2jewns25x85l3.cloudfront.net](d2jewns25x85l3.cloudfront.net)
+- CloudFront: [https://d2jewns25x85l3.cloudfront.net](https://d2jewns25x85l3.cloudfront.net)
 - S3: [https://serverless-bucket18425329.s3.eu-central-1.amazonaws.com](https://serverless-bucket18425329.s3.eu-central-1.amazonaws.com/index.html)
