@@ -29,3 +29,6 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Application links
+Cloudfront: https://d1d4yhbzq6pepb.cloudfront.net
