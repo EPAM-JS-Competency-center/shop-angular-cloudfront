@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card style="height: 100%; display: flex; flex-direction: column">
   <div mat-card-image class="img-container">
     <div class="img-container__inner">
       <img src="https://source.unsplash.com/random?sig={{ index }}" alt="" />
@@ -15,7 +15,7 @@
     <p>{{ product.price | number: "1.2-2" | currency }}</p>
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions style="margin-top: auto">
     <!-- Add to cart btn -->
     <button
       #cartBtn
