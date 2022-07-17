@@ -9,9 +9,8 @@ import { Product } from './product.interface';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  readonly products$: Observable<
-    Product[]
-  > = this.productsService.getProducts();
+  readonly products$: Observable<Product[]> =
+    this.productsService.getProducts();
 
   constructor(private readonly productsService: ProductsService) {}
 
