@@ -30,7 +30,6 @@ export class ManageProductsComponent implements OnInit {
     if (!this.selectedFile) {
       return;
     }
-
     this.manageProductsService
       .uploadProductsCSV(this.selectedFile)
       .subscribe(() => {
