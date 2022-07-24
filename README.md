@@ -31,7 +31,4 @@ Follow the steps:
 - ng serve
 
 ## Application links
-
-S3 (403 due to restriction policy): http://pc-expert-shop.s3-website-eu-west-1.amazonaws.com/
-
 Cloudfront: https://d1d4yhbzq6pepb.cloudfront.net
