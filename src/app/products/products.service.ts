@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { EMPTY, Observable, of, throwError } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Product } from './product.interface';
+import { CreateProduct, Product } from './product.interface';
 
 import { ApiService } from '../core/api.service';
 
@@ -11,7 +11,7 @@ import { ApiService } from '../core/api.service';
   providedIn: 'root',
 })
 export class ProductsService extends ApiService {
-  createNewProduct(product: Product): Observable<Product> {
+  createNewProduct(product: CreateProduct): Observable<Product> {
     if (!this.endpointEnabled('product')) {
       console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'

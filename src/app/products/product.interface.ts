@@ -7,6 +7,13 @@ export interface Product {
   title: string;
 }
 
+export interface CreateProduct {
+  title: string;
+  description: string;
+  price: number;
+  count: number;
+}
+
 export interface ProductCheckout extends Product {
   orderedCount: number;
   /** orderedCount * price */
