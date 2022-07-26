@@ -56,6 +56,7 @@ export class ProductsService extends ApiService {
   }
 
   getProducts(): Observable<Product[]> {
+    console.log();
     if (!this.endpointEnabled('bff')) {
       console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
