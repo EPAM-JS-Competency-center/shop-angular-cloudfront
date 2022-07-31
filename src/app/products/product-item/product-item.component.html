@@ -1,7 +1,10 @@
 <mat-card>
   <div mat-card-image class="img-container">
     <div class="img-container__inner">
-      <img [src]="product.image" [alt]="product.title" />
+      <img
+        src="https://source.unsplash.com/random?sig={{ index }}"
+        [alt]="product.title"
+      />
     </div>
   </div>
 
