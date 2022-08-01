@@ -7,6 +7,8 @@ import { Product } from './product.interface';
 
 import { ApiService } from '../core/api.service';
 
+import { HttpClient } from '@angular/common/http';
+
 @Injectable({
   providedIn: 'root',
 })
