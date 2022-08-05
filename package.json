@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky install",
+    "deploy": "npm run cloudfront:update:build:deploy:nc",
     "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
     "deploy:s3": "serverless client deploy --no-config-change --no-policy-change --no-cors-change",
     "client:deploy": "sls client deploy --no-config-change --no-policy-change --no-cors-change",
