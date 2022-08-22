@@ -3,13 +3,13 @@
 readonly BUILD_FOLDER_PATH='./dist'
 readonly BUILD_ARCHIVE_PATH=$BUILD_FOLDER_PATH'/client-app.zip';
 
-BUILD_CONFIGURATION='';
+export ENV_CONFIGURATION='';
 
 POSITIONAL_ARGS=();
 while [[ $# -gt 0 ]]; do
   case $1 in
     --configuration)
-      BUILD_CONFIGURATION="$2";
+      ENV_CONFIGURATION="$2";
       shift; shift;
       ;;
     -*|--*)
@@ -26,7 +26,7 @@ set -- "${POSITIONAL_ARGS[@]}";
 
 npm i;
 
-if [ $BUILD_CONFIGURATION == 'production' ]; then
+if [ $ENV_CONFIGURATION == 'production' ]; then
   npm run build-prod;
 else
   npm run build;
