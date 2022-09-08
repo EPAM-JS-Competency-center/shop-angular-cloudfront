@@ -29,3 +29,8 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Links to deployments
+
+- [S3 URL](http://denitrip-task-2.s3-website-eu-west-1.amazonaws.com/)
+- [Cloudfront distribution URL](https://d2zhcer38bmonw.cloudfront.net/)
