@@ -1,0 +1,19 @@
+service: my-first-rs-app
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: my-angular-rs-app 
+    distributionFolder: dist/app
+
+# functions:
+#   hello:
+#     handler: handler.hello
