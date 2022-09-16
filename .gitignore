@@ -22,6 +22,7 @@ speed-measure-plugin*.json
 *.launch
 .settings/
 *.sublime-workspace
+.husky
 
 # IDE - VSCode
 .vscode/*
@@ -40,6 +41,10 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+jspm_packages
+
+# Serverless directories
+.serverless
 
 # System Files
 .DS_Store
