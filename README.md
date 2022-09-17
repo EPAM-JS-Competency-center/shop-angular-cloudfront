@@ -31,4 +31,7 @@ Follow the steps:
 - ng serve
 
 **S3-website:**[ my-first-angular-app](http://my-first-angular-app.s3-website-eu-west-1.amazonaws.com/)  
-**CloudFront:**[ my-first-angular-app](https://sesychev.github.io/rsschool-cv/)
+**CloudFront:**[ my-first-angular-app](https://d3cmborauijqdu.cloudfront.net/)
+
+**S3-website:**[ my-second-angular-app](http://my-second-angular-app.s3-website-us-east-1.amazonaws.com)  
+**CloudFront:**[ my-second-angular-app](https://d25n3tx591rpt6.cloudfront.net)
