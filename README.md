@@ -29,3 +29,6 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+**S3-website:**[ my-first-angular-app](http://my-first-angular-app.s3-website-eu-west-1.amazonaws.com/)  
+**CloudFront:**[ my-first-angular-app](https://sesychev.github.io/rsschool-cv/)
