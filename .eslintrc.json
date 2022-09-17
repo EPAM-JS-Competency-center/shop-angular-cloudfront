@@ -16,6 +16,7 @@
         "prettier"
       ],
       "rules": {
+        "@typescript-eslint/member-ordering": ["off"],
         "@angular-eslint/component-selector": [
           "error",
           {

@@ -4,7 +4,7 @@ export const environment: Config = {
   production: true,
   apiEndpoints: {
     product:
-      'https://msit3q4005.execute-api.eu-central-1.amazonaws.com/dev/goods',
+      'https://msit3q4005.execute-api.eu-central-1.amazonaws.com/dev/products',
     order: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
     import: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
     bff: 'https://msit3q4005.execute-api.eu-central-1.amazonaws.com/dev',
