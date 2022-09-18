@@ -1,6 +1,6 @@
 "use strict";
 
-const spawnSync = require("child_process").spawnSync;
+import { spawnSync } from "child_process";
 
 class ServerlessPlugin {
   constructor(serverless, options) {
@@ -141,4 +141,4 @@ class ServerlessPlugin {
   }
 }
 
-// module.exports = ServerlessPlugin;
+export default ServerlessPlugin;

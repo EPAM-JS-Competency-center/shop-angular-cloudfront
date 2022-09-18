@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: rs-app-j13o
+service: rs-app-j13o-go
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -23,6 +23,7 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs14.x
+  region: eu-west-1
 
 plugins:
   - serverless-finch
@@ -30,11 +31,11 @@ plugins:
 
 custom:
   client:
-    bucketName: rs-app-j13o-auto
+    bucketName: rs-app-j13o-go
     distributionFolder: dist/app
   # you can overwrite defaults here
   #  stage: dev
-  #  region: us-east-1
+  #  region: eu-west-1
 
   ## Serverless-single-page-app-plugin configuration:
   s3LocalPath: ${self:custom.client.distributionFolder}/
@@ -159,7 +160,8 @@ resources:
       Properties:
         DistributionConfig:
           Origins:
-            - DomainName: ${self:custom.s3BucketName}.s3.amazonaws.com
+            # - DomainName: ${self:custom.s3BucketName}.s3.amazonaws.com
+            - DomainName: !GetAtt WebAppS3Bucket.RegionalDomainName
               ## An identifier for the origin which must be unique within the distribution
               Id: myS3Origin
               ## In case you don't want to restrict the bucket access use CustomOriginConfig and remove S3OriginConfig
