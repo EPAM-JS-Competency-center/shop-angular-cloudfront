@@ -29,3 +29,11 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Link to S3 bucket
+
+http://avkomosko-shop.s3-website-eu-west-1.amazonaws.com
+
+## Link to cloudFront
+
+https://d2ckqbio6mg2rz.cloudfront.net/
