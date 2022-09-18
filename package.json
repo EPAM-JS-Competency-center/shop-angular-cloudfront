@@ -30,7 +30,8 @@
     "serverless": "^3.22.0",
     "serverless-finch": "^4.0.0",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.4"
+    "zone.js": "~0.11.4",
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~12.0.0",
