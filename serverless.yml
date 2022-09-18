@@ -30,6 +30,11 @@ resources:
       Properties:
         BucketName: ${self:custom.s3BucketName}
         AccessControl: BucketOwnerFullControl
+        PublicAccessBlockConfiguration:
+          BlockPublicAcls: true
+          BlockPublicPolicy: true
+          IgnorePublicAcls: true
+          RestrictPublicBuckets: true
         WebsiteConfiguration:
           IndexDocument: index.html
           ErrorDocument: index.html
