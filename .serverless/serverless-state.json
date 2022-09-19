@@ -1,8 +1,8 @@
 {
   "service": {
-    "service": "denitrip-task-2",
+    "service": "denitrip-task-3",
     "serviceObject": {
-      "name": "denitrip-task-2"
+      "name": "denitrip-task-3"
     },
     "provider": {
       "name": "aws",
@@ -86,7 +86,7 @@
           "HelloLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/denitrip-task-2-dev-hello"
+              "LogGroupName": "/aws/lambda/denitrip-task-3-dev-hello"
             }
           },
           "IamRoleLambdaExecution": {
@@ -107,7 +107,7 @@
               "Policies": [
                 {
                   "PolicyName": {
-                    "Fn::Join": ["-", ["denitrip-task-2", "dev", "lambda"]]
+                    "Fn::Join": ["-", ["denitrip-task-3", "dev", "lambda"]]
                   },
                   "PolicyDocument": {
                     "Version": "2012-10-17",
@@ -120,7 +120,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-2-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-3-dev*:*"
                           }
                         ]
                       },
@@ -129,7 +129,7 @@
                         "Action": ["logs:PutLogEvents"],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-2-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-3-dev*:*:*"
                           }
                         ]
                       }
@@ -142,7 +142,7 @@
                 "Fn::Join": [
                   "-",
                   [
-                    "denitrip-task-2",
+                    "denitrip-task-3",
                     "dev",
                     {
                       "Ref": "AWS::Region"
@@ -160,11 +160,11 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/denitrip-task-2/dev/1662647418657-2022-09-08T14:30:18.657Z/denitrip-task-2.zip"
+                "S3Key": "serverless/denitrip-task-3/dev/1663575573726-2022-09-19T08:19:33.726Z/denitrip-task-3.zip"
               },
               "Handler": "handler.hello",
               "Runtime": "nodejs12.x",
-              "FunctionName": "denitrip-task-2-dev-hello",
+              "FunctionName": "denitrip-task-3-dev-hello",
               "MemorySize": 1024,
               "Timeout": 6,
               "Role": {
@@ -173,20 +173,20 @@
             },
             "DependsOn": ["HelloLogGroup"]
           },
-          "HelloLambdaVersionkBjP6cPmkMgCT55HhVIAFe77yN9S20SvRivSHTmCQ": {
+          "HelloLambdaVersion8pW6S6HVDFScPlQetYU4r5yttSzGe2V7Yw6tD5gPHb4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "bIb69N76wajZA3fJI9UwUCWJdmndyh1/6IGped3MjAg="
+              "CodeSha256": "hoA3WIAGa2LumjcotpCZzpZMfCNFm/EkhRKeLRQSMMI="
             }
           },
           "WebAppS3Bucket": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
-              "BucketName": "denitrip-task-2",
+              "BucketName": "denitrip-task-3",
               "AccessControl": "PublicRead",
               "WebsiteConfiguration": {
                 "IndexDocument": "index.html",
@@ -206,7 +206,7 @@
                     "Sid": "AllowCloudFrontAccessIdentity",
                     "Effect": "Allow",
                     "Action": "s3:GetObject",
-                    "Resource": "arn:aws:s3:::denitrip-task-2/*",
+                    "Resource": "arn:aws:s3:::denitrip-task-3/*",
                     "Principal": {
                       "AWS": {
                         "Fn::Join": [
@@ -294,16 +294,16 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-denitrip-task-2-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-denitrip-task-3-dev-ServerlessDeploymentBucketName"
             }
           },
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionkBjP6cPmkMgCT55HhVIAFe77yN9S20SvRivSHTmCQ"
+              "Ref": "HelloLambdaVersion8pW6S6HVDFScPlQetYU4r5yttSzGe2V7Yw6tD5gPHb4"
             },
             "Export": {
-              "Name": "sls-denitrip-task-2-dev-HelloLambdaFunctionQualifiedArn"
+              "Name": "sls-denitrip-task-3-dev-HelloLambdaFunctionQualifiedArn"
             }
           },
           "WebAppS3BucketOutput": {
@@ -404,11 +404,11 @@
     },
     "custom": {
       "client": {
-        "bucketName": "denitrip-task-2",
+        "bucketName": "denitrip-task-3",
         "distributionFolder": "dist/app"
       },
       "s3LocalPath": "dist/app/",
-      "s3BucketName": "denitrip-task-2"
+      "s3BucketName": "denitrip-task-3"
     },
     "plugins": ["serverless-finch", "serverless-single-page-app-plugin"],
     "pluginsData": {},
@@ -416,13 +416,13 @@
       "hello": {
         "handler": "handler.hello",
         "events": [],
-        "name": "denitrip-task-2-dev-hello",
+        "name": "denitrip-task-3-dev-hello",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionkBjP6cPmkMgCT55HhVIAFe77yN9S20SvRivSHTmCQ"
+        "versionLogicalId": "HelloLambdaVersion8pW6S6HVDFScPlQetYU4r5yttSzGe2V7Yw6tD5gPHb4"
       }
     },
     "resources": {
@@ -430,7 +430,7 @@
         "WebAppS3Bucket": {
           "Type": "AWS::S3::Bucket",
           "Properties": {
-            "BucketName": "denitrip-task-2",
+            "BucketName": "denitrip-task-3",
             "AccessControl": "PublicRead",
             "WebsiteConfiguration": {
               "IndexDocument": "index.html",
@@ -450,7 +450,7 @@
                   "Sid": "AllowCloudFrontAccessIdentity",
                   "Effect": "Allow",
                   "Action": "s3:GetObject",
-                  "Resource": "arn:aws:s3:::denitrip-task-2/*",
+                  "Resource": "arn:aws:s3:::denitrip-task-3/*",
                   "Principal": {
                     "AWS": {
                       "Fn::Join": [
@@ -548,7 +548,7 @@
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
     "initialServerlessConfig": {
-      "service": "denitrip-task-2",
+      "service": "denitrip-task-3",
       "frameworkVersion": "3",
       "provider": {
         "$ref": "$[\"service\"][\"provider\"]"
@@ -568,10 +568,10 @@
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "D:\\aws\\shop-angular-cloudfront\\.serverless\\denitrip-task-2.zip"
+    "artifact": "D:\\aws\\shop-angular-cloudfront\\.serverless\\denitrip-task-3.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/denitrip-task-2/dev/1662647418657-2022-09-08T14:30:18.657Z",
-    "artifact": "denitrip-task-2.zip"
+    "artifactDirectoryName": "serverless/denitrip-task-3/dev/1663575573726-2022-09-19T08:19:33.726Z",
+    "artifact": "denitrip-task-3.zip"
   }
 }

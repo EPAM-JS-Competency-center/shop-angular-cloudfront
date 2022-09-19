@@ -74,7 +74,7 @@
     "HelloLogGroup": {
       "Type": "AWS::Logs::LogGroup",
       "Properties": {
-        "LogGroupName": "/aws/lambda/denitrip-task-2-dev-hello"
+        "LogGroupName": "/aws/lambda/denitrip-task-3-dev-hello"
       }
     },
     "IamRoleLambdaExecution": {
@@ -95,7 +95,7 @@
         "Policies": [
           {
             "PolicyName": {
-              "Fn::Join": ["-", ["denitrip-task-2", "dev", "lambda"]]
+              "Fn::Join": ["-", ["denitrip-task-3", "dev", "lambda"]]
             },
             "PolicyDocument": {
               "Version": "2012-10-17",
@@ -105,7 +105,7 @@
                   "Action": ["logs:CreateLogStream", "logs:CreateLogGroup"],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-2-dev*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-3-dev*:*"
                     }
                   ]
                 },
@@ -114,7 +114,7 @@
                   "Action": ["logs:PutLogEvents"],
                   "Resource": [
                     {
-                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-2-dev*:*:*"
+                      "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/denitrip-task-3-dev*:*:*"
                     }
                   ]
                 }
@@ -127,7 +127,7 @@
           "Fn::Join": [
             "-",
             [
-              "denitrip-task-2",
+              "denitrip-task-3",
               "dev",
               {
                 "Ref": "AWS::Region"
@@ -145,11 +145,11 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/denitrip-task-2/dev/1662647418657-2022-09-08T14:30:18.657Z/denitrip-task-2.zip"
+          "S3Key": "serverless/denitrip-task-3/dev/1663575573726-2022-09-19T08:19:33.726Z/denitrip-task-3.zip"
         },
         "Handler": "handler.hello",
         "Runtime": "nodejs12.x",
-        "FunctionName": "denitrip-task-2-dev-hello",
+        "FunctionName": "denitrip-task-3-dev-hello",
         "MemorySize": 1024,
         "Timeout": 6,
         "Role": {
@@ -158,20 +158,20 @@
       },
       "DependsOn": ["HelloLogGroup"]
     },
-    "HelloLambdaVersionkBjP6cPmkMgCT55HhVIAFe77yN9S20SvRivSHTmCQ": {
+    "HelloLambdaVersion8pW6S6HVDFScPlQetYU4r5yttSzGe2V7Yw6tD5gPHb4": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "bIb69N76wajZA3fJI9UwUCWJdmndyh1/6IGped3MjAg="
+        "CodeSha256": "hoA3WIAGa2LumjcotpCZzpZMfCNFm/EkhRKeLRQSMMI="
       }
     },
     "WebAppS3Bucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "denitrip-task-2",
+        "BucketName": "denitrip-task-3",
         "AccessControl": "PublicRead",
         "WebsiteConfiguration": {
           "IndexDocument": "index.html",
@@ -191,7 +191,7 @@
               "Sid": "AllowCloudFrontAccessIdentity",
               "Effect": "Allow",
               "Action": "s3:GetObject",
-              "Resource": "arn:aws:s3:::denitrip-task-2/*",
+              "Resource": "arn:aws:s3:::denitrip-task-3/*",
               "Principal": {
                 "AWS": {
                   "Fn::Join": [
@@ -279,16 +279,16 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-denitrip-task-2-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-denitrip-task-3-dev-ServerlessDeploymentBucketName"
       }
     },
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersionkBjP6cPmkMgCT55HhVIAFe77yN9S20SvRivSHTmCQ"
+        "Ref": "HelloLambdaVersion8pW6S6HVDFScPlQetYU4r5yttSzGe2V7Yw6tD5gPHb4"
       },
       "Export": {
-        "Name": "sls-denitrip-task-2-dev-HelloLambdaFunctionQualifiedArn"
+        "Name": "sls-denitrip-task-3-dev-HelloLambdaFunctionQualifiedArn"
       }
     },
     "WebAppS3BucketOutput": {
