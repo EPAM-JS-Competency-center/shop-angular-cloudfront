@@ -1,0 +1,20 @@
+{
+  "name": "serverless-single-page-app-plugin",
+  "version": "1.0.3",
+  "description": "A plugin for Serverless Framework, to simplify deploying Single Page Application using S3 and CloudFront.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathanconway/serverless-single-page-app-plugin.git"
+  },
+  "keywords": [],
+  "author": "Jonathan Conway",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jonathanconway/serverless-single-page-app-plugin/issues"
+  },
+  "homepage": "https://github.com/jonathanconway/serverless-single-page-app-plugin#readme"
+}

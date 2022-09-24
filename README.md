@@ -1,3 +1,8 @@
+##TASK 2
+
+CloudFront: https://d3kp6zj5yh0rbl.cloudfront.net/
+S3: https://epam-aws-nodejs-shop-angular.s3.amazonaws.com/index.html
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
