@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { EMPTY, Observable, of, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 
 import { Product } from './product.interface';
 
@@ -64,7 +64,7 @@ export class ProductsService extends ApiService {
     }
 
     const url = this.getUrl('bff', 'products');
-    return this.http.get<Product[]>(url);
+    return this.http.get<Product[]>(url).pipe(pluck('data'));
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {
