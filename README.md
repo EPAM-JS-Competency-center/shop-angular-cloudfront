@@ -1,26 +1,25 @@
-# Shop Angular Cloudfront
+# Task 2 (Serve SPA in AWS S3 and Cloudfront Services)
 
-Angular version: ~12.
+**link to CloudFront website** -  https://dvfrx4qp13uph.cloudfront.net/
 
-Repo maintainers:
+## What is done
 
-- [Sergey Gultyayev](https://github.com/gultyaev)
+[**x**] `Serverless-finch` and `serverless-single-page-app` plugins are added and configured
+<img width="631" alt="Screen Shot 2022-09-25 at 10 26 41 AM" src="https://user-images.githubusercontent.com/26601879/192133059-61b61d48-0db1-49e5-b6cd-e6e036f45349.png">
+<img width="290" alt="Screen Shot 2022-09-25 at 10 26 28 AM" src="https://user-images.githubusercontent.com/26601879/192133067-d10203fe-a769-485a-a792-1229502b8ed2.png">
 
-## The purpose
 
-The repository was created to have an Angular version of e-shop for EPAM NodeJS AWS course. At the same time we strive to make this repository follows best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
+[**x**] The app can be built and deployed by running npm script command
+![Screen Shot 2022-09-25 at 10 30 22 AM](https://user-images.githubusercontent.com/26601879/192133102-511eb15d-3297-47e0-b9d1-cec7adee0561.png)
 
-## NodeJS AWS course integration
+[**x**] Link to CloudFront website is provided. PR with all changes is submitted in the YOUR OWN frontend repository and its link is provided for review
 
-All the necessary API endpoints are in the environments files `environment.ts` (for dev builds). Also it contains feature flags to enable/disable endpoints invocations from within the app so to ensure that you don't get errors for not implemented API endpoints.
+![Screen Shot 2022-09-25 at 10 27 33 AM](https://user-images.githubusercontent.com/26601879/192133110-db02ccc8-894a-4902-8908-f2b7ea5f21b9.png)
 
-## Contribution
+### Scrore - 5
 
-Create an issue with the detailed description of the improvement/issue.
 
-If you would like to help implementing some feature, you should ask the maintainers for approval so to ensure that the feature is desired in the repository and no efforts go wasted.
-
-## Get up and running
+### Get up and running
 
 Prerequisites: NodeJS v14
 
@@ -29,3 +28,7 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Build && deploy
+
+- npm run cloudfront:update:build:deploy
