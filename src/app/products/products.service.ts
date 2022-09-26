@@ -12,36 +12,22 @@ import { ApiService } from '../core/api.service';
 })
 export class ProductsService extends ApiService {
   createNewProduct(product: Product): Observable<Product> {
-    if (!this.endpointEnabled('bff')) {
-      console.warn(
-        'Endpoint "bff" is disabled. To enable change your environment.ts config'
-      );
-      return EMPTY;
-    }
-
     const url = this.getUrl('bff', 'products');
     return this.http.post<Product>(url, product);
   }
 
   editProduct(id: string, changedProduct: Product): Observable<Product> {
-    if (!this.endpointEnabled('bff')) {
-      console.warn(
-        'Endpoint "bff" is disabled. To enable change your environment.ts config'
-      );
-      return EMPTY;
-    }
-
     const url = this.getUrl('bff', `products/${id}`);
     return this.http.put<Product>(url, changedProduct);
   }
 
   getProductById(id: string): Observable<Product | null> {
-    const url = this.getUrl('bff', `goods/${id}`);
+    const url = this.getUrl('bff', `products/${id}`);
     return this.http.get<Product>(url);
   }
 
   getProducts(): Observable<Product[]> {
-    const url = this.getUrl('bff', 'goods');
+    const url = this.getUrl('bff', 'products');
     return this.http.get<Product[]>(url);
   }
 
@@ -53,5 +39,10 @@ export class ProductsService extends ApiService {
     return this.getProducts().pipe(
       map((products) => products.filter((product) => ids.includes(product.id)))
     );
+  }
+
+  deleteProduct(id: string) {
+    const url = this.getUrl('bff', `products/${id}`);
+    return this.http.delete<Product>(url);
   }
 }
