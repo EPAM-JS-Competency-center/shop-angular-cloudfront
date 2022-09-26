@@ -1,0 +1,12 @@
+service: shopping-app
+
+provider:
+  name: aws
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: shopping-app-oj
+    distributionFolder: dist/app
