@@ -145,7 +145,7 @@
           "S3Bucket": {
             "Ref": "ServerlessDeploymentBucket"
           },
-          "S3Key": "serverless/denitrip-task-3/dev/1663575573726-2022-09-19T08:19:33.726Z/denitrip-task-3.zip"
+          "S3Key": "serverless/denitrip-task-3/dev/1664521709901-2022-09-30T07:08:29.901Z/denitrip-task-3.zip"
         },
         "Handler": "handler.hello",
         "Runtime": "nodejs12.x",
@@ -158,14 +158,14 @@
       },
       "DependsOn": ["HelloLogGroup"]
     },
-    "HelloLambdaVersion8pW6S6HVDFScPlQetYU4r5yttSzGe2V7Yw6tD5gPHb4": {
+    "HelloLambdaVersion6LWBUrLarDzokMKMxMWbkisZtUxHxsYJHFrHVoY": {
       "Type": "AWS::Lambda::Version",
       "DeletionPolicy": "Retain",
       "Properties": {
         "FunctionName": {
           "Ref": "HelloLambdaFunction"
         },
-        "CodeSha256": "hoA3WIAGa2LumjcotpCZzpZMfCNFm/EkhRKeLRQSMMI="
+        "CodeSha256": "lOr3PUsaVe7d8hHjQgGjh7lawXxTgyyydeiGhSpaqik="
       }
     },
     "WebAppS3Bucket": {
@@ -285,7 +285,7 @@
     "HelloLambdaFunctionQualifiedArn": {
       "Description": "Current Lambda function version",
       "Value": {
-        "Ref": "HelloLambdaVersion8pW6S6HVDFScPlQetYU4r5yttSzGe2V7Yw6tD5gPHb4"
+        "Ref": "HelloLambdaVersion6LWBUrLarDzokMKMxMWbkisZtUxHxsYJHFrHVoY"
       },
       "Export": {
         "Name": "sls-denitrip-task-3-dev-HelloLambdaFunctionQualifiedArn"
