@@ -3,7 +3,7 @@
 
 # URLs
 - S3 bucket link: http://my-angular-rs-app.s3-website-eu-west-1.amazonaws.com/
-- Cloudfront link: https://d28b69v801b6zm.cloudfront.net/
+- Cloudfront link: https://d1dha05y42thc2.cloudfront.net	
 
 Angular version: ~12.
 
