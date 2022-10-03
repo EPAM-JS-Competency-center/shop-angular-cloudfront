@@ -1,3 +1,16 @@
+## Task 2 ##
+
+1. What was done?
+
+Manually Website was deployed on S3 bucket & Cloudfront:
+Static website url - http://akshay-js-shop-angular.s3-website-ap-northeast-1.amazonaws.com
+Cloudfront url - https://d3d3akg9zundeq.cloudfront.net
+
+serverless and serverless-finch plugins are added and  configured 
+
+
+2. Link to FE PR (YOUR OWN REPOSITORY : 
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
@@ -29,3 +42,57 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+- npm run cloudfront:update:build:deploy (make sure to change bucket name in serverless.yml file)
+
+
+
+### `client:deploy`, `client:deploy:nc`
+
+Deploy the project build from `dist` folder to configured in `serverless.yml` AWS S3 bucket with or without confirmation.
+
+### `client:build:deploy`, `client:build:deploy:nc`
+
+Combination of `build` and `client:deploy` commands with or without confirmation.
+
+### `cloudfront:setup`
+
+Deploy configured in `serverless.yml` stack via CloudFormation.
+
+### `cloudfront:domainInfo`
+
+Display cloudfront domain information in console.
+
+### `cloudfront:invalidateCache`
+
+Invalidate cloudfront cache.
+
+### `cloudfront:build:deploy`, `cloudfront:build:deploy:nc`
+
+Combination of `client:build:deploy` and `cloudfront:invalidateCache` commands with or without confirmation.
+
+### `cloudfront:update:build:deploy`, `cloudfront:update:build:deploy:nc`
+
+Combination of `cloudfront:setup` and `cloudfront:build:deploy` commands with or without confirmation.
+
+### `serverless:remove`
+
+Remove an entire stack configured in `serverless.yml` via CloudFormation.
+
+
+## Task 2 ##
+
+1. What was done?
+
+Manually Website was deployed on S3 bucket & Cloudfront:
+Static website url - http://akshay-js-shop-angular.s3-website-ap-northeast-1.amazonaws.com
+Cloudfront url - https://d3d3akg9zundeq.cloudfront.net
+
+serverless and serverless-finch plugins are added and  configured 
+
+
+2. Link to FE PR (YOUR OWN REPOSITORY : 
+
+2.1 - Static website url - http://akshay-js-shop-angular.s3-website-ap-northeast-1.amazonaws.com
+2.2 - Cloudfront url - https://d3d3akg9zundeq.cloudfront.net
+2.3 https://d1nmo40ewl07lt.cloudfront.net
+
