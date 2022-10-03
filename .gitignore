@@ -9,6 +9,10 @@
 
 # dependencies
 /node_modules
+jspm_packages
+
+# Serverless directories
+.serverless
 
 # profiling files
 chrome-profiler-events*.json
