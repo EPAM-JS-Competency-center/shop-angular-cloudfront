@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: aws-fe
+service: aws-fe-sls
 # app and org for use with dashboard.serverless.com
 #app: your-app-name
 #org: your-org-name
@@ -27,10 +27,12 @@ plugins:
 provider:
   name: aws
   runtime: nodejs12.x
+  region: ${self:custom.client.region}
 
 custom:
   client:
-    bucketName: aws-fe-serverless 
+    bucketName: aws-fe-sls-s3
+    region: eu-west-1
     distributionFolder: dist/app
   
   s3LocalPath: ${self:custom.client.distributionFolder}/
@@ -159,7 +161,7 @@ resources:
       Properties:
         DistributionConfig:
           Origins:
-            - DomainName: ${self:custom.s3BucketName}.s3.amazonaws.com
+            - DomainName: ${self:custom.s3BucketName}.s3.${self:custom.client.region}.amazonaws.com
               ## An identifier for the origin which must be unique within the distribution
               Id: myS3Origin
               ## In case you don't want to restrict the bucket access use CustomOriginConfig and remove S3OriginConfig
