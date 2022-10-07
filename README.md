@@ -29,3 +29,10 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Deploy run
+
+Follow the steps: 
+
+- build
+- deployToS3
