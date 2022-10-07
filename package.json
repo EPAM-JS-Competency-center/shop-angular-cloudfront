@@ -9,7 +9,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky install",
-    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged"
+    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
+    "deployToS3": "sls syncToS3"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +26,7 @@
     "@angular/router": "~12.0.0",
     "bootstrap": "^4.6.0",
     "rxjs": "~6.6.0",
+    "serverless-finch": "^4.0.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"
   },
@@ -61,6 +63,7 @@
     "prettier": "^2.3.0",
     "pretty-quick": "^3.1.0",
     "protractor": "~7.0.0",
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin",
     "ts-node": "^9.1.1",
     "typescript": "~4.2.4"
   },
