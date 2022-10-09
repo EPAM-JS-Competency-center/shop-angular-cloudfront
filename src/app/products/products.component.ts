@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ProductsService } from './products.service';
-import { Observable } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+
 import { Product } from './product.interface';
 
 @Component({
@@ -9,11 +9,11 @@ import { Product } from './product.interface';
   styleUrls: ['./products.component.scss'],
 })
 export class ProductsComponent implements OnInit {
-  readonly products$: Observable<
-    Product[]
-  > = this.productsService.getProducts();
+  products: Product[] = [];
 
-  constructor(private readonly productsService: ProductsService) {}
+  constructor(private activatedRoute: ActivatedRoute) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.products = this.activatedRoute.snapshot.data.products;
+  }
 }

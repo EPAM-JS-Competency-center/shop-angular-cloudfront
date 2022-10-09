@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+
+import { ProductsApiService } from 'src/app/api';
+
 import { Product } from '../../products/product.interface';
-import { ProductsService } from '../../products/products.service';
 import { ManageProductsService } from './manage-products.service';
 
 @Component({
@@ -17,13 +19,13 @@ export class ManageProductsComponent implements OnInit {
   products$!: Observable<Product[]>;
 
   constructor(
-    private readonly productsService: ProductsService,
+    private readonly productsApiService: ProductsApiService,
     private readonly manageProductsService: ManageProductsService,
     private readonly cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
-    this.products$ = this.productsService.getProducts();
+    this.products$ = this.productsApiService.getProducts();
   }
 
   onUploadCSV(): void {
