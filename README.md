@@ -32,6 +32,6 @@ Follow the steps:
 
 ## Task 2
 
-[CloudFront](https://dj3v9ed8je2bx.cloudfront.net)
+[CloudFront](https://d2khn404ig5sop.cloudfront.net)
 
-[S3Bucket](http://aws-practitioner-for-js.s3-website-us-east-1.amazonaws.com/)
+[S3Bucket](http://aws-practitioner-for-js.s3-website-eu-west-1.amazonaws.com/)
