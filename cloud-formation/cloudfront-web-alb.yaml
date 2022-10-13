@@ -309,9 +309,7 @@ Outputs:
     Value: !Join
       - ''
       - - 'https://'
-        - !GetAtt
-          - S3Bucket
-          - DomainName
+        - !GetAtt S3Bucket.DomainName
     Description: Secure URL for website hosted on S3
   CloudFront:
     Value: !Ref CloudFrontWebDistribution
@@ -319,3 +317,6 @@ Outputs:
   CloudFrontDomainName:
     Value: !GetAtt CloudFrontWebDistribution.DomainName
     Description: CloudFront distribution's domain name
+  LoadBalancerPublicURL:
+    Description: URL of the website
+    Value: !Join [ '', [ 'http://', !GetAtt LoadBalancer.DNSName ] ]
