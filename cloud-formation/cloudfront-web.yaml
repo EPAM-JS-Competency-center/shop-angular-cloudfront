@@ -1,0 +1,172 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: A CloudFormation template for static website hosting based on S3 bucket and CloudFront CDN
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: A unique bucket name. If not provided AWS will use a unique bucket name based on the stack name
+    Default: ''
+  OriginAccessControlId:
+    Type: String
+    Description: An Id of existing Origin Access Control
+    Default: ''
+
+Conditions:
+  HasBucketName: !Not [ !Equals [ !Ref BucketName, '' ] ]
+  HasOriginAccessControlId: !Not [ !Equals [ !Ref OriginAccessControlId, '' ] ]
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Description: Bucket for static website hosting
+    Properties:
+      BucketName: !If [ HasBucketName, !Ref BucketName, !Ref AWS::NoValue ]
+      VersioningConfiguration:
+        Status: Enabled
+      AccessControl: Private
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      PolicyDocument:
+        Id: PolicyForCloudFrontPrivateContent
+        Version: 2012-10-17
+        Statement:
+## Policy for OAC:
+          - Sid: 'AllowCloudFrontServicePrincipal'
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+              - 's3:ListBucket'
+            Resource:
+              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket, /* ] ]
+              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket ] ]
+            Principal:
+              Service: 'cloudfront.amazonaws.com'
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Join
+                - ':'
+                - - 'arn:aws:cloudfront:'
+                  - !Ref 'AWS::AccountId'
+                  - !Sub distribution/${CloudFrontWebDistribution}
+## Policy for OAI:
+#          - Sid: 'AllowCloudFrontAccessIdentityOnly'
+#            Effect: Allow
+#            Action:
+#              - 's3:GetObject'
+#              - 's3:ListBucket'
+#            Resource:
+#              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket, /* ] ]
+#              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket ] ]
+#            Principal:
+#              AWS:
+#                Fn::Join:
+#                  - ' '
+#                  - - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity'
+#                    - !Ref OriginAccessIdentity
+      Bucket: !Ref S3Bucket
+
+## Recommended OAC:
+  OriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Description: Allows CloudFront distribution to access files from S3
+        Name: !Join [ '-', [ 'CloudFrontWebOAC', !Ref 'AWS::StackName' ] ]
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+## Legacy OAI:
+#  OriginAccessIdentity:
+#    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+#    Properties:
+#      CloudFrontOriginAccessIdentityConfig:
+#        Comment: Access identity between CloudFront and S3 bucket
+
+  CloudFrontWebDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    Properties:
+      DistributionConfig:
+        Comment: A CloudFront distribution for S3 origin with static web app
+        Enabled: true
+        DefaultRootObject: index.html
+        HttpVersion: http2and3
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+        Origins:
+          - DomainName: !Sub ${S3Bucket}.s3.amazonaws.com
+            Id: s3Origin
+## Origin Access Control (OAC) settings:
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+            OriginAccessControlId: !If
+              - HasOriginAccessControlId
+              - !Ref OriginAccessControlId
+              - !GetAtt OriginAccessControl.Id
+## Origin Access Identity (OAI) settings:
+#            S3OriginConfig:
+#              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${OriginAccessIdentity}
+        DefaultCacheBehavior:
+          AllowedMethods: [ 'GET', 'HEAD', 'OPTIONS' ]
+          CachedMethods: [ 'GET', 'HEAD', 'OPTIONS' ]
+          ForwardedValues:
+            Headers:
+              - Access-Control-Request-Headers
+              - Access-Control-Request-Method
+              - Origin
+              - Authorization
+            QueryString: false
+            Cookies:
+              Forward: none
+          TargetOriginId: s3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          DefaultTTL: 0
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponsePagePath: /index.html
+            ResponseCode: 200
+            ErrorCachingMinTTL: 300
+          - ErrorCode: 400
+            ErrorCachingMinTTL: 0
+          - ErrorCode: 403
+            ErrorCachingMinTTL: 1
+          - ErrorCode: 500
+            ErrorCachingMinTTL: 5
+      Tags:
+        - Key: Owner
+          Value: boale
+        - Key: Environment
+          Value: preprod
+        - Key: Project
+          Value: CloudX
+
+Outputs:
+  S3Bucket:
+    Description: Bucket Created using this template.
+    Value: !Ref S3Bucket
+  WebsiteURL:
+    Value: !GetAtt
+      - S3Bucket
+      - WebsiteURL
+    Description: URL for website hosted on S3
+  S3BucketSecureURL:
+    Value: !Join
+      - ''
+      - - 'https://'
+        - !GetAtt
+          - S3Bucket
+          - DomainName
+    Description: Secure URL for website hosted on S3
+  CloudFront:
+    Value: !Ref CloudFrontWebDistribution
+    Description: CloudFront distribution ID
+  CloudFrontDomainName:
+    Value: !GetAtt CloudFrontWebDistribution.DomainName
+    Description: CloudFront distribution's domain name

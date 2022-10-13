@@ -1,0 +1,61 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: A CloudFormation template for a simple S3 bucket
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: must be a unique bucket name. If not provided AWS will use a unique bucket name based on the stack name
+    Default: ''
+
+Conditions:
+  HasBucketName: !Not [ !Equals [ !Ref BucketName, '' ] ]
+
+Resources:
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Description: My very first CloudX bucket, created with CloudFormation
+    Properties:
+      BucketName: !If [ HasBucketName, !Ref BucketName, !Ref AWS::NoValue]
+      VersioningConfiguration:
+        Status: Enabled
+      AccessControl: Private
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      PolicyDocument:
+        Id: MyPolicy
+        Version: 2012-10-17
+        Statement:
+          - Sid: PublicReadForGetBucketObjects
+            Effect: Allow
+            Principal: '*'
+            Action: 's3:GetObject'
+            Resource: !Join
+              - ''
+              - - 'arn:aws:s3:::'
+                - !Ref S3Bucket
+                - /*
+      Bucket: !Ref S3Bucket
+
+Outputs:
+  S3Bucket:
+    Description: Bucket Created using this template.
+    Value: !Ref S3Bucket
+  WebsiteURL:
+    Value: !GetAtt
+      - S3Bucket
+      - WebsiteURL
+    Description: URL for website hosted on S3
+  S3BucketSecureURL:
+    Value: !Join
+      - ''
+      - - 'https://'
+        - !GetAtt
+          - S3Bucket
+          - DomainName
+    Description: Secure URL for website hosted on S3

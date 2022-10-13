@@ -1,0 +1,321 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: A CloudFormation template for static website hosting based on S3 bucket and CloudFront CDN and custom origin for ALB
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: A unique bucket name. If not provided AWS will use a unique bucket name based on the stack name
+    Default: ''
+  OriginAccessControlId:
+    Type: String
+    Description: An Id of existing Origin Access Control
+    Default: ''
+  LoadBalancerSubnets:
+    Description: List of public Subnet Ids for the Load Balancer
+    Type: List<AWS::EC2::Subnet::Id>
+    ConstraintDescription: must be list of Subnet ids
+  VpcId:
+    Description: VPC ID where a load balancer will operate
+    Type: AWS::EC2::VPC::Id
+    ConstraintDescription: must be a valid VPC id
+  Ec2Instance1Id:
+    Type: AWS::EC2::Instance::Id
+    Description: An EC2 instance that is running with API back-end
+    ConstraintDescription: must be a valid list of EC2 instance ids.
+  Ec2Instance2Id:
+    Type: String
+    Description: An optional EC2 instance that is running with API back-ends. You have to provide it explicitly
+    Default: ''
+  LoadBalancerCertificateArn:
+    Description: 'Optional AMC Certificate ARN for Load balancer'
+    Type: String
+    Default: ''
+  HealthCheckPath:
+    Description: Healthcheck path to check whether an instance is healthy or not
+    Type: String
+    Default: '/health'
+  CachingPolicyId:
+    Description: Custom Caching policy Id for ALB origin. AWS Managed CachingOptimized Policy Id by default
+    Type: String
+    Default: '658327ea-f89d-4fab-a63d-7e88639e58f6'
+  OriginRequestPolicyId:
+    Description: Custom Origin Request Caching policy Id for ALB origin. Managed AllViewer Origin Request Policy Id with forward all parameters (headers, cookies, query strings) in viewer requests
+    Type: String
+    Default: '216adef6-5c7f-47e4-b989-5492eafa07d3'
+
+Conditions:
+  HasBucketName: !Not [ !Equals [ !Ref BucketName, '' ] ]
+  HasOriginAccessControlId: !Not [ !Equals [ !Ref OriginAccessControlId, '' ] ]
+  HasLoadBalancerCertificateArn: !Not [ !Equals [ !Ref LoadBalancerCertificateArn, '' ] ]
+  HasSecondEc2InstanceId: !Not [ !Equals [ !Ref Ec2Instance2Id, '' ] ]
+
+Resources:
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      VpcId: !Ref VpcId
+      GroupDescription: Allows Http and Https access only over the Internet
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 443
+          ToPort: 443
+          CidrIp: 0.0.0.0/0
+
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Name: !Sub ALB-${AWS::StackName}
+      ## NOTE: here can add other security groups if it is necessary:
+      SecurityGroups: [ !Ref LoadBalancerSecurityGroup ]
+      Subnets: !Ref LoadBalancerSubnets
+      Scheme: internet-facing
+
+  TargetGroup:
+    Type: 'AWS::ElasticLoadBalancingV2::TargetGroup'
+    Properties:
+      VpcId: !Ref VpcId
+      Port: !If [ HasLoadBalancerCertificateArn, 443, 80 ]
+      Protocol: HTTP
+      TargetType: instance
+      ##      Here you can add/register your EC2 targets by providing instance ids:
+      Targets:
+        - Id: !Ref Ec2Instance1Id
+          Port: 80
+        - !If
+          - HasSecondEc2InstanceId
+          - Id: !Ref Ec2Instance2Id
+            Port: 80
+          - !Ref AWS::NoValue
+      Matcher:
+        HttpCode: 200-299
+      Name: !Sub '${AWS::StackName}-TG'
+      HealthCheckIntervalSeconds: 30
+      HealthCheckPath: !Ref HealthCheckPath
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 5
+      HealthyThresholdCount: 2
+
+  LoadBalancerListener:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 80
+      Protocol: HTTP
+      DefaultActions:
+        - !If
+          - HasLoadBalancerCertificateArn
+          - Type: redirect
+            RedirectConfig:
+              Host: '#{host}'
+              Path: '/#{path}'
+              Port: 443
+              Protocol: HTTPS
+              Query: '#{query}'
+              StatusCode: HTTP_301
+          - Type: forward
+            TargetGroupArn: !Ref TargetGroup
+
+  LoadBalancerHTTPSListener:
+    Type: 'AWS::ElasticLoadBalancingV2::Listener'
+    Condition: HasLoadBalancerCertificateArn
+    Properties:
+      LoadBalancerArn: !Ref LoadBalancer
+      Certificates:
+        - CertificateArn: !Ref LoadBalancerCertificateArn
+      Port: 443
+      Protocol: HTTPS
+      DefaultActions:
+        - Type: forward
+          TargetGroupArn: !Ref TargetGroup
+
+  ListenerHTTPSRule:
+    Type: 'AWS::ElasticLoadBalancingV2::ListenerRule'
+    Condition: HasLoadBalancerCertificateArn
+    Properties:
+      ListenerArn: !Ref LoadBalancerHTTPSListener
+      Priority: 1
+      Conditions:
+        - Field: path-pattern
+          Values:
+            - "/*"
+      Actions:
+        - TargetGroupArn: !Ref TargetGroup
+          Type: forward
+
+  S3Bucket:
+    Type: AWS::S3::Bucket
+    Description: Bucket for static website hosting
+    Properties:
+      BucketName: !If [ HasBucketName, !Ref BucketName, !Ref AWS::NoValue ]
+      VersioningConfiguration:
+        Status: Enabled
+      AccessControl: Private
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
+
+  BucketPolicy:
+    Type: 'AWS::S3::BucketPolicy'
+    Properties:
+      PolicyDocument:
+        Id: PolicyForCloudFrontPrivateContent
+        Version: 2012-10-17
+        Statement:
+## Policy for OAC:
+          - Sid: 'AllowCloudFrontServicePrincipal'
+            Effect: Allow
+            Action:
+              - 's3:GetObject'
+              - 's3:ListBucket'
+            Resource:
+              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket, /* ] ]
+              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket ] ]
+            Principal:
+              Service: 'cloudfront.amazonaws.com'
+            Condition:
+              StringEquals:
+                AWS:SourceArn: !Join
+                - ':'
+                - - 'arn:aws:cloudfront:'
+                  - !Ref 'AWS::AccountId'
+                  - !Sub distribution/${CloudFrontWebDistribution}
+## Policy for OAI:
+#          - Sid: 'AllowCloudFrontAccessIdentityOnly'
+#            Effect: Allow
+#            Action:
+#              - 's3:GetObject'
+#              - 's3:ListBucket'
+#            Resource:
+#              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket, /* ] ]
+#              - !Join [ '', [ 'arn:aws:s3:::', !Ref S3Bucket ] ]
+#            Principal:
+#              AWS:
+#                Fn::Join:
+#                  - ' '
+#                  - - 'arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity'
+#                    - !Ref OriginAccessIdentity
+      Bucket: !Ref S3Bucket
+
+## Recommended OAC:
+  OriginAccessControl:
+    Type: AWS::CloudFront::OriginAccessControl
+    Properties:
+      OriginAccessControlConfig:
+        Description: Allows CloudFront distribution to access files from S3
+        Name: !Join [ '-', [ 'CloudFrontWebOAC', !Ref 'AWS::StackName' ] ]
+        OriginAccessControlOriginType: s3
+        SigningBehavior: always
+        SigningProtocol: sigv4
+
+## Legacy OAI:
+#  OriginAccessIdentity:
+#    Type: AWS::CloudFront::CloudFrontOriginAccessIdentity
+#    Properties:
+#      CloudFrontOriginAccessIdentityConfig:
+#        Comment: Access identity between CloudFront and S3 bucket
+
+  CloudFrontWebDistribution:
+    Type: 'AWS::CloudFront::Distribution'
+    DependsOn: LoadBalancer
+    Properties:
+      DistributionConfig:
+        Comment: A CloudFront distribution for S3 origin with static web app
+        Enabled: true
+        DefaultRootObject: index.html
+        HttpVersion: http2and3
+        ViewerCertificate:
+          CloudFrontDefaultCertificate: true
+        Origins:
+          - DomainName: !Sub ${S3Bucket}.s3.amazonaws.com
+            Id: s3Origin
+## Origin Access Control (OAC) settings:
+            S3OriginConfig:
+              OriginAccessIdentity: ''
+            OriginAccessControlId: !If
+              - HasOriginAccessControlId
+              - !Ref OriginAccessControlId
+              - !GetAtt OriginAccessControl.Id
+## Origin Access Identity (OAI) settings:
+#            S3OriginConfig:
+#              OriginAccessIdentity: !Sub origin-access-identity/cloudfront/${OriginAccessIdentity}
+          - DomainName: !GetAtt LoadBalancer.DNSName
+            Id: !Sub Products-API-Alb-Origin-${AWS::StackName}
+            CustomOriginConfig:
+              HTTPPort: '80'
+              OriginProtocolPolicy: http-only
+              ## HTTPS options:
+#              HTTPSPort: '443'
+#              OriginProtocolPolicy: https-only
+#              OriginSSLProtocols:
+#                - 'TLSv1.2'
+        CacheBehaviors:
+          - PathPattern: api/*
+            AllowedMethods: [ 'GET', 'HEAD', 'OPTIONS', 'PUT', 'POST', 'PATCH', 'DELETE' ]
+            CachedMethods: [ 'GET', 'HEAD' ]
+            TargetOriginId: !Sub Products-API-Alb-Origin-${AWS::StackName}
+            CachePolicyId: !Ref CachingPolicyId
+            OriginRequestPolicyId: !Ref OriginRequestPolicyId
+            ViewerProtocolPolicy: allow-all
+        DefaultCacheBehavior:
+          AllowedMethods: [ 'GET', 'HEAD', 'OPTIONS' ]
+          CachedMethods: [ 'GET', 'HEAD', 'OPTIONS' ]
+          ForwardedValues:
+            Headers:
+              - Access-Control-Request-Headers
+              - Access-Control-Request-Method
+              - Origin
+              - Authorization
+            QueryString: false
+            Cookies:
+              Forward: none
+          TargetOriginId: s3Origin
+          ViewerProtocolPolicy: redirect-to-https
+          Compress: true
+          DefaultTTL: 0
+        CustomErrorResponses:
+          - ErrorCode: 404
+            ResponsePagePath: /index.html
+            ResponseCode: 200
+            ErrorCachingMinTTL: 300
+          - ErrorCode: 400
+            ErrorCachingMinTTL: 0
+          - ErrorCode: 403
+            ErrorCachingMinTTL: 1
+          - ErrorCode: 500
+            ErrorCachingMinTTL: 5
+      Tags:
+        - Key: Owner
+          Value: boale
+        - Key: Environment
+          Value: preprod
+        - Key: Project
+          Value: CloudX
+
+Outputs:
+  S3Bucket:
+    Description: Bucket Created using this template.
+    Value: !Ref S3Bucket
+  WebsiteURL:
+    Value: !GetAtt
+      - S3Bucket
+      - WebsiteURL
+    Description: URL for website hosted on S3
+  S3BucketSecureURL:
+    Value: !Join
+      - ''
+      - - 'https://'
+        - !GetAtt
+          - S3Bucket
+          - DomainName
+    Description: Secure URL for website hosted on S3
+  CloudFront:
+    Value: !Ref CloudFrontWebDistribution
+    Description: CloudFront distribution ID
+  CloudFrontDomainName:
+    Value: !GetAtt CloudFrontWebDistribution.DomainName
+    Description: CloudFront distribution's domain name
