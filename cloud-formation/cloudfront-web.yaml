@@ -74,6 +74,7 @@ Resources:
 ## Recommended OAC:
   OriginAccessControl:
     Type: AWS::CloudFront::OriginAccessControl
+    DependsOn: S3Bucket
     Properties:
       OriginAccessControlConfig:
         Description: Allows CloudFront distribution to access files from S3
@@ -91,6 +92,7 @@ Resources:
 
   CloudFrontWebDistribution:
     Type: 'AWS::CloudFront::Distribution'
+    DependsOn: OriginAccessControl
     Properties:
       DistributionConfig:
         Comment: A CloudFront distribution for S3 origin with static web app
