@@ -12,14 +12,8 @@ import { ApiService } from '../core/api.service';
 })
 export class ProductsService extends ApiService {
   createNewProduct(product: Product): Observable<Product> {
-    if (!this.endpointEnabled('bff')) {
-      console.warn(
-        'Endpoint "bff" is disabled. To enable change your environment.ts config'
-      );
-      return EMPTY;
-    }
+    const url = this.getUrl('product', 'products');
 
-    const url = this.getUrl('bff', 'products');
     return this.http.post<Product>(url, product);
   }
 
@@ -36,20 +30,8 @@ export class ProductsService extends ApiService {
   }
 
   getProductById(id: string): Observable<Product | null> {
-    if (!this.endpointEnabled('bff')) {
-      console.warn(
-        'Endpoint "bff" is disabled. To enable change your environment.ts config'
-      );
-      return this.http
-        .get<Product[]>('/assets/products.json')
-        .pipe(
-          map(
-            (products) => products.find((product) => product.id === id) || null
-          )
-        );
-    }
+    const url = this.getUrl('product', `products/${id}`);
 
-    const url = this.getUrl('bff', `products/${id}`);
     return this.http
       .get<{ product: Product }>(url)
       .pipe(map((resp) => resp.product));
