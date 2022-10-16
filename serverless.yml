@@ -23,7 +23,7 @@ frameworkVersion: "3"
 provider:
   name: aws
   runtime: nodejs12.x
-#  region: eu-west-1
+  region: eu-west-1
 
 plugins:
   - serverless-finch
