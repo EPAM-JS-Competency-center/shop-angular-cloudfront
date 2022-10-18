@@ -2,6 +2,10 @@
 
 Angular version: ~12.
 
+CloudFront url - https://d3a1mjrc371ipm.cloudfront.net/
+
+S3-website - http://cloudx-angular.s3-website-eu-west-1.amazonaws.com/
+
 Repo maintainers:
 
 - [Sergey Gultyayev](https://github.com/gultyaev)
