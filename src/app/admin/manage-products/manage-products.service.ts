@@ -38,8 +38,18 @@ export class ManageProductsService extends ApiService {
       },
       headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        Authorization: '123',
+        Authorization: `Basic ${this.getAuthTokenLS()}`,
       },
     });
+  }
+
+  private getAuthTokenLS(): string {
+    try {
+      const authorizationToken = localStorage.getItem('authorization_token');
+      return authorizationToken || '';
+    } catch (e) {
+      console.log(JSON.stringify(e));
+    }
+    return '';
   }
 }
