@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { EMPTY, Observable, of, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, pluck } from 'rxjs/operators';
 
 import { Product } from './product.interface';
 
@@ -50,9 +50,7 @@ export class ProductsService extends ApiService {
     }
 
     const url = this.getUrl('bff', `products/${id}`);
-    return this.http
-      .get<{ product: Product }>(url)
-      .pipe(map((resp) => resp.product));
+    return this.http.get<{ data: Product }>(url).pipe(map((resp) => resp.data));
   }
 
   getProducts(): Observable<Product[]> {
@@ -64,7 +62,7 @@ export class ProductsService extends ApiService {
     }
 
     const url = this.getUrl('bff', 'products');
-    return this.http.get<Product[]>(url);
+    return this.http.get<Product[]>(url).pipe(pluck('data'));
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {

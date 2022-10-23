@@ -30,7 +30,7 @@ plugins:
 
 custom:
   client:
-    bucketName: my-rs-shop-app-4
+    bucketName: my-rs-shop-app-3
     distributionFolder: dist/app
   ## Serverless-single-page-app-plugin configuration:
   s3LocalPath: ${self:custom.client.distributionFolder}/
