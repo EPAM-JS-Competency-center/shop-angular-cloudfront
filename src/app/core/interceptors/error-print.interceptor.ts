@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
@@ -19,7 +20,23 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
-        error: () => {
+        error: (err: unknown) => {
+          if (err instanceof HttpErrorResponse) {
+            if (err.status === 403) {
+              this.notificationService.showError(
+                `Access is forbidden. Please contact support`
+              );
+              return;
+            }
+
+            if (err.status === 401) {
+              this.notificationService.showError(
+                `Please authorize and repeat the request`
+              );
+              return;
+            }
+          }
+          
           const url = new URL(request.url);
 
           this.notificationService.showError(

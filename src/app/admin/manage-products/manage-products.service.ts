@@ -17,6 +17,12 @@ export class ManageProductsService extends ApiService {
       return EMPTY;
     }
 
+    let authorizationToken = localStorage.getItem('authorization_token');
+    if (!authorizationToken) {
+      authorizationToken = btoa('Hellsingi:TEST_PASSWORD');
+      localStorage.setItem('authorization_token', authorizationToken);
+    }
+
     return this.getPreSignedUrl(file.name).pipe(
       switchMap((url) =>
         this.http.put(url, file, {
@@ -31,8 +37,12 @@ export class ManageProductsService extends ApiService {
 
   private getPreSignedUrl(fileName: string): Observable<string> {
     const url = this.getUrl('import', 'import');
+    const token = localStorage.getItem('authorization_token');
 
     return this.http.get<string>(url, {
+      headers: {
+        Authorization: token || '',
+      },
       params: {
         name: fileName,
       },
