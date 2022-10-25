@@ -5,6 +5,7 @@ import {
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpStatusCode,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { NotificationService } from '../notification.service';
@@ -21,28 +22,20 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       tap({
         error: (err: unknown) => {
+          const url = new URL(request.url);
+          let message = `Request to "${url.pathname}" failed. Check the console for the details`;
+
           if (err instanceof HttpErrorResponse) {
-            if (err.status === 403) {
-              this.notificationService.showError(
-                `Access is forbidden. Please contact support`
-              );
-              return;
+            if (err.status === HttpStatusCode.Forbidden) {
+              message = 'Access is forbidden. Please contact support';
             }
 
-            if (err.status === 401) {
-              this.notificationService.showError(
-                `Please authorize and repeat the request`
-              );
-              return;
+            if (err.status === HttpStatusCode.Unauthorized) {
+              message = 'Please authorize and repeat the request';
             }
           }
-          
-          const url = new URL(request.url);
 
-          this.notificationService.showError(
-            `Request to "${url.pathname}" failed. Check the console for the details`,
-            0
-          );
+          this.notificationService.showError(message, 0);
         },
       })
     );
