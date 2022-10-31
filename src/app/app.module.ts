@@ -15,7 +15,7 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CartModule } from './cart/cart.module';
 import { CONFIG_TOKEN } from './core/injection-tokens/config.token';
-import { environment } from '../environments/environment';
+import { environment } from '../environments/environment.prod';
 import { ErrorPrintInterceptor } from './core/interceptors/error-print.interceptor';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 

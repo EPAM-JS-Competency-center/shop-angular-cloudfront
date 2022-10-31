@@ -10,13 +10,6 @@ export class ManageProductsService extends ApiService {
   }
 
   uploadProductsCSV(file: File): Observable<unknown> {
-    if (!this.endpointEnabled('import')) {
-      console.warn(
-        'Endpoint "import" is disabled. To enable change your environment.ts config'
-      );
-      return EMPTY;
-    }
-
     return this.getPreSignedUrl(file.name).pipe(
       switchMap((url) =>
         this.http.put(url, file, {
@@ -34,7 +27,7 @@ export class ManageProductsService extends ApiService {
 
     return this.http.get<string>(url, {
       params: {
-        name: fileName,
+        fileName,
       },
     });
   }

@@ -6,7 +6,7 @@ export const environment: Config = {
     product:
       'https://msit3q4005.execute-api.eu-central-1.amazonaws.com/dev/products',
     order: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
-    import: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
+    import: 'https://itksqme8a4.execute-api.eu-central-1.amazonaws.com/dev',
     bff: 'https://msit3q4005.execute-api.eu-central-1.amazonaws.com/dev',
     cart: 'https://.execute-api.eu-west-1.amazonaws.com/dev',
   },
