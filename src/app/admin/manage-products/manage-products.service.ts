@@ -17,6 +17,12 @@ export class ManageProductsService extends ApiService {
       return EMPTY;
     }
 
+    let authorizationToken = localStorage.getItem('authorization_token');
+    if (!authorizationToken) {
+      authorizationToken = btoa('Hellsingi:TEST_PASSWORD');
+      localStorage.setItem('authorization_token', authorizationToken);
+    }
+
     return this.getPreSignedUrl(file.name).pipe(
       switchMap((url) =>
         this.http.put(url, file, {
@@ -36,6 +42,20 @@ export class ManageProductsService extends ApiService {
       params: {
         name: fileName,
       },
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        Authorization: `Basic ${this.getAuthTokenLS()}`,
+      },
     });
+  }
+
+  private getAuthTokenLS(): string {
+    try {
+      const authorizationToken = localStorage.getItem('authorization_token');
+      return authorizationToken || '';
+    } catch (e) {
+      console.log(JSON.stringify(e));
+    }
+    return '';
   }
 }
