@@ -1,0 +1,19 @@
+name: angular workflow
+
+on: [push, pull_request]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    name: Test angular app
+    defaults:
+      run:
+        working-directory: ./src
+    steps:
+    - uses: actions/checkout@v1
+    - name: Install requirements
+      run: npm install
+    - name: Run tests and collect coverage
+      run: npm run test
+    - name: Upload coverage reports to Codecov with GitHub Action
+      uses: codecov/codecov-action@v3

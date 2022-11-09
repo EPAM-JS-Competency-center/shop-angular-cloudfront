@@ -1,0 +1,22 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@3.2.2
+
+jobs:
+  test-api:
+    steps:
+      - checkout
+      - run:
+          name: Install requirements
+          command: npm install
+      - run:
+          name: Run tests and collect coverage
+          command: npm run test
+      - codecov/upload
+
+workflows:
+  version: 2.1
+  build-test:
+    jobs:
+      - test-api
