@@ -16,7 +16,7 @@ export const environment: Config = {
   apiEndpointsEnabled: {
     product: true,
     order: false,
-    import: false,
+    import: true,
     bff: false,
     cart: false,
   },
