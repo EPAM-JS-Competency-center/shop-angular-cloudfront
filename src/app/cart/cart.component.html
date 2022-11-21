@@ -92,8 +92,12 @@
               <button class="text-uppercase" mat-button matStepperPrevious>
                 back
               </button>
-              <button color="primary" class="text-uppercase" mat-flat-button>
-                place order
+              <button
+                color="primary"
+                class="text-uppercase"
+                mat-flat-button
+                (click)="createOrder()">
+                  place order
               </button>
             </div>
           </mat-step>

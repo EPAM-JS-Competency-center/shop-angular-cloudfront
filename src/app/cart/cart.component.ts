@@ -6,6 +6,8 @@ import { ProductCheckout } from '../products/product.interface';
 import { Observable } from 'rxjs';
 import { CartService } from './cart.service';
 import { map, shareReplay } from 'rxjs/operators';
+import { OrdersService } from '../admin/orders/orders.service';
+import { OrderStatus } from '../admin/orders/order.enum';
 
 @Component({
   selector: 'app-cart',
@@ -23,13 +25,15 @@ export class CartComponent implements OnInit {
   totalPrice$!: Observable<number>;
   totalInCart$!: Observable<number>;
   cartEmpty$!: Observable<boolean>;
+  products: any;
 
   shippingInfo!: FormGroup;
 
   constructor(
     private readonly fb: FormBuilder,
     private readonly checkoutService: CheckoutService,
-    private readonly cartService: CartService
+    private readonly cartService: CartService,
+    private readonly ordersService: OrdersService
   ) {}
 
   get fullName(): string {
@@ -62,6 +66,8 @@ export class CartComponent implements OnInit {
 
     this.totalPrice$ = this.products$.pipe(
       map((products) => {
+        this.products = products;
+        console.log(products, '<<<<<<')
         const total = products.reduce((acc, val) => acc + val.totalPrice, 0);
         return +total.toFixed(2);
       }),
@@ -81,5 +87,37 @@ export class CartComponent implements OnInit {
 
   remove(id: string): void {
     this.cartService.removeItem(id);
+  }
+
+  createOrder(): void {
+    // const products = this.products$.pipe(
+    //   map((products) => {
+    //     console.log(products, '<<<<<<')
+    //     const total = products.reduce((acc, val) => acc + val.totalPrice, 0);
+    //     return +total.toFixed(2);
+    //   }),
+    //   shareReplay({
+    //     refCount: true,
+    //     bufferSize: 1,
+    //   })
+    // );
+    
+    const order = {
+      delivery: this.shippingInfo.value,
+      statusHistory: {
+        timestamp: new Date(),
+        status: OrderStatus.open
+      },
+      items: this.products
+    }
+
+    console.log(order.items);
+
+    // this.ordersService.createOrder(order)
+    //   .subscribe(
+    //     () => {
+    //       console.log('result')
+    //     }
+    //   )
   }
 }

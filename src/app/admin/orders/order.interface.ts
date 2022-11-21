@@ -1,13 +1,5 @@
 import { ShippingInfo } from '../../cart/shipping-info.interface';
-
-export enum OrderStatus {
-  open = 'open',
-  approved = 'approved',
-  confirmed = 'confirmed',
-  sent = 'sent',
-  completed = 'completed',
-  cancelled = 'cancelled',
-}
+import { OrderStatus } from './order.enum';
 
 export interface StatusHistory {
   status: OrderStatus;
@@ -17,7 +9,7 @@ export interface StatusHistory {
 
 export interface Order {
   id?: string;
-  address: ShippingInfo;
+  delivery: ShippingInfo;
   items: unknown[]; // TODO: find exact
   statusHistory: StatusHistory[];
 }

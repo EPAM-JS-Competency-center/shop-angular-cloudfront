@@ -18,4 +18,6 @@ export class OrdersComponent implements OnInit {
   ngOnInit(): void {
     this.orders$ = this.ordersService.getOrders();
   }
+
+  
 }

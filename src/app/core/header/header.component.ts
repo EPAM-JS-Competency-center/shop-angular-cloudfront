@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
   totalInCart$!: Observable<number>;
+  userCart$!: Observable<any>;
 
   constructor(private readonly cartService: CartService) {}
 
