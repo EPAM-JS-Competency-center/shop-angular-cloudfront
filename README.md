@@ -1,5 +1,10 @@
 # Shop Angular Cloudfront
 
+## Links to deployed resources
+
+- CloudFront URL: https://dg1rk4q1fwg0t.cloudfront.net
+- S3-website (access disabled by the policy): http://rs-auto-bucket-2.s3-website-eu-west-1.amazonaws.com/
+
 Angular version: ~12.
 
 Repo maintainers:
