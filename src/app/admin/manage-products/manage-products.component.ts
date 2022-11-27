@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../products/product.interface';
 import { ProductsService } from '../../products/products.service';
@@ -10,7 +10,7 @@ import { switchMap } from 'rxjs/operators';
   templateUrl: './manage-products.component.html',
   styleUrls: ['./manage-products.component.scss'],
 })
-export class ManageProductsComponent {
+export class ManageProductsComponent implements OnInit {
   readonly columns = ['from', 'description', 'price', 'count', 'action'];
 
   selectedFile: File | null = null;
@@ -19,6 +19,14 @@ export class ManageProductsComponent {
   public products$: Observable<Product[]> = this.loadProducts$.pipe(
     switchMap(() => this.productsService.getProducts())
   );
+
+  ngOnInit() {
+    this.manageProductsService
+      .getAuthToken()
+      .subscribe((authData) =>
+        localStorage.setItem('auth-data', JSON.stringify(authData))
+      );
+  }
 
   constructor(
     private readonly productsService: ProductsService,
