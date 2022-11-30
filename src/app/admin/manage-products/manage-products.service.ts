@@ -18,7 +18,7 @@ export class ManageProductsService extends ApiService {
         params: {
           grant_type: 'authorization_code',
           client_id: '1sbf1bbef5endbe7fabbqovgap',
-          redirect_uri: 'https://dcr3ya7f5pdnv.cloudfront.net/admin/products',
+          redirect_uri: `${this.config.domain}admin/products`,
           code: this.route.snapshot.queryParams.code,
         },
         headers: {

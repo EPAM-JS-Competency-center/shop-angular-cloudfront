@@ -71,15 +71,7 @@ export class CartService extends ApiService {
     this.#cartSource.next(newVal);
   }
 
-  public createOrder(checkout: {
-    products: ProductCheckout[];
-    shipping: {
-      lastName: string;
-      firstName: string;
-      address: string;
-      comment: string;
-    };
-  }) {
+  public createOrder(checkout: Checkout) {
     const url = this.getUrl('cart', 'api/profile/cart/checkout');
     return this.http.post<any>(url, checkout, {
       headers: {
@@ -88,4 +80,14 @@ export class CartService extends ApiService {
       },
     });
   }
+}
+
+interface Checkout {
+  products: ProductCheckout[];
+  shipping: {
+    lastName: string;
+    firstName: string;
+    address: string;
+    comment: string;
+  };
 }

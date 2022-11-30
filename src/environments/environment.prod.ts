@@ -17,4 +17,5 @@ export const environment: Config = {
     bff: true,
     cart: false,
   },
+  domain: 'https://dcr3ya7f5pdnv.cloudfront.net/',
 };
