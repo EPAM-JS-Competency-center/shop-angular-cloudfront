@@ -4,4 +4,5 @@ export interface Config {
   production: boolean;
   apiEndpoints: Record<ApiEndpoint, string>;
   apiEndpointsEnabled: Record<ApiEndpoint, boolean>;
+  domain: string;
 }

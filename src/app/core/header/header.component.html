@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
-  <a routerLink="/" matTooltip="Open main page" class="home-link">E-shop</a>
+  <a routerLink="/" matTooltip="Open main page" class="home-link"
+    >Fencing Equipment Shop</a
+  >
 
   <div class="d-flex flex-fill"></div>
 
@@ -17,6 +19,11 @@
     <mat-icon [matBadge]="totalInCart$ | async" matBadgeColor="accent"
       >shopping_cart</mat-icon
     >
+  </button>
+
+  <!--  Sign in-->
+  <button matTooltip="Sign in" mat-icon-button>
+    <a [href]="signInUrl">Sign in</a>
   </button>
 </mat-toolbar>
 

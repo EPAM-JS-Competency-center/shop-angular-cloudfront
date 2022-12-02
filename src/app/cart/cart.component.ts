@@ -82,4 +82,19 @@ export class CartComponent implements OnInit {
   remove(id: string): void {
     this.cartService.removeItem(id);
   }
+
+  submit() {
+    this.cartService
+      .createOrder({
+        products: getLatest(this.products$),
+        shipping: this.shippingInfo.value,
+      })
+      .subscribe(() => {});
+  }
+}
+
+function getLatest(obs: Observable<any>): any {
+  let val;
+  obs.subscribe((obsVal) => (val = obsVal)).unsubscribe();
+  return val;
 }

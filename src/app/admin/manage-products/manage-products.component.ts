@@ -1,8 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../../products/product.interface';
 import { ProductsService } from '../../products/products.service';
 import { ManageProductsService } from './manage-products.service';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-manage-products',
@@ -14,17 +15,24 @@ export class ManageProductsComponent implements OnInit {
 
   selectedFile: File | null = null;
 
-  products$!: Observable<Product[]>;
+  private loadProducts$ = new BehaviorSubject<void>(undefined);
+  public products$: Observable<Product[]> = this.loadProducts$.pipe(
+    switchMap(() => this.productsService.getProducts())
+  );
+
+  ngOnInit() {
+    this.manageProductsService
+      .getAuthToken()
+      .subscribe((authData) =>
+        localStorage.setItem('auth-data', JSON.stringify(authData))
+      );
+  }
 
   constructor(
     private readonly productsService: ProductsService,
     private readonly manageProductsService: ManageProductsService,
     private readonly cdr: ChangeDetectorRef
   ) {}
-
-  ngOnInit(): void {
-    this.products$ = this.productsService.getProducts();
-  }
 
   onUploadCSV(): void {
     if (!this.selectedFile) {
@@ -37,5 +45,11 @@ export class ManageProductsComponent implements OnInit {
         this.selectedFile = null;
         this.cdr.markForCheck();
       });
+  }
+
+  deleteProduct(id: string) {
+    this.productsService
+      .deleteProduct(id)
+      .subscribe(() => this.loadProducts$.next());
   }
 }

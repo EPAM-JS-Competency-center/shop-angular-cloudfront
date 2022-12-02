@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, shareReplay } from 'rxjs/operators';
+import { ProductCheckout } from '../products/product.interface';
+import { ApiService } from '../core/api.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService extends ApiService {
   /** Key - item id, value - ordered amount */
   #cartSource = new BehaviorSubject<Record<string, number>>({});
 
@@ -26,8 +28,6 @@ export class CartService {
       bufferSize: 1,
     })
   );
-
-  constructor() {}
 
   addItem(id: string): void {
     this.updateCount(id, 1);
@@ -70,4 +70,24 @@ export class CartService {
 
     this.#cartSource.next(newVal);
   }
+
+  public createOrder(checkout: Checkout) {
+    const url = this.getUrl('cart', 'api/profile/cart/checkout');
+    return this.http.post<any>(url, checkout, {
+      headers: {
+        authorization: JSON.parse(localStorage.getItem('auth-data') || '{}')
+          .id_token,
+      },
+    });
+  }
+}
+
+interface Checkout {
+  products: ProductCheckout[];
+  shipping: {
+    lastName: string;
+    firstName: string;
+    address: string;
+    comment: string;
+  };
 }

@@ -10,7 +10,7 @@ export abstract class ApiService {
   protected readonly config: Config;
   protected readonly http: HttpClient;
 
-  protected constructor(protected readonly injector: Injector) {
+  public constructor(protected readonly injector: Injector) {
     this.config = injector.get(CONFIG_TOKEN);
     this.http = injector.get(HttpClient);
   }
