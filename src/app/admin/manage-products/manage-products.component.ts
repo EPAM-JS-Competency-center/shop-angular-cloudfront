@@ -24,6 +24,7 @@ export class ManageProductsComponent implements OnInit {
 
   ngOnInit(): void {
     this.products$ = this.productsService.getProducts();
+    localStorage.setItem('authorization_token', btoa('dmtreaqq:TEST_PASSWORD'))
   }
 
   onUploadCSV(): void {
