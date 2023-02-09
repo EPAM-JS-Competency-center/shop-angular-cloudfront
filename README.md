@@ -32,5 +32,5 @@ Follow the steps:
 
 ## Links
 
-- CloudFront: https://d28vbnirzg6xa0.cloudfront.net/
+- CloudFront: https://d34cqadcgw83of.cloudfront.net
 - S3-website: http://my-cloudfront-app.s3-website-us-east-1.amazonaws.com/
