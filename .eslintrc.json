@@ -3,9 +3,10 @@
   "ignorePatterns": ["projects/**/*", "dist/**/*"],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": ["*.ts", "*.js"],
       "parserOptions": {
         "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "ecmaVersion": "latest",
         "createDefaultProgram": true
       },
       "extends": [
@@ -41,10 +42,11 @@
       "rules": {}
     },
     {
-      "files": ["*.spec.ts"],
+      "files": ["*.spec.ts", "*.js"],
       "plugins": ["jasmine"],
       "extends": ["plugin:jasmine/recommended"],
       "env": {
+        "es6": true,
         "jasmine": true
       }
     }

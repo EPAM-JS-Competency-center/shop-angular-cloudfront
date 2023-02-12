@@ -7,6 +7,9 @@ import { Product } from './product.interface';
 
 import { ApiService } from '../core/api.service';
 
+type ProductsHttpResult = {
+  body: Product[];
+};
 @Injectable({
   providedIn: 'root',
 })
@@ -64,7 +67,8 @@ export class ProductsService extends ApiService {
     }
 
     const url = this.getUrl('bff', 'products');
-    return this.http.get<Product[]>(url);
+    const res = this.http.get<ProductsHttpResult>(url);
+    return res.pipe(map((result) => result.body));
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {
