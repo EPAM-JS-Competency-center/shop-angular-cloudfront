@@ -32,19 +32,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   loaded$ = new BehaviorSubject(false);
 
-  get countCtrl(): AbstractControl {
-    return this.form.get('count') as AbstractControl;
-  }
-  get descriptionCtrl(): AbstractControl {
-    return this.form.get('description') as AbstractControl;
-  }
-  get priceCtrl(): AbstractControl {
-    return this.form.get('price') as AbstractControl;
-  }
-  get titleCtrl(): AbstractControl {
-    return this.form.get('title') as AbstractControl;
-  }
-
   private readonly onDestroy$: Subject<void> = new Subject();
 
   constructor(
@@ -60,6 +47,22 @@ export class EditProductComponent implements OnInit, OnDestroy {
       price: ['', Validators.required],
       count: ['', Validators.required],
     });
+  }
+
+  get countCtrl(): AbstractControl {
+    return this.form.get('count') as AbstractControl;
+  }
+
+  get descriptionCtrl(): AbstractControl {
+    return this.form.get('description') as AbstractControl;
+  }
+
+  get priceCtrl(): AbstractControl {
+    return this.form.get('price') as AbstractControl;
+  }
+
+  get titleCtrl(): AbstractControl {
+    return this.form.get('title') as AbstractControl;
   }
 
   ngOnInit(): void {
