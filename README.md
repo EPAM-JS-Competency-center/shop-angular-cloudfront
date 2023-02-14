@@ -22,7 +22,7 @@ If you would like to help implementing some feature, you should ask the maintain
 
 ## Get up and running
 
-Prerequisites: NodeJS v14
+Prerequisites: NodeJS v14.20.x and higher
 
 Follow the steps:
 
