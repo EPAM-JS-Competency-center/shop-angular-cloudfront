@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { UntypedFormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-cart-shipping-form',
@@ -7,7 +7,7 @@ import { FormGroup } from '@angular/forms';
   styleUrls: ['./cart-shipping-form.component.scss'],
 })
 export class CartShippingFormComponent {
-  @Input() shippingInfo!: FormGroup;
+  @Input() shippingInfo!: UntypedFormGroup;
 
   @Output() nextStep = new EventEmitter<void>();
 }

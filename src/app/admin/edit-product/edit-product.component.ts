@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,7 +26,7 @@ import { NotificationService } from '../../core/notification.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditProductComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+  form: UntypedFormGroup;
   productId: string | null = null;
   requestInProgress = false;
 
@@ -49,7 +49,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly productsService: ProductsService,
     private readonly router: Router
