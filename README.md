@@ -29,3 +29,8 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Homework links
+
+- S3 Bucket - http://my-spa-bucket1.s3-website-us-east-1.amazonaws.com/
+- CloudFront - https://d11kgh239a5ccp.cloudfront.net/
