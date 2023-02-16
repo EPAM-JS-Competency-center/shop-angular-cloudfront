@@ -1,3 +1,25 @@
+# TASK2: Serve SPA in AWS
+
+## Manually created resources
+
+### S3 bucket:
+
+http://dream-shop-angular-cloudfront.s3-website-eu-west-1.amazonaws.com/
+
+### CloudFront:
+
+https://d3mk6tnn95ii2r.cloudfront.net/
+
+## Resources created by the `serverless` framework
+
+### S3 bucket:
+
+http://shop-angular-cloudfront-sls.s3-website-eu-west-1.amazonaws.com/
+
+### CloudFront:
+
+https://d2nu6079bnm48e.cloudfront.net
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
