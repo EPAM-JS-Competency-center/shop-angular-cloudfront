@@ -1,4 +1,4 @@
-@use '~@angular/material' as mat;
+@use '@angular/material' as mat;
 
 @include mat.core();
 
@@ -9,7 +9,9 @@ $my-theme: mat.define-light-theme((
  color: (
    primary: $my-primary,
    accent: $my-accent,
- )
+ ),
+ typography: mat.define-typography-config(),
+ density: 0,
 ));
 
 @include mat.all-component-themes($my-theme);
