@@ -29,3 +29,10 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+
+----- HOMEWORK TWO -----
+Task One
+S3 Bucket: https://s3.console.aws.amazon.com/s3/buckets/cilga-aws-course-spa?region=eu-central-1&tab=objects
+S3 Website: https://cilga-aws-course-spa.s3.eu-central-1.amazonaws.com/index.html
+Cloudfront: https://d1fncc7xea6zrz.cloudfront.net
