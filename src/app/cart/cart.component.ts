@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CheckoutService } from './checkout.service';
 import { ProductCheckout } from '../products/product.interface';
@@ -24,10 +24,10 @@ export class CartComponent implements OnInit {
   totalInCart$!: Observable<number>;
   cartEmpty$!: Observable<boolean>;
 
-  shippingInfo!: FormGroup;
+  shippingInfo!: UntypedFormGroup;
 
   constructor(
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly checkoutService: CheckoutService,
     private readonly cartService: CartService
   ) {}

@@ -6,8 +6,8 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
-  FormBuilder,
-  FormGroup,
+  UntypedFormBuilder,
+  UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -26,30 +26,17 @@ import { NotificationService } from '../../core/notification.service';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EditProductComponent implements OnInit, OnDestroy {
-  form: FormGroup;
+  form: UntypedFormGroup;
   productId: string | null = null;
   requestInProgress = false;
 
   loaded$ = new BehaviorSubject(false);
 
-  get countCtrl(): AbstractControl {
-    return this.form.get('count') as AbstractControl;
-  }
-  get descriptionCtrl(): AbstractControl {
-    return this.form.get('description') as AbstractControl;
-  }
-  get priceCtrl(): AbstractControl {
-    return this.form.get('price') as AbstractControl;
-  }
-  get titleCtrl(): AbstractControl {
-    return this.form.get('title') as AbstractControl;
-  }
-
   private readonly onDestroy$: Subject<void> = new Subject();
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
-    private readonly fb: FormBuilder,
+    private readonly fb: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly productsService: ProductsService,
     private readonly router: Router
@@ -60,6 +47,22 @@ export class EditProductComponent implements OnInit, OnDestroy {
       price: ['', Validators.required],
       count: ['', Validators.required],
     });
+  }
+
+  get countCtrl(): AbstractControl {
+    return this.form.get('count') as AbstractControl;
+  }
+
+  get descriptionCtrl(): AbstractControl {
+    return this.form.get('description') as AbstractControl;
+  }
+
+  get priceCtrl(): AbstractControl {
+    return this.form.get('price') as AbstractControl;
+  }
+
+  get titleCtrl(): AbstractControl {
+    return this.form.get('title') as AbstractControl;
   }
 
   ngOnInit(): void {

@@ -1,11 +1,19 @@
 {
   "root": true,
-  "ignorePatterns": ["projects/**/*", "dist/**/*"],
+  "ignorePatterns": [
+    "projects/**/*",
+    "dist/**/*"
+  ],
   "overrides": [
     {
-      "files": ["*.ts"],
+      "files": [
+        "*.ts"
+      ],
       "parserOptions": {
-        "project": ["tsconfig.json", "e2e/tsconfig.json"],
+        "project": [
+          "tsconfig.json",
+          "e2e/tsconfig.json"
+        ],
         "createDefaultProgram": true
       },
       "extends": [
@@ -32,20 +40,41 @@
             "style": "camelCase"
           }
         ],
-        "rxjs/no-subject-value": [0]
+        "rxjs/no-subject-value": [
+          0
+        ]
       }
     },
     {
-      "files": ["*.html"],
-      "extends": ["plugin:@angular-eslint/template/recommended", "prettier"],
+      "files": [
+        "*.html"
+      ],
+      "extends": [
+        "plugin:@angular-eslint/template/recommended",
+        "prettier"
+      ],
       "rules": {}
     },
     {
-      "files": ["*.spec.ts"],
-      "plugins": ["jasmine"],
-      "extends": ["plugin:jasmine/recommended"],
+      "files": [
+        "*.spec.ts"
+      ],
+      "plugins": [
+        "jasmine"
+      ],
+      "extends": [
+        "plugin:jasmine/recommended"
+      ],
       "env": {
         "jasmine": true
+      }
+    },
+    {
+      "files": [
+        "*.js"
+      ],
+      "env": {
+        "es6": true
       }
     }
   ]

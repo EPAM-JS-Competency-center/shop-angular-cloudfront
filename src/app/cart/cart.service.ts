@@ -9,8 +9,10 @@ export class CartService {
   /** Key - item id, value - ordered amount */
   #cartSource = new BehaviorSubject<Record<string, number>>({});
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   cart$ = this.#cartSource.asObservable();
 
+  // eslint-disable-next-line @typescript-eslint/member-ordering
   totalInCart$: Observable<number> = this.cart$.pipe(
     map((cart) => {
       const values = Object.values(cart);
