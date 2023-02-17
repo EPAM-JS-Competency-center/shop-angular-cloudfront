@@ -1,0 +1,452 @@
+{
+  "service": {
+    "service": "aws-cloudx-bike-shop-angular",
+    "serviceObject": {
+      "name": "aws-cloudx-bike-shop-angular"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs12.x",
+      "profile": "default",
+      "stage": "dev",
+      "region": "us-east-1",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ServerlessDeploymentBucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+              "Bucket": {
+                "Ref": "ServerlessDeploymentBucket"
+              },
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Action": "s3:*",
+                    "Effect": "Deny",
+                    "Principal": "*",
+                    "Resource": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            }
+                          ]
+                        ]
+                      }
+                    ],
+                    "Condition": {
+                      "Bool": {
+                        "aws:SecureTransport": false
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "WebAppS3Bucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketName": "aws-cloudx-bike-shop-angular",
+              "AccessControl": "PublicRead",
+              "WebsiteConfiguration": {
+                "IndexDocument": "index.html",
+                "ErrorDocument": "index.html"
+              }
+            }
+          },
+          "WebAppS3BucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+              "Bucket": {
+                "Ref": "WebAppS3Bucket"
+              },
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Sid": "AllowCloudFrontAccessIdentity",
+                    "Effect": "Allow",
+                    "Action": "s3:GetObject",
+                    "Resource": "arn:aws:s3:::aws-cloudx-bike-shop-angular/*",
+                    "Principal": {
+                      "AWS": {
+                        "Fn::Join": [
+                          " ",
+                          [
+                            "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity",
+                            {
+                              "Ref": "OriginAccessIdentity"
+                            }
+                          ]
+                        ]
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "OriginAccessIdentity": {
+            "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+            "Properties": {
+              "CloudFrontOriginAccessIdentityConfig": {
+                "Comment": "Access identity between CloudFront and S3 bucket"
+              }
+            }
+          },
+          "WebAppCloudFrontDistribution": {
+            "Type": "AWS::CloudFront::Distribution",
+            "Properties": {
+              "DistributionConfig": {
+                "Origins": [
+                  {
+                    "DomainName": "aws-cloudx-bike-shop-angular.s3.amazonaws.com",
+                    "Id": "myS3Origin",
+                    "S3OriginConfig": {
+                      "OriginAccessIdentity": {
+                        "Fn::Sub": "origin-access-identity/cloudfront/${OriginAccessIdentity}"
+                      }
+                    }
+                  }
+                ],
+                "Enabled": true,
+                "IPV6Enabled": true,
+                "HttpVersion": "http2",
+                "DefaultRootObject": "index.html",
+                "CustomErrorResponses": [
+                  {
+                    "ErrorCode": 404,
+                    "ResponseCode": 200,
+                    "ResponsePagePath": "/index.html"
+                  }
+                ],
+                "DefaultCacheBehavior": {
+                  "AllowedMethods": ["GET", "HEAD", "OPTIONS"],
+                  "CachedMethods": ["GET", "HEAD", "OPTIONS"],
+                  "ForwardedValues": {
+                    "Headers": [
+                      "Access-Control-Request-Headers",
+                      "Access-Control-Request-Method",
+                      "Origin",
+                      "Authorization"
+                    ],
+                    "QueryString": false,
+                    "Cookies": {
+                      "Forward": "none"
+                    }
+                  },
+                  "TargetOriginId": "myS3Origin",
+                  "ViewerProtocolPolicy": "redirect-to-https",
+                  "Compress": true,
+                  "DefaultTTL": 0
+                },
+                "ViewerCertificate": {
+                  "CloudFrontDefaultCertificate": "true"
+                }
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            },
+            "Export": {
+              "Name": "sls-aws-cloudx-bike-shop-angular-dev-ServerlessDeploymentBucketName"
+            }
+          },
+          "WebAppS3BucketOutput": {
+            "Value": {
+              "Ref": "WebAppS3Bucket"
+            }
+          },
+          "WebAppCloudFrontDistributionOutput": {
+            "Value": {
+              "Fn::GetAtt": ["WebAppCloudFrontDistribution", "DomainName"]
+            }
+          }
+        }
+      },
+      "coreCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "ServerlessDeploymentBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketEncryption": {
+                "ServerSideEncryptionConfiguration": [
+                  {
+                    "ServerSideEncryptionByDefault": {
+                      "SSEAlgorithm": "AES256"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          "ServerlessDeploymentBucketPolicy": {
+            "Type": "AWS::S3::BucketPolicy",
+            "Properties": {
+              "Bucket": {
+                "Ref": "ServerlessDeploymentBucket"
+              },
+              "PolicyDocument": {
+                "Statement": [
+                  {
+                    "Action": "s3:*",
+                    "Effect": "Deny",
+                    "Principal": "*",
+                    "Resource": [
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            },
+                            "/*"
+                          ]
+                        ]
+                      },
+                      {
+                        "Fn::Join": [
+                          "",
+                          [
+                            "arn:",
+                            {
+                              "Ref": "AWS::Partition"
+                            },
+                            ":s3:::",
+                            {
+                              "Ref": "ServerlessDeploymentBucket"
+                            }
+                          ]
+                        ]
+                      }
+                    ],
+                    "Condition": {
+                      "Bool": {
+                        "aws:SecureTransport": false
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": {
+              "Ref": "ServerlessDeploymentBucket"
+            }
+          }
+        }
+      }
+    },
+    "custom": {
+      "client": {
+        "bucketName": "aws-cloudx-bike-shop-angular",
+        "distributionFolder": "dist/app",
+        "indexDocument": "index.html",
+        "manageResources": false
+      },
+      "s3LocalPath": "dist/app/",
+      "s3BucketName": "aws-cloudx-bike-shop-angular"
+    },
+    "plugins": ["serverless-finch"],
+    "pluginsData": {},
+    "functions": {},
+    "resources": {
+      "Resources": {
+        "WebAppS3Bucket": {
+          "Type": "AWS::S3::Bucket",
+          "Properties": {
+            "BucketName": "aws-cloudx-bike-shop-angular",
+            "AccessControl": "PublicRead",
+            "WebsiteConfiguration": {
+              "IndexDocument": "index.html",
+              "ErrorDocument": "index.html"
+            }
+          }
+        },
+        "WebAppS3BucketPolicy": {
+          "Type": "AWS::S3::BucketPolicy",
+          "Properties": {
+            "Bucket": {
+              "Ref": "WebAppS3Bucket"
+            },
+            "PolicyDocument": {
+              "Statement": [
+                {
+                  "Sid": "AllowCloudFrontAccessIdentity",
+                  "Effect": "Allow",
+                  "Action": "s3:GetObject",
+                  "Resource": "arn:aws:s3:::aws-cloudx-bike-shop-angular/*",
+                  "Principal": {
+                    "AWS": {
+                      "Fn::Join": [
+                        " ",
+                        [
+                          "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity",
+                          {
+                            "Ref": "OriginAccessIdentity"
+                          }
+                        ]
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        },
+        "OriginAccessIdentity": {
+          "Type": "AWS::CloudFront::CloudFrontOriginAccessIdentity",
+          "Properties": {
+            "CloudFrontOriginAccessIdentityConfig": {
+              "Comment": "Access identity between CloudFront and S3 bucket"
+            }
+          }
+        },
+        "WebAppCloudFrontDistribution": {
+          "Type": "AWS::CloudFront::Distribution",
+          "Properties": {
+            "DistributionConfig": {
+              "Origins": [
+                {
+                  "DomainName": "aws-cloudx-bike-shop-angular.s3.amazonaws.com",
+                  "Id": "myS3Origin",
+                  "S3OriginConfig": {
+                    "OriginAccessIdentity": {
+                      "Fn::Sub": "origin-access-identity/cloudfront/${OriginAccessIdentity}"
+                    }
+                  }
+                }
+              ],
+              "Enabled": true,
+              "IPV6Enabled": true,
+              "HttpVersion": "http2",
+              "DefaultRootObject": "index.html",
+              "CustomErrorResponses": [
+                {
+                  "ErrorCode": 404,
+                  "ResponseCode": 200,
+                  "ResponsePagePath": "/index.html"
+                }
+              ],
+              "DefaultCacheBehavior": {
+                "AllowedMethods": ["GET", "HEAD", "OPTIONS"],
+                "CachedMethods": ["GET", "HEAD", "OPTIONS"],
+                "ForwardedValues": {
+                  "Headers": [
+                    "Access-Control-Request-Headers",
+                    "Access-Control-Request-Method",
+                    "Origin",
+                    "Authorization"
+                  ],
+                  "QueryString": false,
+                  "Cookies": {
+                    "Forward": "none"
+                  }
+                },
+                "TargetOriginId": "myS3Origin",
+                "ViewerProtocolPolicy": "redirect-to-https",
+                "Compress": true,
+                "DefaultTTL": 0
+              },
+              "ViewerCertificate": {
+                "CloudFrontDefaultCertificate": "true"
+              }
+            }
+          }
+        }
+      },
+      "Outputs": {
+        "WebAppS3BucketOutput": {
+          "Value": {
+            "Ref": "WebAppS3Bucket"
+          }
+        },
+        "WebAppCloudFrontDistributionOutput": {
+          "Value": {
+            "Fn::GetAtt": ["WebAppCloudFrontDistribution", "DomainName"]
+          }
+        }
+      }
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless.yml",
+    "initialServerlessConfig": {
+      "service": {
+        "$ref": "$[\"service\"][\"serviceObject\"]"
+      },
+      "frameworkVersion": "2",
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "plugins": {
+        "$ref": "$[\"service\"][\"plugins\"]"
+      },
+      "custom": {
+        "$ref": "$[\"service\"][\"custom\"]"
+      },
+      "resources": {
+        "$ref": "$[\"service\"][\"resources\"]"
+      }
+    },
+    "layers": {},
+    "isDashboardMonitoringPreconfigured": false
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/aws-cloudx-bike-shop-angular/dev/1676657574264-2023-02-17T18:12:54.264Z",
+    "artifact": ""
+  }
+}

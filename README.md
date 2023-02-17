@@ -29,3 +29,11 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## S3-website
+
+https://aws-cloudx-bike-shop-angular.s3.amazonaws.com/index.html
+
+## CloudFront URL
+
+https://dqbw3kxelkxvj.cloudfront.net/
