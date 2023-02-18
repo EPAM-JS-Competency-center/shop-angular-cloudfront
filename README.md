@@ -1,5 +1,15 @@
 # Shop Angular Cloudfront
 
+## Task 2
+- serverless-finch
+  - S3 public link: http://epam-shop-angular-finch.s3-website-us-east-1.amazonaws.com/
+
+- serverless-single-page-app-plugin
+  - S3 public link (no access): http://epam-aws-shop-angular-dev-webapps3bucket-10k120ahsh00u.s3-website-us-east-1.amazonaws.com/
+  - Cloudfront link: https://d2dnhx4sl7d783.cloudfront.net/
+
+---
+
 Angular version: ~12.
 
 Repo maintainers:
