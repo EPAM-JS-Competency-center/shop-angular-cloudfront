@@ -1,3 +1,9 @@
+# Links to CloudFront and S3 websites
+
+[Link to S3 website](https://az-shop-app.s3.amazonaws.com/index.html) - shows AccessDenied error page.
+
+[Link to CloudFront website](https://d1y9xxzfv5qd59.cloudfront.net/) - works properly.
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
