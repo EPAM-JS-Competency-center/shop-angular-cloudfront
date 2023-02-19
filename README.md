@@ -1,31 +1,7 @@
-# Shop Angular Cloudfront
+Attention!
 
-Angular version: ~12.
+I don't really know why but CloudFront which have been created automatically didn't work. (E2QCXRVX7X05FM) I noticed that "Origin acces" was public and "Origin domain" had slight diggerence with real (s3.eu-west-1.amazonaws.com instead s3.EU-WEST-1.amazonaws.com). So I changed them manualy and then everything worked correct. I'd be happy if you could explain the reason.
 
-Repo maintainers:
+link to CloudFront - https://us-east-1.console.aws.amazon.com/cloudfront/v3/home?region=eu-west-1#/distributions
 
-- [Sergey Gultyayev](https://github.com/gultyayev)
-
-## The purpose
-
-The repository was created to have an Angular version of e-shop for EPAM NodeJS AWS course. At the same time we strive to make this repository follows best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
-
-## NodeJS AWS course integration
-
-All the necessary API endpoints are in the environments files `environment.ts` (for dev builds). Also it contains feature flags to enable/disable endpoints invocations from within the app so to ensure that you don't get errors for not implemented API endpoints.
-
-## Contribution
-
-Create an issue with the detailed description of the improvement/issue.
-
-If you would like to help implementing some feature, you should ask the maintainers for approval so to ensure that the feature is desired in the repository and no efforts go wasted.
-
-## Get up and running
-
-Prerequisites: NodeJS v14.20.x and higher
-
-Follow the steps:
-
-- git clone
-- npm i
-- ng serve
+link to S3 - https://s3.console.aws.amazon.com/s3/buckets?region=eu-west-1&region=eu-west-1
