@@ -30,5 +30,8 @@ Follow the steps:
 - npm i
 - npm start
 
-S3: http://eshop-gaming-bucket.s3-website-us-east-1.amazonaws.com/
-CLOUDFRONT URI: https://d3p9c88204whqm.cloudfront.net/
+## Links
+
+[S3](http://eshop-gaming-bucket.s3-website-us-east-1.amazonaws.com/)
+
+[CLOUDFRONT](https://d3p9c88204whqm.cloudfront.net/)
