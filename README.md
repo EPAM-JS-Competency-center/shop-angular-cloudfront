@@ -1,6 +1,6 @@
 # Shop Angular Cloudfront
 
-Angular version: ~12.
+Angular version: ~15.
 
 Repo maintainers:
 
@@ -29,3 +29,8 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Project links
+
+- CloudFront URL: [https://d2kfr883q16qfl.cloudfront.net](https://d2kfr883q16qfl.cloudfront.net)
+- S3 bucket URL: [http://tyres-shop.s3-website.eu-central-1.amazonaws.com](http://tyres-shop.s3-website.eu-central-1.amazonaws.com)

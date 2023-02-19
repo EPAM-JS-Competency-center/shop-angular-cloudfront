@@ -1,6 +1,6 @@
 {
-  "name": "app",
-  "version": "0.0.0",
+  "name": "tyres-shop",
+  "version": "1.0.0",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -9,7 +9,15 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky install",
-    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged"
+    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
+    "deploy": "sls client deploy --no-config-change --no-policy-change --no-cors-change --no-confirm",
+    "build:deploy": "npm run build && npm run deploy",
+    "cloudfront:setup": "sls deploy",
+    "cloudfront:domainInfo": "sls domainInfo",
+    "cloudfront:invalidateCache": "sls invalidateCloudFrontCache",
+    "cloudfront:build:deploy": "npm run build:deploy && npm run cloudfront:invalidateCache",
+    "cloudfront:update:build:deploy": "npm run cloudfront:setup && npm run cloudfront:build:deploy",
+    "serverless:remove": "sls remove"
   },
   "private": true,
   "dependencies": {
@@ -61,6 +69,8 @@
     "prettier": "^2.8.4",
     "pretty-quick": "^3.1.3",
     "protractor": "~7.0.0",
+    "serverless-finch": "^4.0.0",
+    "serverless-s3-cleaner": "^2.0.2",
     "ts-node": "^10.9.1",
     "typescript": "~4.9.5"
   },
