@@ -2,6 +2,11 @@
 
 Angular version: ~12.
 
+## Url
+
+Bucket: https://shop-angular-cloudfront-aws.s3.amazonaws.com/index.html
+App: d21qpjv4by8xus.cloudfront.net
+
 Repo maintainers:
 
 - [Sergey Gultyayev](https://github.com/gultyayev)

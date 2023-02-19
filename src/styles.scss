@@ -16,6 +16,10 @@ body {
   overflow-y: scroll;
 }
 
+.mat-toolbar.mat-primary {
+  background-color: aquamarine;
+}
+
 .mat-icon-button {
   // Fix vertical alignment for Firefox
   line-height: 1 !important;
