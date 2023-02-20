@@ -1,6 +1,6 @@
 # Shop Angular Cloudfront
 
-## Manual Deployment
+## Links to S3 bucket/website
 
-- S3 https://baldych-shop-angular-cloudfront.s3.eu-central-1.amazonaws.com/index.html
-- Cloudfront https://d28utdh6rzcfpn.cloudfront.net
+- S3 http://baldych-shop-angular-cloudfront.s3-website.eu-central-1.amazonaws.com/
+- Cloudfront https://dfcyipx9yleye.cloudfront.net
