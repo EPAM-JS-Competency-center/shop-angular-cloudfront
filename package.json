@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "client:deploy": "sls client deploy --no-config-change --no-policy-change --no-cors-change",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -25,6 +26,8 @@
     "@angular/router": "^15.1.4",
     "bootstrap": "^4.6.0",
     "rxjs": "^7.8.0",
+    "serverless": "^3.27.0",
+    "serverless-finch": "^4.0.0",
     "tslib": "^2.5.0",
     "zone.js": "^0.12.0"
   },
