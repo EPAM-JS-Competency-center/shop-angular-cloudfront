@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "deploy": "serverless client deploy --no-config-change --no-policy-change --no-cors-change",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
