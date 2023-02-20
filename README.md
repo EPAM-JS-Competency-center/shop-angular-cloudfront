@@ -2,6 +2,10 @@
 
 [shop-angular-cloudfront-app.s3-website-eu-west-1.amazonaws.com](http://shop-angular-cloudfront-app.s3-website-eu-west-1.amazonaws.com/)
 
+# cloudfront URL
+
+[https://d1wesz2bdfhld4.cloudfront.net](https://d1wesz2bdfhld4.cloudfront.net/)
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
