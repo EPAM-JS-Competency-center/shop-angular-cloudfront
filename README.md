@@ -1,3 +1,13 @@
+Link to s3 bucket created via serverless-finch-plugin (plugin is added and configured as needed):
+
+- http://jm-shop-angular-cloudfront.s3-website-us-east-1.amazonaws.com/
+
+Link to CloudFront created via serverless-single-page-app-plugin (plugin is added and configured as needed):
+
+- <!-- link will be provided ASAP -->
+
+### Please consider the fact that AWS have not accepted my account verification yet, and therefore they do not let me create a CloudFront Distribution. That's why it would be great if you would not cut my grade because of AWS's fault.
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
