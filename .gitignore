@@ -46,3 +46,8 @@ testem.log
 Thumbs.db
 
 package-lock.json
+
+jspm_packages
+
+# Serverless directories
+.serverless
