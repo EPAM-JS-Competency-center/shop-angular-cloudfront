@@ -20,7 +20,7 @@ plugins:
 custom:
   client:
     bucketName: eshop-gaming-bucket
-    distributionFolder: dist/app
+    distributionFolder: dist
   s3BucketName: ${self:custom.client.bucketName}
 
   ## Serverless-single-page-app-plugin configuration:
