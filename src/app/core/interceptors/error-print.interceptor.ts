@@ -23,7 +23,7 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
           const url = new URL(request.url);
 
           this.notificationService.showError(
-            `Request to "${url.pathname}" failed. Check the console for the details`,
+            `Request to "${url.pathname}" failed. Check the console for the details.`,
             0
           );
         },

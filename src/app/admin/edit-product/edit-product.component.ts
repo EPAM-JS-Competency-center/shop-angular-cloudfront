@@ -67,7 +67,6 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     const productId = this.activatedRoute.snapshot.paramMap.get('productId');
-
     if (!productId) {
       this.loaded$.next(true);
       return;
