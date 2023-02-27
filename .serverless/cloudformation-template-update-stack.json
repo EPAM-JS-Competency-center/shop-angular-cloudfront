@@ -74,7 +74,7 @@
     "WebAppS3Bucket": {
       "Type": "AWS::S3::Bucket",
       "Properties": {
-        "BucketName": "shop-angular-a",
+        "BucketName": "aws-shop-fe",
         "AccessControl": "PublicRead",
         "WebsiteConfiguration": {
           "IndexDocument": "index.html",
@@ -94,7 +94,7 @@
               "Sid": "AllowCloudFrontAccessIdentity",
               "Effect": "Allow",
               "Action": "s3:GetObject",
-              "Resource": "arn:aws:s3:::shop-angular-a/*",
+              "Resource": "arn:aws:s3:::aws-shop-fe/*",
               "Principal": {
                 "AWS": {
                   "Fn::Join": [
@@ -127,7 +127,7 @@
         "DistributionConfig": {
           "Origins": [
             {
-              "DomainName": "shop-angular-a.s3.amazonaws.com",
+              "DomainName": "aws-shop-fe.s3.amazonaws.com",
               "Id": "myS3Origin",
               "S3OriginConfig": {
                 "OriginAccessIdentity": {
@@ -180,7 +180,7 @@
         "Ref": "ServerlessDeploymentBucket"
       },
       "Export": {
-        "Name": "sls-shop-angular-cloudfront-aws-dev-ServerlessDeploymentBucketName"
+        "Name": "sls-aws-shop-fe-dev-ServerlessDeploymentBucketName"
       }
     },
     "WebAppS3BucketOutput": {
