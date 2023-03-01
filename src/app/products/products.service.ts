@@ -7,6 +7,9 @@ import { Product } from './product.interface';
 
 import { ApiService } from '../core/api.service';
 
+const URL_PRODUCTS =
+  'https://6fw4y49igd.execute-api.eu-west-1.amazonaws.com/dev/products';
+
 @Injectable({
   providedIn: 'root',
 })
@@ -41,7 +44,7 @@ export class ProductsService extends ApiService {
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
       return this.http
-        .get<Product[]>('/assets/products.json')
+        .get<Product[]>(URL_PRODUCTS)
         .pipe(
           map(
             (products) => products.find((product) => product.id === id) || null
@@ -60,7 +63,7 @@ export class ProductsService extends ApiService {
       console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
-      return this.http.get<Product[]>('/assets/products.json');
+      return this.http.get<Product[]>(URL_PRODUCTS);
     }
 
     const url = this.getUrl('bff', 'products');
