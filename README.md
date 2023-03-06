@@ -67,4 +67,4 @@ Remove an entire stack configured in `serverless.yml` via CloudFormation.
 
 [S3](http://eshop-gaming-bucket.s3-website-us-east-1.amazonaws.com/)
 
-[CLOUDFRONT](https://d3p9c88204whqm.cloudfront.net/)
+[CLOUDFRONT](https://d37voe5ouiuxb3.cloudfront.net)

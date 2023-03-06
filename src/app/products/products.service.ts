@@ -12,14 +12,14 @@ import { ApiService } from '../core/api.service';
 })
 export class ProductsService extends ApiService {
   createNewProduct(product: Product): Observable<Product> {
-    if (!this.endpointEnabled('bff')) {
+    if (!this.endpointEnabled('product')) {
       console.warn(
-        'Endpoint "bff" is disabled. To enable change your environment.ts config'
+        'Endpoint "product" is disabled. To enable change your environment.ts config'
       );
       return EMPTY;
     }
 
-    const url = this.getUrl('bff', 'products');
+    const url = this.getUrl('product', 'products');
     return this.http.post<Product>(url, product);
   }
 
