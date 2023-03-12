@@ -16,26 +16,25 @@ export class ManageProductsService extends ApiService {
       );
       return EMPTY;
     }
-
     return this.getPreSignedUrl(file.name).pipe(
-      switchMap((url) =>
-        this.http.put(url, file, {
+      switchMap((url: any) => {
+        return this.http.put(url.signedUrl, file, {
           headers: {
             // eslint-disable-next-line @typescript-eslint/naming-convention
             'Content-Type': 'text/csv',
           },
-        })
-      )
+        });
+      })
     );
   }
 
   private getPreSignedUrl(fileName: string): Observable<string> {
     const url = this.getUrl('import', 'import');
-
-    return this.http.get<string>(url, {
+    const response = this.http.get<string>(url, {
       params: {
         name: fileName,
       },
     });
+    return response;
   }
 }
