@@ -9,7 +9,7 @@ import { ApiService } from '../core/api.service';
 })
 export class ProductsService extends ApiService {
   private readonly productsUrl =
-    'https://gvccngzso7.execute-api.us-east-1.amazonaws.com/products';
+    'https://j9qub2jznd.execute-api.us-east-1.amazonaws.com/dev/products';
 
   createNewProduct(product: Product): Observable<Product> {
     if (!this.endpointEnabled('bff')) {
