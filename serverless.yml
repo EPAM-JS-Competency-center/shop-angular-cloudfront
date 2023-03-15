@@ -1,4 +1,4 @@
-service: my-aws-e-shop
+service: fe-shop-s3
 frameworkVersion: "3"
 
 provider:
@@ -12,7 +12,7 @@ plugins:
 custom:
   ## Serverless-finch configuration
   client:
-    bucketName: my-third-bucket-19841111
+    bucketName: fe-shop-bucket-s3
     distributionFolder: dist/app
     indexDocument: index.html
   ## Serverless-single-page-app-plugin configuration:

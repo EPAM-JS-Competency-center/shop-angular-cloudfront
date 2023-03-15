@@ -34,7 +34,7 @@ export class ManageProductsService extends ApiService {
 
     return this.http.get<string>(url, {
       params: {
-        name: fileName,
+        fileName,
       },
     });
   }
