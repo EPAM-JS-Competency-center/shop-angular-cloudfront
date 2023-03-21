@@ -7,6 +7,7 @@
     "build": "ng build",
     "test": "ng test",
     "deploy:s3": "serverless client deploy --no-config-change --no-policy-change --no-cors-change",
+    "build-deploy:s3": "npm run build && npm run deploy:s3",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky install",
