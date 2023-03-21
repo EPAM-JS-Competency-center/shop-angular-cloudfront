@@ -1,0 +1,11 @@
+service: shop-angular-cloudfront-megasaab
+frameworkVersion: "3"
+provider:
+  name: aws
+  runtime: nodejs12.x
+plugins:
+  - serverless-finch
+custom:
+  client:
+    bucketName: megasaab-bucket
+    distributionFolder: dist/app
