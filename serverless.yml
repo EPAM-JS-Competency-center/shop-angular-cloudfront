@@ -86,7 +86,7 @@ resources:
             Compress: true
             DefaultTTL: 0
           ViewerCertificate:
-            CloudFrontDefaultCertificate: "true"
+            CloudFrontDefaultCertificate: true
   Outputs:
     WebAppS3BucketOutput:
       Value:
