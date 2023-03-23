@@ -80,7 +80,6 @@ fi
 result=$(cat <<< $result | jq --arg isPipelineAutoStart $isPipelineAutoStart '.pipeline.stages[0].actions[0].configuration.PollForSourceChanges=$isPipelineAutoStart');
 # Set EnvironmentVariables in each action TODO
 if [ ! -z $config ]; then
-    echo "I dont have any clue how to set production env vars"
     changedQualityGate=$(cat <<< $result | jq --arg value [{\"BUILD_CONFIGURATION\":\"$config\"}] '.pipeline.stages | map(select(.name == "QualityGate").actions[0].configuration.EnvironmentVariables=$value)');
     changedBuldAndQG=$(cat <<< $changedQualityGate | jq --arg value [{\"BUILD_CONFIGURATION\":\"$config\"}] 'map(select(.name == "Build").actions[0].configuration.EnvironmentVariables=$value)')
     result=$(cat <<< $result | jq --arg newStages "$changedBuldAndQG" '.pipeline.stages=$newStages');
