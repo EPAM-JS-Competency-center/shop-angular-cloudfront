@@ -1,5 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
+import { NotificationService } from 'src/app/core/notification.service';
 import { Product } from '../../products/product.interface';
 import { ProductsService } from '../../products/products.service';
 import { ManageProductsService } from './manage-products.service';
@@ -19,7 +20,8 @@ export class ManageProductsComponent implements OnInit {
   constructor(
     private readonly productsService: ProductsService,
     private readonly manageProductsService: ManageProductsService,
-    private readonly cdr: ChangeDetectorRef
+    private readonly cdr: ChangeDetectorRef,
+    private readonly notificationService: NotificationService
   ) {}
 
   ngOnInit(): void {
@@ -33,6 +35,11 @@ export class ManageProductsComponent implements OnInit {
 
     this.manageProductsService
       .uploadProductsCSV(this.selectedFile)
+      .pipe(
+        catchError(async (error) => {
+          this.notificationService.showError(error.error.message, 0);
+        })
+      )
       .subscribe(() => {
         this.selectedFile = null;
         this.cdr.markForCheck();
