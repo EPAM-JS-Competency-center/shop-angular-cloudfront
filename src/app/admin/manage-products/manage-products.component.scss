@@ -1,0 +1,18 @@
+@import "bootstrap/scss/functions";
+@import "bootstrap/scss/variables";
+@import "bootstrap/scss/mixins/breakpoints";
+
+.manage-product-message {
+  font-size: 14px;
+  color: red;
+  margin-top: 10px;
+  padding: 3px;
+
+  @include media-breakpoint-up(md) {
+    font-size: 16px;
+  }
+
+  @include media-breakpoint-up(lg) {
+    font-size: 20px;
+  }
+}
