@@ -17,10 +17,6 @@
   </button>
 </div>
 
-<div class="manage-product-message">
-  <p>{{ message$ | async }}</p>
-</div>
-
 <table class="w-100" [dataSource]="products$" mat-table>
   <ng-container matColumnDef="from">
     <th mat-header-cell *matHeaderCellDef>Title</th>
@@ -35,7 +31,7 @@
   <ng-container matColumnDef="price">
     <th mat-header-cell *matHeaderCellDef>Price</th>
     <td mat-cell *matCellDef="let product">
-      {{ product.price | number : "1.2-2" | currency }}
+      {{ product.price | number: "1.2-2" | currency }}
     </td>
   </ng-container>
   <ng-container matColumnDef="count">

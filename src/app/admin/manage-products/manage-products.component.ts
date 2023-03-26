@@ -1,5 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { BehaviorSubject, catchError, Observable } from 'rxjs';
+import { catchError, Observable } from 'rxjs';
 import { NotificationService } from 'src/app/core/notification.service';
 import { Product } from '../../products/product.interface';
 import { ProductsService } from '../../products/products.service';
@@ -17,9 +17,6 @@ export class ManageProductsComponent implements OnInit {
 
   products$!: Observable<Product[]>;
 
-  private message: BehaviorSubject<string> = new BehaviorSubject('');
-  public message$: Observable<string> = this.message.asObservable();
-
   constructor(
     private readonly productsService: ProductsService,
     private readonly manageProductsService: ManageProductsService,
@@ -32,7 +29,6 @@ export class ManageProductsComponent implements OnInit {
   }
 
   onUploadCSV(): void {
-    this.message.next('');
     if (!this.selectedFile) {
       return;
     }
@@ -41,8 +37,7 @@ export class ManageProductsComponent implements OnInit {
       .uploadProductsCSV(this.selectedFile)
       .pipe(
         catchError(async (error) => {
-          this.notificationService.showError(error.error.message, 4000);
-          this.message.next(error.error.message);
+          this.notificationService.showError(error.error.message, 0);
         })
       )
       .subscribe(() => {
