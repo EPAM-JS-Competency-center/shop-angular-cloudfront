@@ -29,3 +29,8 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## S3 bucket endpoint and CloudFront distribution links:
+
+- [http://aws-s3-shop-cloudformation-deploy.s3-website-us-east-1.amazonaws.com](http://aws-s3-shop-cloudformation-deploy.s3-website-us-east-1.amazonaws.com)
+- [https://d1k8j2u4m97tfo.cloudfront.net](https://d1k8j2u4m97tfo.cloudfront.net)
