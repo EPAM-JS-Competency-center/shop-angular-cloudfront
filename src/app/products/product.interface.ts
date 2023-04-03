@@ -12,3 +12,8 @@ export interface ProductCheckout extends Product {
   /** orderedCount * price */
   totalPrice: number;
 }
+
+export interface ProductsResponse {
+  statusCode: number;
+  products: Product[];
+}
