@@ -11,6 +11,8 @@ import { ApiService } from '../core/api.service';
   providedIn: 'root',
 })
 export class ProductsService extends ApiService {
+  private mainUrl = 'https://50tdgqcex4.execute-api.us-east-1.amazonaws.com/dev/products';
+
   createNewProduct(product: Product): Observable<Product> {
     if (!this.endpointEnabled('bff')) {
       console.warn(
@@ -60,7 +62,8 @@ export class ProductsService extends ApiService {
       console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
-      return this.http.get<Product[]>('/assets/products.json');
+      return this.http.get<{ content: Product[] }>(this.mainUrl)
+        .pipe(map((response) => response.content))
     }
 
     const url = this.getUrl('bff', 'products');
