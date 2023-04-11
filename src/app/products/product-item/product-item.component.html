@@ -1,7 +1,11 @@
 <mat-card>
   <div mat-card-image class="img-container">
     <div class="img-container__inner">
-      <img src="{{ product.imagePath }}" alt="" />
+      <img
+        src="{{ product.imagePath }}"
+        onerror="this.src='/assets/icons/electronics.svg'"
+        alt=""
+      />
     </div>
   </div>
 

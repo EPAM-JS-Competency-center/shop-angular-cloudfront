@@ -46,6 +46,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       description: ['', Validators.required],
       price: ['', Validators.required],
       count: ['', Validators.required],
+      imagePath: [''],
     });
   }
 
