@@ -17,12 +17,14 @@ export class ManageProductsService extends ApiService {
       return EMPTY;
     }
 
+    const token = localStorage.getItem('token');
+
     return this.getPreSignedUrl(file.name).pipe(
       switchMap((url) =>
         this.http.put(url, file, {
           headers: {
-            // eslint-disable-next-line @typescript-eslint/naming-convention
-            'Content-Type': 'text/csv',
+            'Content-Type': 'text/csv', // eslint-disable-line @typescript-eslint/naming-convention
+            Authorization: `Basic ${token}`, // eslint-disable-line @typescript-eslint/naming-convention
           },
         })
       )
