@@ -31,7 +31,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col col-md-6">
+      <div class="col col-md-4">
         <mat-form-field class="w-100">
           <mat-label>Price ($)</mat-label>
           <input type="number" matInput formControlName="price" />
@@ -43,7 +43,7 @@
         </mat-form-field>
       </div>
 
-      <div class="col col-md-6">
+      <div class="col col-md-4">
         <mat-form-field class="w-100">
           <mat-label>Count</mat-label>
           <input type="number" matInput formControlName="count" />
@@ -52,6 +52,13 @@
           >
             Product count is required
           </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col col-md-4">
+        <mat-form-field class="w-100">
+          <mat-label>Image path</mat-label>
+          <input matInput formControlName="imagePath" />
         </mat-form-field>
       </div>
     </form>
