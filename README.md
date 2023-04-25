@@ -1,10 +1,15 @@
-# Shop Angular Cloudfront
+# Shop Angular Cloudfront ( Forked version by Angel Mena)
 
 Angular version: ~12.
 
-Repo maintainers:
+## AWS Deployment links
 
-- [Sergey Gultyayev](https://github.com/gultyayev)
+S3: https://myownjuicestorebucket.s3.amazonaws.com/index.html
+CloudFront: https://d3i49zqf7hu5b1.cloudfront.net/
+
+## Changelog
+
+1.0.0 initial version
 
 ## The purpose
 
