@@ -4,8 +4,8 @@ Angular version: ~12.
 
 ## AWS Deployment links
 
-S3: https://myjuicestorebucket.s3.amazonaws.com/index.html
-CloudFront: https://d3kfjipfqh0m5h.cloudfront.net
+S3: https://myownjuicestorebucket.s3.amazonaws.com/index.html
+CloudFront: https://d3i49zqf7hu5b1.cloudfront.net/
 
 ## Changelog
 
