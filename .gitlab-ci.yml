@@ -1,0 +1,21 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  script:
+    - echo "Running unit tests"
+    - echo "Running eslint check"
+    - echo "Running npm packages audit"
+
+build:
+  stage: build
+  script:
+    - echo "Building the app (for typescript/babel projects)"
+
+deploy:
+  stage: deploy
+  script:
+    - echo "Deploying the app"
