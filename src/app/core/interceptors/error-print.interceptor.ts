@@ -19,7 +19,8 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
-        error: (err: unknown) => {
+        // eslint-disable-next-line rxjs/no-implicit-any-catch
+        error: (err: any) => {
           const url = new URL(request.url);
 
           if (err?.status === 401) {
