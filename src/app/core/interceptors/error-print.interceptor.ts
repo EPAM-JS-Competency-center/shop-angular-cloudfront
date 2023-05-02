@@ -19,8 +19,17 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
-        error: () => {
+        error: (err: unknown) => {
           const url = new URL(request.url);
+
+          if (err?.status === 401) {
+            alert(
+              `401. Unauthorized. Reason: no data for authorization was provided`
+            );
+          }
+          if (err?.status === 403) {
+            alert(`403. Forbidden. Reason: wrong credentials was provided`);
+          }
 
           this.notificationService.showError(
             `Request to "${url.pathname}" failed. Check the console for the details`,
