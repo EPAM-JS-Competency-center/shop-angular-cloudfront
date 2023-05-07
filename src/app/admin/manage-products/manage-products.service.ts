@@ -9,6 +9,10 @@ export class ManageProductsService extends ApiService {
     super(injector);
   }
 
+  private getBasicToken(): string | null {
+    return localStorage.getItem('authorization_token');
+  }
+
   uploadProductsCSV(file: File): Observable<unknown> {
     if (!this.endpointEnabled('import')) {
       console.warn(
@@ -32,8 +36,12 @@ export class ManageProductsService extends ApiService {
 
   private getPreSignedUrl(fileName: string): Observable<string> {
     const url = this.getUrl('import', 'import');
+    const headers: { [key: string]: string } = {};
+    const token = this.getBasicToken();
+    token && (headers.Authorization = `Basic ${token}`)
 
     return this.http.get<string>(url, {
+      headers,
       params: {
         name: fileName,
       },
