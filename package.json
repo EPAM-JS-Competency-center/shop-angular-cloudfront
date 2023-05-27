@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "prepare": "husky install",
     "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
-    "commitlint:last": "npx commitlint --from HEAD~1 --to HEAD --verbose",
+    "commitlint": "npx commitlint --edit",
     "unit-test": "npx jest",
     "check-deps": "yarn audit",
     "sonarqube": "sonar-scanner"
