@@ -27,6 +27,6 @@ jobs:
       uses: CultureHQ/actions-yarn@v1.0.1
     - run: yarn
     - run: yarn build
-    - run: yarn test
+    - run: yarn nowatch-test
     - run: yarn lint
     - run: yarn check-deps
