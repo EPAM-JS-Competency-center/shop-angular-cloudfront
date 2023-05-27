@@ -1,0 +1,127 @@
+{
+    "pipeline": {
+        "name": "angular-shop",
+        "roleArn": "roleArn",
+        "artifactStore": {
+            "type": "S3",
+            "location": "codepipeline-artifactStore-location"
+        },
+        "stages": [
+            {
+                "name": "Source",
+                "actions": [
+                    {
+                        "name": "Source",
+                        "actionTypeId": {
+                            "category": "Source",
+                            "owner": "ThirdParty",
+                            "provider": "GitHub",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "Branch": "{{Branch name}}",
+                            "OAuthToken": "****",
+                            "Owner": "{{GitHub Owner}}",
+                            "PollForSourceChanges": "{{PollForSourceChanges}}",
+                            "Repo": "shop-angular-cloudfront"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "inputArtifacts": [],
+                        "region": "us-east-1",
+                        "namespace": "SourceVariables"
+                    }
+                ]
+            },
+            {
+                "name": "QualityGate",
+                "actions": [
+                    {
+                        "name": "LintingAntUnitTesting",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "EnvironmentVariables": "[{\"name\":\"BUILD_CONFIGURATION\",\"value\":\"{{BUILD_CONFIGURATION value}}\",\"type\":\"PLAINTEXT\"}]",
+                            "ProjectName": "client-app-quality"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "region": "us-east-1"
+                    }
+                ]
+            },
+            {
+                "name": "Approve",
+                "actions": [
+                    {
+                        "name": "ManualApproval",
+                        "actionTypeId": {
+                            "category": "Approval",
+                            "owner": "AWS",
+                            "provider": "Manual",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "CustomData": "Approve me"
+                        },
+                        "outputArtifacts": [],
+                        "inputArtifacts": [],
+                        "region": "us-east-1"
+                    }
+                ]
+            },
+            {
+                "name": "Build",
+                "actions": [
+                    {
+                        "name": "BuildAndDeploy",
+                        "actionTypeId": {
+                            "category": "Build",
+                            "owner": "AWS",
+                            "provider": "CodeBuild",
+                            "version": "1"
+                        },
+                        "runOrder": 1,
+                        "configuration": {
+                            "EnvironmentVariables": "[{\"name\":\"BUILD_CONFIGURATION\",\"value\":\"{{BUILD_CONFIGURATION value}}\",\"type\":\"PLAINTEXT\"}]",
+                            "ProjectName": "client-app-build"
+                        },
+                        "outputArtifacts": [
+                            {
+                                "name": "BuildArtifact"
+                            }
+                        ],
+                        "inputArtifacts": [
+                            {
+                                "name": "SourceArtifact"
+                            }
+                        ],
+                        "region": "us-east-1",
+                        "namespace": "BuildVariables"
+                    }
+                ]
+            }
+        ],
+        "version": 1
+    },
+    "metadata": {
+        "pipelineArn": "pipelineArn",
+        "created": 1586327944.749,
+        "updated": 1587023189.403
+    }
+}
+

@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
+    "nowatch-test": "ng test --watch=false",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky install",
