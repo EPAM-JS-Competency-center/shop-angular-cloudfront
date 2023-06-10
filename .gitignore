@@ -45,6 +45,7 @@ testem.log
 .DS_Store
 Thumbs.db
 .scannerwork
+.angular
 
 # SAM assests
 template-export.yml
