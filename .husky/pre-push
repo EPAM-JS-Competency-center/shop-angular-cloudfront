@@ -1,5 +1,5 @@
 #!/bin/sh
 
 npm run lint:format
-npm run test:cov
+npm run test:coverage
 npm audit
