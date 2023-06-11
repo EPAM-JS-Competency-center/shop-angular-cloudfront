@@ -4,12 +4,9 @@ default:
     - echo Hello World
 
 cache:
-  - key: &global_cache_node_mods
-    files:
-      - package-lock.json
-    paths:
-      - node_modules/
-    policy: pull
+  paths:
+    - node_modules/
+  policy: pull
 
 build:
   stage: build
@@ -19,8 +16,6 @@ build:
     - npm run build
   cache:
     - key:
-      files:
-        - package-lock.json
       paths:
         - node_modules/
       when: on_success
