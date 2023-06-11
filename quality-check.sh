@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# eslint, testing, dependencies check, static code analysis.
+
 #Avoid Angular cli asking for collecting analytics
 export NG_CLI_ANALYTICS="false"
 
