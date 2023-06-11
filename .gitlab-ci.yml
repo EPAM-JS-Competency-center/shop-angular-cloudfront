@@ -1,7 +1,7 @@
-build-job:
-  stage: build
+dependencies:
+  stage: install dependencies
   script:
-    - echo "Hello, $GITLAB_USER_LOGIN!"
+    - npm i
 
 test-job1:
   stage: test
