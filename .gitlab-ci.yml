@@ -7,15 +7,10 @@ cache:
   paths:
     - node_modules/
 
-dependencies:
+build:
   stage: build
   script:
     - npm i
-
-build:
-  stage: build
-  needs: [dependencies]
-  script:
     - npm run build
 
 unit-tests:
