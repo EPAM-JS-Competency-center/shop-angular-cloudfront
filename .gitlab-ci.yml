@@ -1,9 +1,10 @@
 stages:
   - dependencies
-  - test
   - build
+  - test
 
 install_dependencies:
+  stage: dependencies
   image: "node:18-alpine"
   script:
     - export NODE_OPTIONS=--openssl-legacy-provider
