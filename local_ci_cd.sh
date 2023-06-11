@@ -24,7 +24,6 @@ else
 fi
 
 echo "Building and Deploying app"
-npm run build -- --configuration=production
 scp -Cr client-app.zip certs nginx.conf $SSH_ALIAS:$FE_REMOTE_DIR
 ssh $SSH_ALIAS "sudo -S unzip $FE_REMOTE_DIR/client-app.zip"
 echo "App built and deployed"
