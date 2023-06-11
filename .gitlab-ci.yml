@@ -4,15 +4,27 @@ default:
     - echo Hello World
 
 cache:
-  paths:
-    - node_modules/
+  - key: &global_cache_node_mods
+    files:
+      - package-lock.json
+    paths:
+      - node_modules/
+    policy: pull
 
 build:
   stage: build
   script:
     - export NODE_OPTIONS=--openssl-legacy-provider
-    - npm i
+    - npm ci
     - npm run build
+  cache:
+    - key:
+      files:
+        - package-lock.json
+      paths:
+        - node_modules/
+      when: on_success
+      policy: pull-push
 
 unit-tests:
   stage: test
