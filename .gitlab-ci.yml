@@ -1,7 +1,5 @@
 default:
   image: "node:18-alpine"
-  before_script:
-    - echo Hello World
 
 cache:
   paths:
