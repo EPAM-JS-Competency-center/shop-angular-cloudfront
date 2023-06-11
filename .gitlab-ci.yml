@@ -20,6 +20,7 @@ build:
   image: "node:18-alpine"
   stage: build
   script:
+    - ls node_modules
     - npm run build
   cache:
     key:
