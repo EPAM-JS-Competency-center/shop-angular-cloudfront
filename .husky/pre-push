@@ -1,3 +1,5 @@
 #!/bin/sh
 
 npm run lint:format
+npm run test:coverage
+npm audit
