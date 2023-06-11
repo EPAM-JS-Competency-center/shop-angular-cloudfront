@@ -3,43 +3,32 @@ default:
   before_script:
     - echo Hello World
 
+cache:
+  paths:
+    - node_modules/
+
 dependencies:
   stage: build
   script:
     - npm i
-  artifacts:
-    paths:
-      - node_modules/
 
 build:
   stage: build
   needs: [dependencies]
   script:
     - npm run build
-  artifacts:
-    paths:
-      - node_modules/
 
 unit-tests:
   stage: test
   script:
     - npm run test:coverage
-  artifacts:
-    paths:
-      - node_modules/
 
 linting:
   stage: test
   script:
     - npm run lint
-  artifacts:
-    paths:
-      - node_modules/
 
 audit:
   stage: test
   script:
     - npm audit
-  artifacts:
-    paths:
-      - node_modules/
