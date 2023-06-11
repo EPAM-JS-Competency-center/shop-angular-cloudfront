@@ -38,7 +38,7 @@ unit-tests:
         - package-lock.json
     paths:
       - node_modules
-    policy: pul
+    policy: pull
 
 linting:
   stage: test
@@ -50,7 +50,7 @@ linting:
         - package-lock.json
     paths:
       - node_modules
-    policy: pul
+    policy: pull
 
 audit:
   stage: test
