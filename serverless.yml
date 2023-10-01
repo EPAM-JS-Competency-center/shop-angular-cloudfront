@@ -1,0 +1,23 @@
+org: gattygamaun
+app: shop-angular-cloudfront
+service: shop-angular-cloudfront
+frameworkVersion: "3"
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  profile: me
+  region: eu-west-3
+  deploymentMethod: direct
+
+functions:
+  function1:
+    handler: index.handler
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: shop-angular-study-gatty
+    distributionFolder: dist/app
