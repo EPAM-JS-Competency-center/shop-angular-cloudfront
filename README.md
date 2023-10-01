@@ -29,3 +29,18 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Task 2.2
+
+MANUAL part
+Deployment with serverless and serverless-finch works (npm run deploy:s3).
+Invalidation done manually
+Policies applied
+S3 bucket is unaccessible http://ng-aws-shop7534537.s3-website-us-east-1.amazonaws.com/
+CloudFront distribution https://dss0onfn4usid.cloudfront.net/
+
+I did not destroy infrastructure but create automatic deploy to another bucket
+
+AUTOMATIC part
+S3 bucket (not available to public) http://ng-aws-shop123123-automatic.s3-website-us-east-1.amazonaws.com/
+CloudFront distribution (not available to public) https://d3joqbsltlv2xt.cloudfront.net/
