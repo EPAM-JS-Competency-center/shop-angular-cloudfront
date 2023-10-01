@@ -5,7 +5,7 @@
 
 # Shop Angular Cloudfront
 
-Angular version: ~18.
+Angular version: ~15.
 
 Repo maintainers:
 
