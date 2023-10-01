@@ -11,6 +11,12 @@
     </mat-card-title>
   </mat-card-header>
 
+  <mat-card-actions>
+    <button mat-icon-button color="warn" aria-label="like">
+      <mat-icon>favorite</mat-icon>
+    </button>
+  </mat-card-actions>
+  
   <mat-card-content>
     <p>{{ product.price | number: "1.2-2" | currency }}</p>
   </mat-card-content>
