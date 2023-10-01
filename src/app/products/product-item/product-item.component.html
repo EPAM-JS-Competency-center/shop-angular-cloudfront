@@ -6,13 +6,13 @@
   </div>
 
   <mat-card-header>
-    <mat-card-title>
+    <mat-card-title class="product-title">
       {{ product.title }}
     </mat-card-title>
   </mat-card-header>
 
   <mat-card-content>
-    <p>{{ product.price | number: "1.2-2" | currency }}</p>
+    <p>{{ product.price | number : "1.2-2" | currency }}</p>
   </mat-card-content>
 
   <mat-card-actions>

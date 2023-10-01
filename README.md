@@ -4,7 +4,7 @@ Angular version: ~12.
 
 Repo maintainers:
 
-- [Sergey Gultyayev](https://github.com/gultyayev)
+- [Katsiaryna Sacvhko](https://github.com/katrin2404)
 
 ## The purpose
 
@@ -29,3 +29,15 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Deployment Links
+
+The project is deployed on AWS, utilizing services like S3 for static website hosting and CloudFront for content delivery and caching.
+
+### [AWS S3 Bucket](http://my-first-aws-application.s3-website-eu-west-1.amazonaws.com/)
+
+- The S3 bucket hosts the static assets of the application. S3-website shows 403 Access Denied error because of changes in bucket's policy. Navigates to site by CloudFront URL
+
+### [AWS CloudFront Distribution](https://d2dnq0tvhz4gqe.cloudfront.net/)
+
+- The CloudFront distribution is the recommended way to access the application. It serves the content stored in the S3 bucket but with the added benefits of caching, content delivery optimization, and possibly added security configurations, making the user experience more robust and responsive.
