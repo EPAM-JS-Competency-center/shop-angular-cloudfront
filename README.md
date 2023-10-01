@@ -1,6 +1,11 @@
+# Task-02
+
+- CloudFront URL: https://dju18uyqbp43i.cloudfront.net/
+- S3-website URL: https://aws-practitioner-shop-angular-cloudfront.s3.amazonaws.com/index.html
+
 # Shop Angular Cloudfront
 
-Angular version: ~12.
+Angular version: ~18.
 
 Repo maintainers:
 
