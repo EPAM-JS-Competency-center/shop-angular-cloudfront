@@ -1,3 +1,9 @@
+# AWS links
+
+Manual deployment(access via S3): http://cloud-aws-angular-manual.s3-website-eu-west-1.amazonaws.com/
+Auto deployment(no access via S3): http://cloud-aws-angular-auto.s3-website-eu-west-1.amazonaws.com/
+Auto deployment(access via Cloudfront): https://d2dj99cr4w2ekr.cloudfront.net/
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
