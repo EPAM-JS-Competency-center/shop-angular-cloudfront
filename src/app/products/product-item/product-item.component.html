@@ -12,7 +12,7 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p>{{ product.price | number: "1.2-2" | currency }}</p>
+    <p>{{ product.price | number : "1.2-2" | currency }}</p>
   </mat-card-content>
 
   <mat-card-actions>
@@ -27,6 +27,7 @@
     >
       <mat-icon>shopping_cart</mat-icon>
     </button>
+    Add to cart
 
     <app-cart-count-controls
       #controls="countControls"
