@@ -1,0 +1,23 @@
+org: patroklosz
+app: aws-node-express-api-project
+service: aws-node-express-api-project
+frameworkVersion: "3"
+
+plugins:
+  - serverless-finch
+
+custom:
+  client:
+    bucketName: js-shop-angular-cloudfront-4120
+    distributionFolder: website
+    errorDocument: index.html
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+
+functions:
+  api:
+    handler: index.handler
+    events:
+      - httpApi: "*"
