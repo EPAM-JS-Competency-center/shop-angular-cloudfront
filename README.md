@@ -2,6 +2,11 @@
 
 Angular version: ~12.
 
+Links task 2:
+
+- [S3-website] (http://my-first-app-ts.s3-website.eu-north-1.amazonaws.com/)
+- [CloudFront URL](http://my-first-app-ts-deploy-1.s3-website-us-east-1.amazonaws.com/)
+
 Repo maintainers:
 
 - [Sergey Gultyayev](https://github.com/gultyayev)
