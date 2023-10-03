@@ -5,19 +5,48 @@ frameworkVersion: "3"
 
 plugins:
   - serverless-finch
+  - serverless-cloudfront-invalidate
 
 custom:
   client:
     bucketName: js-shop-angular-cloudfront-4120
     distributionFolder: website
-    errorDocument: index.html
+  cloudfrontInvalidate:
+    - distributionId: "E2CG2U8KBRVZM"
+      autoInvalidate: true
+      items:
+        - "/*"
 
 provider:
   name: aws
   runtime: nodejs18.x
+  region: eu-central-1
 
 functions:
   api:
     handler: index.handler
     events:
       - httpApi: "*"
+
+resources:
+  Resources:
+    WebAppS3Bucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${self:custom.client.bucketName}
+        AccessControl: PublicRead
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: index.html
+    WebAppS3BucketPolicy:
+      Type: AWS::S3::BucketPolicy
+      Properties:
+        Bucket:
+          Ref: WebAppS3Bucket
+        PolicyDocument:
+          Statement:
+            - Sid: "PublicReadGetObject"
+              Effect: Allow
+              Action: s3:GetObject
+              Resource: arn:aws:s3:::${self:custom.client.bucketName}/*
+              Principal: "*"
