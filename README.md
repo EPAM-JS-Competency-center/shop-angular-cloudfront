@@ -29,3 +29,10 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+
+## CloudFront URL
+https://d1yjrrfqpmfm0h.cloudfront.net
+
+## S3-website
+http://atatakainyan-first-app.s3-website-us-east-1.amazonaws.com/
