@@ -29,3 +29,9 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## The links to CloudFront URL and S3-website
+
+CloudFront: https://d35vpraq17qss0.cloudfront.net/
+
+S3-website: http://my-third-rs-app.s3-website-us-east-1.amazonaws.com/
