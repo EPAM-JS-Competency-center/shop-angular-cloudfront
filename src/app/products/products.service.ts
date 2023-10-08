@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { Product } from './product.interface';
 
 import { ApiService } from '../core/api.service';
+import { HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -56,15 +57,19 @@ export class ProductsService extends ApiService {
   }
 
   getProducts(): Observable<Product[]> {
-    if (!this.endpointEnabled('bff')) {
+    if (!this.endpointEnabled('product')) {
       console.warn(
         'Endpoint "bff" is disabled. To enable change your environment.ts config'
       );
       return this.http.get<Product[]>('/assets/products.json');
     }
-
-    const url = this.getUrl('bff', 'products');
-    return this.http.get<Product[]>(url);
+    const headers = new HttpHeaders()
+      .set('content-type', 'application/json')
+      .set('Access-Control-Allow-Origin', '*');
+    const url = this.getUrl('product', 'getProductList');
+    return this.http.get<Product[]>(url, {
+      headers,
+    });
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {
