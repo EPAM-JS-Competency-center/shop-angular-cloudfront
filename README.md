@@ -1,5 +1,8 @@
 # Shop Angular Cloudfront
 
+* CloudFront URL: https://dsefkc9nz5pps.cloudfront.net/
+* S3-website: http://kitsun-first-app-bucket1.s3-website-us-east-1.amazonaws.com
+
 Angular version: ~12.
 
 Repo maintainers:
