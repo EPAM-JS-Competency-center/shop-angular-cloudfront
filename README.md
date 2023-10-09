@@ -1,31 +1,10 @@
-# Shop Angular Cloudfront
+# Manual deployment
 
-Angular version: ~12.
+- https://d3p56wgg4n9n8s.cloudfront.net
 
-Repo maintainers:
+- https://shop-angular-cloudfront-1.s3.eu-north-1.amazonaws.com/index.html
 
-- [Sergey Gultyayev](https://github.com/gultyayev)
+# Serverless
 
-## The purpose
-
-The repository was created to have an Angular version of e-shop for EPAM NodeJS AWS course. At the same time we strive to make this repository follows best practices so it may be used as a starter for new projects with all the necessary toolings already set up.
-
-## NodeJS AWS course integration
-
-All the necessary API endpoints are in the environments files `environment.ts` (for dev builds). Also it contains feature flags to enable/disable endpoints invocations from within the app so to ensure that you don't get errors for not implemented API endpoints.
-
-## Contribution
-
-Create an issue with the detailed description of the improvement/issue.
-
-If you would like to help implementing some feature, you should ask the maintainers for approval so to ensure that the feature is desired in the repository and no efforts go wasted.
-
-## Get up and running
-
-Prerequisites: NodeJS v14.20.x and higher
-
-Follow the steps:
-
-- git clone
-- npm i
-- ng serve
+- http://shop-angular-skaya-lts.s3-website-us-east-1.amazonaws.com/
+- https://d3ia6udvjq7xth.cloudfront.net
