@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 import { EMPTY, Observable, of, throwError } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 
 import { Product } from './product.interface';
 
