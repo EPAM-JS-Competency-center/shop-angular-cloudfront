@@ -21,9 +21,8 @@
       <p class="text-muted">{{ product.description }}</p>
     </div>
     <div class="col-12 col-md-3">
-      {{ product.price | number: "1.2-2" | currency }} x
-      {{ product.orderedCount }} =
-      {{ product.totalPrice | number: "1.2-2" | currency }}
+      {{ product.price | currency }} x {{ product.orderedCount }} =
+      {{ product.totalPrice | currency }}
     </div>
   </div>
 </mat-card>
