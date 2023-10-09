@@ -12,7 +12,13 @@ import {
 } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { BehaviorSubject, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  catchError,
+  ObservableInput,
+  of,
+  Subject,
+} from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
 
 import { Product } from '../../products/product.interface';
@@ -77,12 +83,15 @@ export class EditProductComponent implements OnInit, OnDestroy {
       .getProductById(productId)
       .pipe(
         finalize(() => this.loaded$.next(true)),
+        catchError((): ObservableInput<any> => of(null)),
         takeUntil(this.onDestroy$)
       )
       .subscribe((product) => {
         if (product) {
           this.form.patchValue(product);
           this.productId = product.id;
+        } else {
+          this.notificationService.showError(`Product not found`, 0);
         }
       });
   }
