@@ -29,3 +29,7 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Task-2 Result
+## CloudFront dist: https://d27adexfoy9nzy.cloudfront.net/
+## S3 bucket: http://jamshid-angular-shop-market.s3-website-eu-west-1.amazonaws.com
