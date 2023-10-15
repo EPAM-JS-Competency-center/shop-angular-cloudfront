@@ -10,7 +10,7 @@ import { ManageProductsService } from './manage-products.service';
   styleUrls: ['./manage-products.component.scss'],
 })
 export class ManageProductsComponent implements OnInit {
-  readonly columns = ['from', 'description', 'price', 'count', 'action'];
+  readonly columns = ['from', 'author', 'price', 'count', 'action'];
 
   selectedFile: File | null = null;
 

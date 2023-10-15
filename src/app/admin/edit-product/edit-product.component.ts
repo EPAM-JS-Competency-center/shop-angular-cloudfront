@@ -43,7 +43,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   ) {
     this.form = this.fb.group({
       title: ['', Validators.required],
-      description: ['', Validators.required],
+      author: ['', Validators.required],
       price: ['', Validators.required],
       count: ['', Validators.required],
     });
@@ -54,7 +54,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
   }
 
   get descriptionCtrl(): AbstractControl {
-    return this.form.get('description') as AbstractControl;
+    return this.form.get('author') as AbstractControl;
   }
 
   get priceCtrl(): AbstractControl {
