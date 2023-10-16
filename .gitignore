@@ -8,6 +8,7 @@
 /bazel-out
 
 # dependencies
+/.serverless
 /node_modules
 
 # profiling files
@@ -21,6 +22,7 @@ speed-measure-plugin*.json
 .c9/
 *.launch
 .settings/
+package-lock.json
 *.sublime-workspace
 
 # IDE - VSCode

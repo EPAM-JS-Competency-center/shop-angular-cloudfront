@@ -1,3 +1,6 @@
+Cloudfront: -[CloudFrontLink](https://d2ee1433i4vg22.cloudfront.net/)
+S3: -[s3Link](http://bookify-aws-app-lts.s3-website-us-east-1.amazonaws.com/)
+
 # Shop Angular Cloudfront
 
 Angular version: ~12.
