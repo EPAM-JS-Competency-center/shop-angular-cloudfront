@@ -12,14 +12,14 @@
   </mat-card-header>
 
   <mat-card-content>
-    <p>{{ product.price | number: "1.2-2" | currency }}</p>
+    <p>{{ product.price | number : "1.2-2" | currency }}</p>
   </mat-card-content>
 
   <mat-card-actions>
     <!-- Add to cart btn -->
     <button
       #cartBtn
-      *ngIf="(countInCart$ | async) === 0"
+      *ngIf="(countInCart$ | async) === 0 && product.count > 0"
       (click)="add()"
       color="accent"
       matTooltip="Add {{ product.title }} to cart"
