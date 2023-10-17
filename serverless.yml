@@ -9,10 +9,8 @@ provider:
   profile: me
   region: eu-west-3
   deploymentMethod: direct
-
-functions:
-  function1:
-    handler: index.handler
+  deploymentBucket:
+    skipPolicySetup: true
 
 plugins:
   - serverless-finch
@@ -58,7 +56,7 @@ resources:
                 AWS:
                   Fn::Join:
                     - " "
-                    - - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity"
+                    - - "arn:aws:iam::cloudfront:user/CloudFront Origin Access Identity E26MN5DZVLWQBI"
                       - !Ref OriginAccessIdentity
 
     OriginAccessIdentity:
