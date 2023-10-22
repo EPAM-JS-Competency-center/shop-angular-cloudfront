@@ -15,7 +15,7 @@ import {
 })
 export class CartCountControlsComponent {
   @Input() count!: number;
-  @Input() available!: number;
+  @Input() available?: number;
   @Input() productName!: string;
 
   @Output() increment = new EventEmitter<void>();

@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { EMPTY, Observable, of, throwError } from 'rxjs';
+import { EMPTY, Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 
-import { Product } from './product.interface';
+import {Product, ProductResponse, ProductWithStock} from './product.interface';
 
 import { ApiService } from '../core/api.service';
 
@@ -55,9 +55,16 @@ export class ProductsService extends ApiService {
       .pipe(map((resp) => resp.product));
   }
 
-  getProducts(): Observable<Product[]> {
+  getProducts(): Observable<ProductWithStock[]> {
     const url = this.getUrl('product', 'products');
-    return this.http.get<Product[]>(url);
+    return this.http.get<ProductResponse>(url).pipe(map((resp) => resp.products.map((product) => {
+        const stockByProductId = resp.stock.find((stock) => stock.product_id === product.id);
+        return {
+          ...product,
+          productId: stockByProductId?.product_id,
+          count: stockByProductId?.count
+        };
+      })));
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {

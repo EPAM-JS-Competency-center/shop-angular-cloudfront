@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { Product } from '../product.interface';
+import {  ProductWithStock } from '../product.interface';
 import { CartService } from '../../cart/cart.service';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
@@ -11,7 +11,7 @@ import { CartCountControlsComponent } from '../../core/cart-count-controls/cart-
   styleUrls: ['./product-item.component.scss'],
 })
 export class ProductItemComponent implements OnInit {
-  @Input() product!: Product;
+  @Input() product!: ProductWithStock;
   @Input() index!: number;
 
   @ViewChild('cartBtn', { static: false, read: ElementRef }) cartBtn:
