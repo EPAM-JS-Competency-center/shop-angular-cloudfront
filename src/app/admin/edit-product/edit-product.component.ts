@@ -100,7 +100,12 @@ export class EditProductComponent implements OnInit, OnDestroy {
 
     const editProduct$ = this.productId
       ? this.productsService.editProduct(this.productId, product)
-      : this.productsService.createNewProduct(product);
+      : this.productsService.createNewProduct({
+          ...product,
+          stock: {
+            count: product.count,
+          },
+        });
 
     this.requestInProgress = true;
     editProduct$.subscribe(
