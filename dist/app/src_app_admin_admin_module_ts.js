@@ -580,8 +580,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "ManageProductsService": () => (/* binding */ ManageProductsService)
 /* harmony export */ });
 /* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! rxjs */ 591);
-/* harmony import */ var _core_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/api.service */ 9274);
 /* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! rxjs/operators */ 2673);
+/* harmony import */ var _core_api_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../core/api.service */ 9274);
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/core */ 2560);
 
 
@@ -592,19 +592,21 @@ class ManageProductsService extends _core_api_service__WEBPACK_IMPORTED_MODULE_0
     super(injector);
   }
   uploadProductsCSV(file) {
-    if (!this.endpointEnabled('import')) {
+    if (!this.endpointEnabled("import")) {
       console.warn('Endpoint "import" is disabled. To enable change your environment.ts config');
       return rxjs__WEBPACK_IMPORTED_MODULE_1__.EMPTY;
     }
-    return this.getPreSignedUrl(file.name).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.switchMap)(url => this.http.put(url, file, {
+    return this.getPreSignedUrl(file.name).pipe((0,rxjs_operators__WEBPACK_IMPORTED_MODULE_2__.switchMap)(({
+      signedUrl
+    }) => this.http.put(signedUrl, file, {
       headers: {
         // eslint-disable-next-line @typescript-eslint/naming-convention
-        'Content-Type': 'text/csv'
+        "Content-Type": "text/csv"
       }
     })));
   }
   getPreSignedUrl(fileName) {
-    const url = this.getUrl('import', 'import');
+    const url = this.getUrl("import", "import");
     return this.http.get(url, {
       params: {
         name: fileName
