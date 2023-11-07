@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {
+  HttpErrorResponse,
   HttpEvent,
   HttpHandler,
   HttpInterceptor,
   HttpRequest,
+  HttpResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { NotificationService } from '../notification.service';
 import { tap } from 'rxjs/operators';
 
@@ -19,7 +21,14 @@ export class ErrorPrintInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       tap({
-        error: () => {
+        error: (err: unknown) => {
+          if (
+            err instanceof HttpErrorResponse &&
+            (err.status === 401 || err.status === 403)
+          ) {
+            alert(err.message);
+          }
+
           const url = new URL(request.url);
 
           this.notificationService.showError(
