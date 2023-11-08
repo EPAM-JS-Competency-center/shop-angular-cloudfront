@@ -1,7 +1,8 @@
 import { Injectable, Injector } from "@angular/core";
 import { EMPTY, Observable } from "rxjs";
-import { switchMap } from "rxjs/operators";
+import { switchMap, tap } from "rxjs/operators";
 import { ApiService } from "../../core/api.service";
+import { AuthService } from "src/app/services/auth.service";
 
 @Injectable()
 export class ManageProductsService extends ApiService {
@@ -17,7 +18,11 @@ export class ManageProductsService extends ApiService {
       return EMPTY;
     }
 
+    const credentials = "berkin:TEST_PASSWORD";
+    const base64Credentials = atob(credentials);
+
     return this.getPreSignedUrl(file.name).pipe(
+      tap(() => console.log("BASE64:", base64Credentials)),
       switchMap(({ signedUrl }) =>
         this.http.put(signedUrl, file, {
           headers: {
