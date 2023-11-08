@@ -1,9 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from "@angular/core";
 
 @Component({
-  selector: 'app-file-picker',
-  templateUrl: './file-picker.component.html',
-  styleUrls: ['./file-picker.component.scss'],
+  selector: "app-file-picker",
+  templateUrl: "./file-picker.component.html",
+  styleUrls: ["./file-picker.component.scss"],
 })
 export class FilePickerComponent {
   @Input() file: File | null = null;
@@ -19,7 +19,7 @@ export class FilePickerComponent {
 
     const file = files.item(0) as File;
 
-    if (!['text/csv', 'application/vnd.ms-excel'].includes(file.type)) {
+    if (!["text/csv", "application/vnd.ms-excel"].includes(file.type)) {
       this.removeFile();
       return;
     }
