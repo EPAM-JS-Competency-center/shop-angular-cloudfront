@@ -32,5 +32,5 @@ Follow the steps:
 
 ## CloudFront URL and S3-website links
 
-S3 website URL: http://my-shop-first-app.s3-website-us-east-1.amazonaws.com/
-CloudFront URL: https://d396nxwa9zhbbu.cloudfront.net/
+S3 website URL: http://my-shop-frontend.s3-website-us-east-1.amazonaws.com/
+CloudFront URL: https://d2bl0mbrl42afp.cloudfront.net/

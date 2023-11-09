@@ -17,21 +17,26 @@ provider:
   runtime: nodejs18.x
   ## this is my personal AWS account. This must be skipped in you serverless.yml
   profile: default
+  region: us-east-1
 
 plugins:
   - serverless-finch
   - serverless-single-page-app-plugin
+  - serverless-s3-cleaner
 
 custom:
   ## Serverless-finch configuration
   client:
-    bucketName: my-shop-first-app
+    bucketName: my-shop-frontend
     distributionFolder: dist/app
     indexDocument: index.html
     manageResources: false
   ## Serverless-single-page-app-plugin configuration:
   s3LocalPath: ${self:custom.client.distributionFolder}/
   s3BucketName: ${self:custom.client.bucketName}
+  serverless-s3-cleaner:
+    buckets:
+      - ${self:custom.client.bucketName}
 
 # you can overwrite defaults here
 #  stage: dev
