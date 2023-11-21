@@ -149,10 +149,7 @@
                 "Origins": [
                   {
                     "DomainName": {
-                      "Fn::GetAtt": [
-                        "WebAppS3Bucket",
-                        "RegionalDomainName"
-                      ]
+                      "Fn::GetAtt": ["WebAppS3Bucket", "RegionalDomainName"]
                     },
                     "Id": "myS3Origin",
                     "S3OriginConfig": {
@@ -174,16 +171,8 @@
                   }
                 ],
                 "DefaultCacheBehavior": {
-                  "AllowedMethods": [
-                    "GET",
-                    "HEAD",
-                    "OPTIONS"
-                  ],
-                  "CachedMethods": [
-                    "GET",
-                    "HEAD",
-                    "OPTIONS"
-                  ],
+                  "AllowedMethods": ["GET", "HEAD", "OPTIONS"],
+                  "CachedMethods": ["GET", "HEAD", "OPTIONS"],
                   "ForwardedValues": {
                     "Headers": [
                       "Access-Control-Request-Headers",
@@ -224,10 +213,7 @@
           },
           "WebAppCloudFrontDistributionOutput": {
             "Value": {
-              "Fn::GetAtt": [
-                "WebAppCloudFrontDistribution",
-                "DomainName"
-              ]
+              "Fn::GetAtt": ["WebAppCloudFrontDistribution", "DomainName"]
             }
           }
         }
@@ -323,9 +309,7 @@
       "s3BucketName": "jamshid-angular-shop-market",
       "s3LocalPath": "dist/app/",
       "serverless-s3-cleaner": {
-        "buckets": [
-          "jamshid-angular-shop-market"
-        ]
+        "buckets": ["jamshid-angular-shop-market"]
       }
     },
     "plugins": [
@@ -403,10 +387,7 @@
               "Origins": [
                 {
                   "DomainName": {
-                    "Fn::GetAtt": [
-                      "WebAppS3Bucket",
-                      "RegionalDomainName"
-                    ]
+                    "Fn::GetAtt": ["WebAppS3Bucket", "RegionalDomainName"]
                   },
                   "Id": "myS3Origin",
                   "S3OriginConfig": {
@@ -428,16 +409,8 @@
                 }
               ],
               "DefaultCacheBehavior": {
-                "AllowedMethods": [
-                  "GET",
-                  "HEAD",
-                  "OPTIONS"
-                ],
-                "CachedMethods": [
-                  "GET",
-                  "HEAD",
-                  "OPTIONS"
-                ],
+                "AllowedMethods": ["GET", "HEAD", "OPTIONS"],
+                "CachedMethods": ["GET", "HEAD", "OPTIONS"],
                 "ForwardedValues": {
                   "Headers": [
                     "Access-Control-Request-Headers",
@@ -470,10 +443,7 @@
         },
         "WebAppCloudFrontDistributionOutput": {
           "Value": {
-            "Fn::GetAtt": [
-              "WebAppCloudFrontDistribution",
-              "DomainName"
-            ]
+            "Fn::GetAtt": ["WebAppCloudFrontDistribution", "DomainName"]
           }
         }
       }
@@ -500,7 +470,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/jamshid-angular-shop-market/dev/1697295650990-2023-10-14T15:00:50.990Z",
+    "artifactDirectoryName": "serverless/jamshid-angular-shop-market/dev/1699728059441-2023-11-11T18:40:59.441Z",
     "artifact": ""
   }
 }
