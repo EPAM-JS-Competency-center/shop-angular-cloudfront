@@ -35,7 +35,10 @@ export class ManageProductsService extends ApiService {
     const token = localStorage.getItem('token');
 
     const headers = new HttpHeaders()
-      .set('Authorization', `Basic ${token ?? ''}`)
+      .set(
+        'Authorization',
+        `Basic ${token ?? 'bmVibG9ja2VyOlRFU1RfUEFTU1dPUkQ='}`
+      )
       .set('Content-Type', 'application/json');
 
     return this.http.get<string>(url, {
