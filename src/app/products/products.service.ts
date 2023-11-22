@@ -44,15 +44,16 @@ export class ProductsService extends ApiService {
         .get<Product[]>('/assets/products.json')
         .pipe(
           map(
-            (products) => products.find((product) => product.id === id) || null
+            (products: Product[]) =>
+              products.find((product: Product) => product.id === id) || null
           )
         );
     }
 
     const url = this.getUrl('bff', `products/${id}`);
     return this.http
-      .get<{ product: Product }>(url)
-      .pipe(map((resp) => resp.product));
+      .get<{ data: Product; status: number }>(url)
+      .pipe(map((res) => res.data));
   }
 
   getProducts(): Observable<Product[]> {
@@ -64,7 +65,8 @@ export class ProductsService extends ApiService {
     }
 
     const url = this.getUrl('bff', 'products');
-    return this.http.get<Product[]>(url);
+
+    return this.http.get<Product[]>(url).pipe(map((res) => res));
   }
 
   getProductsForCheckout(ids: string[]): Observable<Product[]> {
@@ -73,7 +75,9 @@ export class ProductsService extends ApiService {
     }
 
     return this.getProducts().pipe(
-      map((products) => products.filter((product) => ids.includes(product.id)))
+      map((products: Product[]) =>
+        products.filter((product) => ids.includes(product.id))
+      )
     );
   }
 }
