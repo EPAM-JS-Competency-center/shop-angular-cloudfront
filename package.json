@@ -9,7 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky install",
-    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged"
+    "tf:apply": "terraform apply",
+    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
+    "deploy": "az storage blob upload-batch -s './dist/app' -d '$web' --account-name 'stgsandfrontendne001'"
   },
   "private": true,
   "dependencies": {
