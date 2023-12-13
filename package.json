@@ -9,6 +9,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky install",
+    "deploy": "az storage blob upload-batch -s './dist/app' -d '$web' --account-name 'stgsandfrontendne00198'",
     "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged"
   },
   "private": true,
