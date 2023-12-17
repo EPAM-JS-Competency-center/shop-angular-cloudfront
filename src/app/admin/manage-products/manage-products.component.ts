@@ -26,6 +26,13 @@ export class ManageProductsComponent implements OnInit {
     this.products$ = this.productsService.getProducts();
   }
 
+  deleteProduct(id: string): void {
+    this.productsService.deleteProduct(id).subscribe(() => {
+      this.products$ = this.productsService.getProducts();
+      this.cdr.markForCheck();
+    });
+  }
+
   onUploadCSV(): void {
     if (!this.selectedFile) {
       return;
