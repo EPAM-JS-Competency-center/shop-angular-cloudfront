@@ -19,7 +19,7 @@ export class ProductsService extends ApiService {
       return EMPTY;
     }
 
-    const url = this.getUrl('bff', 'products');
+    const url = this.getUrl('product', '');
     return this.http.post<Product>(url, product);
   }
 
@@ -31,7 +31,7 @@ export class ProductsService extends ApiService {
       return EMPTY;
     }
 
-    const url = this.getUrl('bff', `products/${id}`);
+    const url = this.getUrl('product', `/${id}`);
     return this.http.put<Product>(url, changedProduct);
   }
 
@@ -49,7 +49,7 @@ export class ProductsService extends ApiService {
         );
     }
 
-    const url = this.getUrl('bff', `products/${id}`);
+    const url = this.getUrl('product', `/${id}`);
     return this.http
       .get<{ product: Product }>(url)
       .pipe(map((resp) => resp.product));
@@ -63,7 +63,7 @@ export class ProductsService extends ApiService {
       return this.http.get<Product[]>('/assets/products.json');
     }
 
-    const url = this.getUrl('bff', 'products');
+    const url = this.getUrl('product', '');
     return this.http.get<Product[]>(url);
   }
 
@@ -75,5 +75,17 @@ export class ProductsService extends ApiService {
     return this.getProducts().pipe(
       map((products) => products.filter((product) => ids.includes(product.id)))
     );
+  }
+
+  deleteProduct(id: string): Observable<void> {
+    if (!this.endpointEnabled('bff')) {
+      console.warn(
+        'Endpoint "bff" is disabled. To enable change your environment.ts config'
+      );
+      return EMPTY;
+    }
+
+    const url = this.getUrl('product', `products/${id}`);
+    return this.http.delete<void>(url);
   }
 }
