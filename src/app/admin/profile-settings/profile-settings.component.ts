@@ -6,7 +6,8 @@ import { Component } from '@angular/core';
   styleUrls: ['./profile-settings.component.scss'],
 })
 export class ProfileSettingsComponent {
-  currentEmail = '';
+  currentEmail = 'Not defined yet';
+  userName = 'Viktoriia';
 
   onEmailChange(emailValue: string): void {
     this.currentEmail = emailValue;

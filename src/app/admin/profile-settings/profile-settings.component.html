@@ -1,13 +1,13 @@
-<mat-card>
-  <mat-card-header>Viktoriia</mat-card-header>
+<mat-card class="profile-card">
+  <mat-card-header class="user-name">Hi {{ userName }}!</mat-card-header>
   <mat-card-content>
     <div id="currentEmail">Your current email is: {{ currentEmail }}</div>
     <mat-form-field class="example-full-width">
       <mat-label>Email</mat-label>
-      <input #email matInput placeholder="" value="" />
+      <input #email matInput type="email" />
     </mat-form-field>
     <button mat-button color="primary" (click)="onEmailChange(email.value)">
-      Change
+      Save
     </button>
   </mat-card-content>
 </mat-card>
