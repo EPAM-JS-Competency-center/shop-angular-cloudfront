@@ -14,12 +14,14 @@ import { MatButtonModule } from '@angular/material/button';
 import { FilePickerModule } from '../shared/file-picker/file-picker.module';
 import { ManageProductsService } from './manage-products/manage-products.service';
 import { EditProductComponent } from './edit-product/edit-product.component';
+import { ProfileSettingsComponent } from './profile-settings/profile-settings.component';
 
 @NgModule({
   declarations: [
     OrdersComponent,
     ManageProductsComponent,
     EditProductComponent,
+    ProfileSettingsComponent,
   ],
   imports: [
     AdminRoutingModule,
