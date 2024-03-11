@@ -11,7 +11,7 @@ import { MatTableModule } from '@angular/material/table';
 import { OrdersService } from './orders/orders.service';
 import { ManageProductsComponent } from './manage-products/manage-products.component';
 import { MatButtonModule } from '@angular/material/button';
-import { FilePickerModule } from '../shared/file-picker/file-picker.module';
+
 import { ManageProductsService } from './manage-products/manage-products.service';
 import { EditProductComponent } from './edit-product/edit-product.component';
 
@@ -19,7 +19,6 @@ import { EditProductComponent } from './edit-product/edit-product.component';
   imports: [
     AdminRoutingModule,
     CommonModule,
-    FilePickerModule,
     MatCardModule,
     MatInputModule,
     MatTableModule,

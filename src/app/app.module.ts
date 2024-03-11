@@ -10,7 +10,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { ProductsModule } from './products/products.module';
+
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatBadgeModule } from '@angular/material/badge';
 import { CartModule } from './cart/cart.module';
@@ -38,7 +38,6 @@ const interceptors: Provider[] = [
     MatIconModule,
     MatMenuModule,
     MatTooltipModule,
-    ProductsModule,
     CartModule,
     HttpClientModule,
     MatBadgeModule,
