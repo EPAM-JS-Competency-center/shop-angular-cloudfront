@@ -28,7 +28,7 @@ const interceptors: Provider[] = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -43,6 +43,7 @@ const interceptors: Provider[] = [
     HttpClientModule,
     MatBadgeModule,
     MatSnackBarModule,
+    HeaderComponent,
   ],
   providers: [
     interceptors,

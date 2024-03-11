@@ -15,12 +15,6 @@ import { CartShippingFormComponent } from './cart-shipping-form/cart-shipping-fo
 import { OrderSummaryComponent } from './order-summary/order-summary.component';
 
 @NgModule({
-  declarations: [
-    CartComponent,
-    ProductItemCheckoutComponent,
-    CartShippingFormComponent,
-    OrderSummaryComponent,
-  ],
   imports: [
     CommonModule,
     CartRoutingModule,
@@ -32,6 +26,10 @@ import { OrderSummaryComponent } from './order-summary/order-summary.component';
     MatInputModule,
     CartCountControlsModule,
     MatProgressSpinnerModule,
+    CartComponent,
+    ProductItemCheckoutComponent,
+    CartShippingFormComponent,
+    OrderSummaryComponent,
   ],
   exports: [CartComponent],
 })

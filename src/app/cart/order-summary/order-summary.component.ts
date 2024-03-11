@@ -1,10 +1,14 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ProductCheckout } from '../../products/product.interface';
+import { ProductItemCheckoutComponent } from '../product-item-checkout/product-item-checkout.component';
+import { CurrencyPipe, DecimalPipe, NgFor } from '@angular/common';
 
 @Component({
   selector: 'app-order-summary',
   templateUrl: './order-summary.component.html',
   styleUrls: ['./order-summary.component.scss'],
+  standalone: true,
+  imports: [NgFor, ProductItemCheckoutComponent, DecimalPipe, CurrencyPipe],
 })
 export class OrderSummaryComponent {
   @Input() products!: ProductCheckout[];

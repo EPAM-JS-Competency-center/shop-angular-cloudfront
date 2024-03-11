@@ -9,7 +9,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { CartCountControlsModule } from '../core/cart-count-controls/cart-count-controls.module';
 
 @NgModule({
-  declarations: [ProductsComponent, ProductItemComponent],
   imports: [
     CommonModule,
     MatCardModule,
@@ -17,6 +16,8 @@ import { CartCountControlsModule } from '../core/cart-count-controls/cart-count-
     MatButtonModule,
     MatTooltipModule,
     CartCountControlsModule,
+    ProductsComponent,
+    ProductItemComponent,
   ],
   exports: [ProductsComponent],
 })

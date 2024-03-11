@@ -6,11 +6,12 @@ import {
 } from '@angular/core';
 import {
   AbstractControl,
+  ReactiveFormsModule,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 import { BehaviorSubject, Subject } from 'rxjs';
 import { finalize, takeUntil } from 'rxjs/operators';
@@ -18,12 +19,40 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { Product } from '../../products/product.interface';
 import { ProductsService } from '../../products/products.service';
 import { NotificationService } from '../../core/notification.service';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { MatButton } from '@angular/material/button';
+import { MatInput } from '@angular/material/input';
+import { MatError, MatFormField, MatLabel } from '@angular/material/form-field';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardTitle,
+} from '@angular/material/card';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-edit-product',
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  standalone: true,
+  imports: [
+    NgIf,
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatError,
+    MatCardActions,
+    MatButton,
+    RouterLink,
+    MatProgressSpinner,
+    AsyncPipe,
+  ],
 })
 export class EditProductComponent implements OnInit, OnDestroy {
   form: UntypedFormGroup;
@@ -39,7 +68,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
     private readonly fb: UntypedFormBuilder,
     private readonly notificationService: NotificationService,
     private readonly productsService: ProductsService,
-    private readonly router: Router
+    private readonly router: Router,
   ) {
     this.form = this.fb.group({
       title: ['', Validators.required],
@@ -77,7 +106,7 @@ export class EditProductComponent implements OnInit, OnDestroy {
       .getProductById(productId)
       .pipe(
         finalize(() => this.loaded$.next(true)),
-        takeUntil(this.onDestroy$)
+        takeUntil(this.onDestroy$),
       )
       .subscribe((product) => {
         if (product) {
@@ -109,9 +138,9 @@ export class EditProductComponent implements OnInit, OnDestroy {
         console.warn(error);
         this.requestInProgress = false;
         this.notificationService.showError(
-          `Failed to ${this.productId ? 'edit' : 'create'} product`
+          `Failed to ${this.productId ? 'edit' : 'create'} product`,
         );
-      }
+      },
     );
   }
 }

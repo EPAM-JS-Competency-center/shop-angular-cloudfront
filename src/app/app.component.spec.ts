@@ -30,7 +30,7 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement;
 
     expect(compiled.querySelector('.content span').textContent).toContain(
-      'app app is running!'
+      'app app is running!',
     );
   });
 });

@@ -1,11 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CheckoutService } from './checkout.service';
 import { ProductCheckout } from '../products/product.interface';
 import { Observable } from 'rxjs';
 import { CartService } from './cart.service';
 import { map, shareReplay } from 'rxjs/operators';
+import { CartShippingFormComponent } from './cart-shipping-form/cart-shipping-form.component';
+import { MatButton } from '@angular/material/button';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { OrderSummaryComponent } from './order-summary/order-summary.component';
+import {
+  MatStep,
+  MatStepper,
+  MatStepperNext,
+  MatStepperPrevious,
+} from '@angular/material/stepper';
+import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
+import { AsyncPipe, NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-cart',
@@ -16,6 +32,22 @@ import { map, shareReplay } from 'rxjs/operators';
       provide: STEPPER_GLOBAL_OPTIONS,
       useValue: { displayDefaultIndicatorType: false },
     },
+  ],
+  standalone: true,
+  imports: [
+    NgIf,
+    MatCard,
+    MatCardTitle,
+    MatCardContent,
+    MatStepper,
+    MatStep,
+    OrderSummaryComponent,
+    MatProgressSpinner,
+    MatButton,
+    MatStepperNext,
+    CartShippingFormComponent,
+    MatStepperPrevious,
+    AsyncPipe,
   ],
 })
 export class CartComponent implements OnInit {
@@ -29,7 +61,7 @@ export class CartComponent implements OnInit {
   constructor(
     private readonly fb: UntypedFormBuilder,
     private readonly checkoutService: CheckoutService,
-    private readonly cartService: CartService
+    private readonly cartService: CartService,
   ) {}
 
   get fullName(): string {
@@ -57,7 +89,7 @@ export class CartComponent implements OnInit {
       shareReplay({
         refCount: true,
         bufferSize: 1,
-      })
+      }),
     );
 
     this.totalPrice$ = this.products$.pipe(
@@ -68,7 +100,7 @@ export class CartComponent implements OnInit {
       shareReplay({
         refCount: true,
         bufferSize: 1,
-      })
+      }),
     );
 
     this.totalInCart$ = this.cartService.totalInCart$;

@@ -8,7 +8,7 @@ describe('CartShippingFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartShippingFormComponent],
+      imports: [CartShippingFormComponent],
     }).compileComponents();
   });
 

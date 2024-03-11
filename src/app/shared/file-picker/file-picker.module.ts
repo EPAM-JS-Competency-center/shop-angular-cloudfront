@@ -4,8 +4,7 @@ import { FilePickerComponent } from './file-picker.component';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
-  declarations: [FilePickerComponent],
-  imports: [CommonModule, MatButtonModule],
+  imports: [CommonModule, MatButtonModule, FilePickerComponent],
   exports: [FilePickerComponent],
 })
 export class FilePickerModule {}

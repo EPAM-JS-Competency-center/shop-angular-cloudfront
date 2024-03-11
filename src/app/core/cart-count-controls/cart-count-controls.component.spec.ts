@@ -8,7 +8,7 @@ describe('CartCountControlsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CartCountControlsComponent],
+      imports: [CartCountControlsComponent],
     }).compileComponents();
   });
 
