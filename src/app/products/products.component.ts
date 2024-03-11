@@ -8,12 +8,10 @@ import { Product } from './product.interface';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
 })
-export class ProductsComponent implements OnInit {
+export class ProductsComponent {
   readonly products$: Observable<
     Product[]
   > = this.productsService.getProducts();
 
   constructor(private readonly productsService: ProductsService) {}
-
-  ngOnInit(): void {}
 }
