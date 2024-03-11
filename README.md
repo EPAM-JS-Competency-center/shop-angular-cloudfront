@@ -1,6 +1,6 @@
 # Shop Angular Cloudfront
 
-Angular version: ~12.
+Angular version: ~17.
 
 Repo maintainers:
 
@@ -22,7 +22,7 @@ If you would like to help implementing some feature, you should ask the maintain
 
 ## Get up and running
 
-Prerequisites: NodeJS v14.20.x and higher
+Prerequisites: NodeJS LTS v18.x and higher
 
 Follow the steps:
 

@@ -5,8 +5,7 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule],
-      declarations: [AppComponent],
+      imports: [RouterTestingModule, AppComponent],
     }).compileComponents();
   });
 
@@ -30,7 +29,7 @@ describe('AppComponent', () => {
     const compiled = fixture.nativeElement;
 
     expect(compiled.querySelector('.content span').textContent).toContain(
-      'app app is running!'
+      'app app is running!',
     );
   });
 });

@@ -4,11 +4,40 @@ import { CartService } from '../../cart/cart.service';
 import { Observable } from 'rxjs';
 import { map, shareReplay, tap } from 'rxjs/operators';
 import { CartCountControlsComponent } from '../../core/cart-count-controls/cart-count-controls.component';
+import { MatIcon } from '@angular/material/icon';
+import { MatTooltip } from '@angular/material/tooltip';
+import { MatIconButton } from '@angular/material/button';
+import { AsyncPipe, CurrencyPipe, DecimalPipe, NgIf } from '@angular/common';
+import {
+  MatCard,
+  MatCardActions,
+  MatCardContent,
+  MatCardHeader,
+  MatCardImage,
+  MatCardTitle,
+} from '@angular/material/card';
 
 @Component({
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.scss'],
+  standalone: true,
+  imports: [
+    MatCard,
+    MatCardImage,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardContent,
+    MatCardActions,
+    NgIf,
+    MatIconButton,
+    MatTooltip,
+    MatIcon,
+    CartCountControlsComponent,
+    AsyncPipe,
+    DecimalPipe,
+    CurrencyPipe,
+  ],
 })
 export class ProductItemComponent implements OnInit {
   @Input() product!: Product;
@@ -42,7 +71,7 @@ export class ProductItemComponent implements OnInit {
       shareReplay({
         bufferSize: 1,
         refCount: true,
-      })
+      }),
     );
   }
 
@@ -68,7 +97,7 @@ export class ProductItemComponent implements OnInit {
           }
 
           prev = curr;
-        })
+        }),
       );
   }
 }
