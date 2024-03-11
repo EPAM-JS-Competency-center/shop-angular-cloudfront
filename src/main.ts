@@ -1,9 +1,8 @@
-import { importProvidersFrom, Provider } from '@angular/core';
+import { Provider } from '@angular/core';
 
 import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { AppRoutingModule } from './app/app-routing.module';
 import { bootstrapApplication } from '@angular/platform-browser';
 import { CONFIG_TOKEN } from './app/core/injection-tokens/config.token';
 import { ErrorPrintInterceptor } from './app/core/interceptors/error-print.interceptor';
@@ -12,6 +11,8 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
+import { provideRouter } from '@angular/router';
+import { appRoutes } from './app/app-routes';
 
 const interceptors: Provider[] = [
   {
@@ -23,7 +24,7 @@ const interceptors: Provider[] = [
 
 bootstrapApplication(AppComponent, {
   providers: [
-    importProvidersFrom(AppRoutingModule),
+    provideRouter(appRoutes),
     interceptors,
     {
       provide: CONFIG_TOKEN,
