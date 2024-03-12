@@ -14,7 +14,7 @@ provider:
 custom:
   client:
     bucketName: angular-app-123456789
-    distributionFolder: dist/app
+    distributionFolder: dist/app/browser
     indexDocument: index.html
     manageResources: true
   ## Serverless-single-page-app-plugin configuration:
