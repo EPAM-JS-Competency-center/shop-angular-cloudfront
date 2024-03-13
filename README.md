@@ -32,5 +32,5 @@ Follow the steps:
 
 ## links
 
-CloudFront URL - https://douj04ebq02h0.cloudfront.net/
-S3-website - http://angular-app-123456789.s3-website-us-east-1.amazonaws.com/
+CloudFront URL - https://d2xc8xbvzz1yfh.cloudfront.net/
+S3-website - http://shop-angular-cloudfront147852369.s3-website-us-east-1.amazonaws.com/
