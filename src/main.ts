@@ -11,7 +11,7 @@ import {
   provideHttpClient,
   withInterceptorsFromDi,
 } from '@angular/common/http';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 import { appRoutes } from './app/app-routes';
 
 const interceptors: Provider[] = [
@@ -24,7 +24,7 @@ const interceptors: Provider[] = [
 
 bootstrapApplication(AppComponent, {
   providers: [
-    provideRouter(appRoutes),
+    provideRouter(appRoutes, withComponentInputBinding()),
     interceptors,
     {
       provide: CONFIG_TOKEN,

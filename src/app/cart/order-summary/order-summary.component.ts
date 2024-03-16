@@ -1,4 +1,9 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { ProductCheckout } from '../../products/product.interface';
 import { ProductItemCheckoutComponent } from '../product-item-checkout/product-item-checkout.component';
 import { CurrencyPipe, DecimalPipe, NgFor } from '@angular/common';
@@ -9,14 +14,15 @@ import { CurrencyPipe, DecimalPipe, NgFor } from '@angular/common';
   styleUrls: ['./order-summary.component.scss'],
   standalone: true,
   imports: [NgFor, ProductItemCheckoutComponent, DecimalPipe, CurrencyPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OrderSummaryComponent {
-  @Input() products!: ProductCheckout[];
-  @Input() showControls!: boolean;
-  @Input() totalPrice!: number;
+  products = input.required<ProductCheckout[]>();
+  showControls = input.required<boolean>();
+  totalPrice = input.required<number>();
 
   /** Add productId */
-  @Output() add = new EventEmitter<string>();
+  add = output<string>();
   /** Remove productId */
-  @Output() remove = new EventEmitter<string>();
+  remove = output<string>();
 }

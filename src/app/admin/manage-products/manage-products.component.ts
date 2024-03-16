@@ -1,6 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Product } from '../../products/product.interface';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { ProductsService } from '../../products/products.service';
 import { ManageProductsService } from './manage-products.service';
 import { CurrencyPipe, DecimalPipe } from '@angular/common';
@@ -19,6 +22,7 @@ import {
 import { RouterLink } from '@angular/router';
 import { MatButton } from '@angular/material/button';
 import { FilePickerComponent } from '../../shared/file-picker/file-picker.component';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-manage-products',
@@ -42,34 +46,28 @@ import { FilePickerComponent } from '../../shared/file-picker/file-picker.compon
     DecimalPipe,
     CurrencyPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ManageProductsComponent implements OnInit {
+export class ManageProductsComponent {
+  private readonly productsService = inject(ProductsService);
+  private readonly manageProductsService = inject(ManageProductsService);
+
   readonly columns = ['from', 'description', 'price', 'count', 'action'];
 
-  selectedFile: File | null = null;
-
-  products$!: Observable<Product[]>;
-
-  constructor(
-    private readonly productsService: ProductsService,
-    private readonly manageProductsService: ManageProductsService,
-    private readonly cdr: ChangeDetectorRef,
-  ) {}
-
-  ngOnInit(): void {
-    this.products$ = this.productsService.getProducts();
-  }
+  selectedFile = signal<File | undefined>(undefined);
+  products = toSignal(this.productsService.getProducts(), {
+    initialValue: [],
+  });
 
   onUploadCSV(): void {
-    if (!this.selectedFile) {
+    const selectedFile = this.selectedFile();
+
+    if (!selectedFile) {
       return;
     }
 
-    this.manageProductsService
-      .uploadProductsCSV(this.selectedFile)
-      .subscribe(() => {
-        this.selectedFile = null;
-        this.cdr.markForCheck();
-      });
+    this.manageProductsService.uploadProductsCSV(selectedFile).subscribe(() => {
+      this.selectedFile.set(undefined);
+    });
   }
 }

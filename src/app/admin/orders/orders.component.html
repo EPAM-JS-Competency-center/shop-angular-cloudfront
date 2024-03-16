@@ -1,6 +1,6 @@
 <h1>Manage orders</h1>
 
-<table class="w-100" [dataSource]="orders$" mat-table>
+<table class="w-100" [dataSource]="orders()" mat-table>
   <ng-container matColumnDef="from">
     <th mat-header-cell *matHeaderCellDef>From</th>
     <td mat-cell *matCellDef="let order">

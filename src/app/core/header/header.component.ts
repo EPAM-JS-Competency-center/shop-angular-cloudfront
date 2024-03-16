@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CartService } from '../../cart/cart.service';
-import { Observable } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { MatBadge } from '@angular/material/badge';
 import { MatIcon } from '@angular/material/icon';
@@ -27,13 +26,8 @@ import { MatToolbar } from '@angular/material/toolbar';
     MatMenuItem,
     AsyncPipe,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HeaderComponent implements OnInit {
-  totalInCart$!: Observable<number>;
-
-  constructor(private readonly cartService: CartService) {}
-
-  ngOnInit(): void {
-    this.totalInCart$ = this.cartService.totalInCart$;
-  }
+export class HeaderComponent {
+  totalInCart = inject(CartService).totalInCart;
 }

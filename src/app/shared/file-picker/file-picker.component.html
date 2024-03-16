@@ -7,7 +7,7 @@
 />
 
 <div class="h5 mb-0 text-muted d-flex align-items-center">
-  <ng-container *ngIf="file; else selectFileTemplate">
+  @if (file(); as file) {
     <span class="mr-3">Selected file: {{ file.name }}</span>
 
     <button
@@ -19,12 +19,10 @@
       Upload
     </button>
     <button (click)="removeFile()" color="warn" mat-flat-button>Delete</button>
-  </ng-container>
+  } @else {
+    <span class="mr-3">Select file to upload</span>
+    <button (click)="fileInput.click()" color="accent" mat-flat-button>
+      Import Products CSV
+    </button>
+  }
 </div>
-
-<ng-template #selectFileTemplate>
-  <span class="mr-3">Select file to upload</span>
-  <button (click)="fileInput.click()" color="accent" mat-flat-button>
-    Import Products CSV
-  </button>
-</ng-template>

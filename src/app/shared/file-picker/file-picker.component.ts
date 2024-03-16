@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, model, output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
 import { NgIf } from '@angular/common';
 
@@ -10,10 +10,9 @@ import { NgIf } from '@angular/common';
   imports: [NgIf, MatButton],
 })
 export class FilePickerComponent {
-  @Input() file: File | null = null;
+  uploadClick = output();
 
-  @Output() fileChange = new EventEmitter<File | null>();
-  @Output() uploadClick = new EventEmitter<void>();
+  file = model<File>();
 
   selectFile(files: FileList | null): void {
     if (!files?.length) {
@@ -28,12 +27,10 @@ export class FilePickerComponent {
       return;
     }
 
-    this.fileChange.emit(file);
-    this.file = file;
+    this.file.set(file);
   }
 
   removeFile(): void {
-    this.file = null;
-    this.fileChange.emit(null);
+    this.file.set(undefined);
   }
 }

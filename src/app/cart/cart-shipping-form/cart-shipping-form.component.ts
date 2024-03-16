@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { ReactiveFormsModule, UntypedFormGroup } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { MatInput } from '@angular/material/input';
@@ -12,7 +12,7 @@ import { MatError, MatFormField } from '@angular/material/form-field';
   imports: [ReactiveFormsModule, MatFormField, MatInput, NgIf, MatError],
 })
 export class CartShippingFormComponent {
-  @Input() shippingInfo!: UntypedFormGroup;
+  shippingInfo = input.required<UntypedFormGroup>();
 
-  @Output() nextStep = new EventEmitter<void>();
+  nextStep = output();
 }

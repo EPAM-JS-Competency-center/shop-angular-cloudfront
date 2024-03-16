@@ -1,10 +1,10 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
-  EventEmitter,
-  Input,
-  Output,
-  ViewChild,
+  input,
+  output,
+  viewChild,
 } from '@angular/core';
 import { MatIcon } from '@angular/material/icon';
 import { MatTooltip } from '@angular/material/tooltip';
@@ -17,19 +17,21 @@ import { MatIconButton } from '@angular/material/button';
   exportAs: 'countControls',
   standalone: true,
   imports: [MatIconButton, MatTooltip, MatIcon],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CartCountControlsComponent {
-  @Input() count!: number;
-  @Input() available!: number;
-  @Input() productName!: string;
+  count = input.required<number>();
+  available = input.required<number>();
+  productName = input.required<string>();
 
-  @Output() increment = new EventEmitter<void>();
-  @Output() decrement = new EventEmitter<void>();
+  increment = output();
+  decrement = output();
 
-  @ViewChild('addBtn', { read: ElementRef })
-  addBtn!: ElementRef<HTMLButtonElement>;
+  addBtn = viewChild.required('addBtn', {
+    read: ElementRef<HTMLButtonElement>,
+  });
 
   focusAddBtn(): void {
-    this.addBtn.nativeElement.focus();
+    this.addBtn().nativeElement.focus();
   }
 }

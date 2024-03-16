@@ -1,8 +1,5 @@
 <main class="container">
-  <app-product-item
-    *ngFor="let product of products$ | async; let i = index"
-    [product]="product"
-    [index]="i"
-  >
-  </app-product-item>
+  @for (product of products(); track $index) {
+    <app-product-item [product]="product" [index]="$index"> </app-product-item>
+  }
 </main>

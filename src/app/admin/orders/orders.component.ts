@@ -1,7 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { OrdersService } from './orders.service';
-import { Observable } from 'rxjs';
-import { Order } from './order.interface';
 import {
   MatCell,
   MatCellDef,
@@ -14,6 +12,7 @@ import {
   MatRowDef,
   MatTable,
 } from '@angular/material/table';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-orders',
@@ -32,15 +31,12 @@ import {
     MatRowDef,
     MatRow,
   ],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OrdersComponent implements OnInit {
+export class OrdersComponent {
   readonly columns = ['from', 'count', 'address', 'status', 'action'];
 
-  orders$!: Observable<Order[]>;
-
-  constructor(private readonly ordersService: OrdersService) {}
-
-  ngOnInit(): void {
-    this.orders$ = this.ordersService.getOrders();
-  }
+  orders = toSignal(inject(OrdersService).getOrders(), {
+    initialValue: [],
+  });
 }
