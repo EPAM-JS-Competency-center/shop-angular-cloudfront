@@ -1,4 +1,4 @@
-<form (ngSubmit)="nextStep.emit()" [formGroup]="shippingInfo">
+<form (ngSubmit)="nextStep.emit()" [formGroup]="shippingInfo()">
   <div class="row">
     <div class="col col-md-6">
       <mat-form-field class="w-100">
@@ -11,9 +11,9 @@
           required
         />
 
-        <mat-error *ngIf="shippingInfo.getError('required', 'firstName')">
-          First name is required!
-        </mat-error>
+        @if (shippingInfo().getError("required", "firstName")) {
+          <mat-error> First name is required! </mat-error>
+        }
       </mat-form-field>
     </div>
     <div class="col col-md-6">
@@ -27,9 +27,9 @@
           required
         />
 
-        <mat-error *ngIf="shippingInfo.getError('required', 'lastName')">
-          Last name is required!
-        </mat-error>
+        @if (shippingInfo().getError("required", "lastName")) {
+          <mat-error> Last name is required! </mat-error>
+        }
       </mat-form-field>
     </div>
     <div class="col-12">
@@ -43,9 +43,9 @@
           required
         />
 
-        <mat-error *ngIf="shippingInfo.getError('required', 'address')">
-          Shipping address is required!
-        </mat-error>
+        @if (shippingInfo().getError("required", "address")) {
+          <mat-error> Shipping address is required! </mat-error>
+        }
       </mat-form-field>
     </div>
     <div class="col-12">

@@ -29,3 +29,25 @@ Follow the steps:
 - git clone
 - npm i
 - ng serve
+
+## Troubleshooting
+
+### Cannot commit
+
+Most likely you are getting a message
+
+> **Commit failed with error**
+>
+> ...
+>
+> ✖ subject may not be empty [subject-empty]
+>
+> ✖ type may not be empty [type-empty]
+>
+> ✖ found 2 problems, 0 warnings
+>
+> ⓘ Get help: https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+>
+> husky - commit-msg script failed (code 1)
+
+To fix it you either need to follow conventional commit messages rules, or remove `.husky/pre-commit` file which enables the aforementioned rule.

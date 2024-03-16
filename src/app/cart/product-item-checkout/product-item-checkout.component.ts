@@ -1,7 +1,12 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  input,
+  output,
+} from '@angular/core';
 import { ProductCheckout } from '../../products/product.interface';
 import { CartCountControlsComponent } from '../../core/cart-count-controls/cart-count-controls.component';
-import { CurrencyPipe, DecimalPipe, NgIf } from '@angular/common';
+import { CurrencyPipe, DecimalPipe } from '@angular/common';
 import { MatCard } from '@angular/material/card';
 
 @Component({
@@ -9,18 +14,13 @@ import { MatCard } from '@angular/material/card';
   templateUrl: './product-item-checkout.component.html',
   styleUrls: ['./product-item-checkout.component.scss'],
   standalone: true,
-  imports: [
-    MatCard,
-    NgIf,
-    CartCountControlsComponent,
-    DecimalPipe,
-    CurrencyPipe,
-  ],
+  imports: [MatCard, CartCountControlsComponent, DecimalPipe, CurrencyPipe],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductItemCheckoutComponent {
-  @Input() product!: ProductCheckout;
-  @Input() hideControls = false;
+  product = input.required<ProductCheckout>();
+  hideControls = input(false);
 
-  @Output() add = new EventEmitter<void>();
-  @Output() remove = new EventEmitter<void>();
+  add = output();
+  remove = output();
 }

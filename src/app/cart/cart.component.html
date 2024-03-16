@@ -1,11 +1,4 @@
-<div
-  *ngIf="{
-    products: products$ | async,
-    totalPrice: totalPrice$ | async,
-    cartEmpty: cartEmpty$ | async
-  } as state"
-  class="row"
->
+<div class="row">
   <div class="col mx-auto">
     <mat-card>
       <h1 class="text-center pt-4" mat-card-title>Checkout</h1>
@@ -13,22 +6,21 @@
       <mat-card-content>
         <mat-vertical-stepper #stepper [linear]="true">
           <!-- Review your cart STEP -->
-          <mat-step label="Review your cart" [completed]="state.cartEmpty">
-            <ng-container *ngIf="state.cartEmpty; else emptyCartTemplate">
-              <app-order-summary
-                *ngIf="state.products; else loaderTemplate"
-                (add)="add($event)"
-                (remove)="remove($event)"
-                [products]="state.products"
-                [totalPrice]="state.totalPrice!"
-                [showControls]="true"
-              ></app-order-summary>
-
-              <ng-template #loaderTemplate>
+          <mat-step label="Review your cart" [completed]="cartNotEmpty()">
+            @if (cartNotEmpty()) {
+              @if (products()) {
+                <app-order-summary
+                  (add)="add($event)"
+                  (remove)="remove($event)"
+                  [products]="products()"
+                  [totalPrice]="totalPrice()"
+                  [showControls]="true"
+                ></app-order-summary>
+              } @else {
                 <div class="py-5">
                   <mat-spinner [diameter]="40" class="mx-auto"></mat-spinner>
                 </div>
-              </ng-template>
+              }
 
               <div class="text-right">
                 <button
@@ -40,7 +32,11 @@
                   next
                 </button>
               </div>
-            </ng-container>
+            } @else {
+              <div class="lead">
+                The cart is empty. Didn't you like anything in our shop?
+              </div>
+            }
           </mat-step>
 
           <!-- Shipping address STEP -->
@@ -69,12 +65,13 @@
 
           <!-- Review your order STEP -->
           <mat-step label="Review your order">
-            <app-order-summary
-              *ngIf="state.products"
-              [products]="state.products"
-              [totalPrice]="state.totalPrice!"
-              [showControls]="false"
-            ></app-order-summary>
+            @if (products()) {
+              <app-order-summary
+                [products]="products()"
+                [totalPrice]="totalPrice()"
+                [showControls]="false"
+              ></app-order-summary>
+            }
 
             <div class="row">
               <div class="col col-md-6">
@@ -102,9 +99,3 @@
     </mat-card>
   </div>
 </div>
-
-<ng-template #emptyCartTemplate>
-  <div class="lead">
-    The cart is empty. Didn't you like anything in our shop?
-  </div>
-</ng-template>

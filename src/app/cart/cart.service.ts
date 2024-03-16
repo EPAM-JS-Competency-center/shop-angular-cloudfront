@@ -1,35 +1,23 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { map, shareReplay } from 'rxjs/operators';
+import { computed, Injectable, signal } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
   /** Key - item id, value - ordered amount */
-  #cartSource = new BehaviorSubject<Record<string, number>>({});
+  #cart = signal<Record<string, number>>({});
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  cart$ = this.#cartSource.asObservable();
+  cart = this.#cart.asReadonly();
 
-  // eslint-disable-next-line @typescript-eslint/member-ordering
-  totalInCart$: Observable<number> = this.cart$.pipe(
-    map((cart) => {
-      const values = Object.values(cart);
+  totalInCart = computed(() => {
+    const values = Object.values(this.cart());
 
-      if (!values.length) {
-        return 0;
-      }
+    if (!values.length) {
+      return 0;
+    }
 
-      return values.reduce((acc, val) => acc + val, 0);
-    }),
-    shareReplay({
-      refCount: true,
-      bufferSize: 1,
-    })
-  );
-
-  constructor() {}
+    return values.reduce((acc, val) => acc + val, 0);
+  });
 
   addItem(id: string): void {
     this.updateCount(id, 1);
@@ -40,11 +28,11 @@ export class CartService {
   }
 
   empty(): void {
-    this.#cartSource.next({});
+    this.#cart.set({});
   }
 
   private updateCount(id: string, type: 1 | -1): void {
-    const val = this.#cartSource.getValue();
+    const val = this.cart();
     const newVal = {
       ...val,
     };
@@ -55,7 +43,7 @@ export class CartService {
 
     if (type === 1) {
       newVal[id] = ++newVal[id];
-      this.#cartSource.next(newVal);
+      this.#cart.set(newVal);
       return;
     }
 
@@ -70,6 +58,6 @@ export class CartService {
       delete newVal[id];
     }
 
-    this.#cartSource.next(newVal);
+    this.#cart.set(newVal);
   }
 }
