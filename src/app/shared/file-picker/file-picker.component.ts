@@ -1,13 +1,12 @@
 import { Component, model, output } from '@angular/core';
 import { MatButton } from '@angular/material/button';
-import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-file-picker',
   templateUrl: './file-picker.component.html',
   styleUrls: ['./file-picker.component.scss'],
   standalone: true,
-  imports: [NgIf, MatButton],
+  imports: [MatButton],
 })
 export class FilePickerComponent {
   uploadClick = output();

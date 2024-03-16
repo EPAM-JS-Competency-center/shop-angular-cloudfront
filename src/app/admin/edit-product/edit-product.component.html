@@ -10,11 +10,9 @@
           <mat-form-field class="w-100">
             <mat-label>Title</mat-label>
             <input matInput formControlName="title" />
-            <mat-error
-              *ngIf="titleCtrl.touched && titleCtrl.hasError('required')"
-            >
-              Product title is required
-            </mat-error>
+            @if (titleCtrl.touched && titleCtrl.hasError("required")) {
+              <mat-error> Product title is required </mat-error>
+            }
           </mat-form-field>
         </div>
 
@@ -22,13 +20,11 @@
           <mat-form-field class="w-100">
             <mat-label>Description</mat-label>
             <textarea matInput formControlName="description"></textarea>
-            <mat-error
-              *ngIf="
-                descriptionCtrl.touched && descriptionCtrl.hasError('required')
-              "
-            >
-              Product description is required
-            </mat-error>
+            @if (
+              descriptionCtrl.touched && descriptionCtrl.hasError("required")
+            ) {
+              <mat-error> Product description is required </mat-error>
+            }
           </mat-form-field>
         </div>
 
@@ -36,11 +32,9 @@
           <mat-form-field class="w-100">
             <mat-label>Price ($)</mat-label>
             <input type="number" matInput formControlName="price" />
-            <mat-error
-              *ngIf="priceCtrl.touched && priceCtrl.hasError('required')"
-            >
-              Product price is required
-            </mat-error>
+            @if (priceCtrl.touched && priceCtrl.hasError("required")) {
+              <mat-error> Product price is required </mat-error>
+            }
           </mat-form-field>
         </div>
 
@@ -48,11 +42,9 @@
           <mat-form-field class="w-100">
             <mat-label>Count</mat-label>
             <input type="number" matInput formControlName="count" />
-            <mat-error
-              *ngIf="countCtrl.touched && countCtrl.hasError('required')"
-            >
-              Product count is required
-            </mat-error>
+            @if (countCtrl.touched && countCtrl.hasError("required")) {
+              <mat-error> Product count is required </mat-error>
+            }
           </mat-form-field>
         </div>
       </form>

@@ -1,17 +1,16 @@
 <mat-card class="mb-3">
   <div class="row align-items-center">
-    <div
-      *ngIf="!hideControls()"
-      class="col-12 col-md-3 order-3 order-md-0 text-center"
-    >
-      <app-cart-count-controls
-        (decrement)="remove.emit()"
-        (increment)="add.emit()"
-        [productName]="product().title"
-        [count]="product().orderedCount"
-        [available]="product().count"
-      ></app-cart-count-controls>
-    </div>
+    @if (!hideControls()) {
+      <div class="col-12 col-md-3 order-3 order-md-0 text-center">
+        <app-cart-count-controls
+          (decrement)="remove.emit()"
+          (increment)="add.emit()"
+          [productName]="product().title"
+          [count]="product().orderedCount"
+          [available]="product().count"
+        ></app-cart-count-controls>
+      </div>
+    }
     <div
       [class.col-md-6]="!hideControls()"
       [class.col-md-9]="hideControls()"

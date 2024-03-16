@@ -1,7 +1,6 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ProductsService } from './products.service';
 import { ProductItemComponent } from './product-item/product-item.component';
-import { AsyncPipe, NgFor } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -9,7 +8,7 @@ import { toSignal } from '@angular/core/rxjs-interop';
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
   standalone: true,
-  imports: [NgFor, ProductItemComponent, AsyncPipe],
+  imports: [ProductItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProductsComponent {

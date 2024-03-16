@@ -31,7 +31,6 @@ import {
   MatCardContent,
   MatCardTitle,
 } from '@angular/material/card';
-import { AsyncPipe, NgIf } from '@angular/common';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -41,7 +40,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
   standalone: true,
   imports: [
-    NgIf,
     MatCard,
     MatCardTitle,
     MatCardContent,
@@ -54,7 +52,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
     MatButton,
     RouterLink,
     MatProgressSpinner,
-    AsyncPipe,
   ],
 })
 export class EditProductComponent implements OnInit {
