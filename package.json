@@ -9,7 +9,9 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky",
-    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged"
+    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
+    "deploy": "serverless deploy",
+    "sync": "serverless syncToS3"
   },
   "private": true,
   "dependencies": {
@@ -61,7 +63,8 @@
     "lint-staged": "^15.2.2",
     "prettier": "^3.2.5",
     "pretty-quick": "^4.0.0",
-    "typescript": "~5.3.3"
+    "typescript": "~5.3.3",
+    "serverless-single-page-app-plugin": "file:./serverless-single-page-app-plugin"
   },
   "lint-staged": {
     "*.{ts,html}": [
