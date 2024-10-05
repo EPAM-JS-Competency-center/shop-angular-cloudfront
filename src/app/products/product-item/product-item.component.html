@@ -15,7 +15,7 @@
     <p>{{ product().price | number: "1.2-2" | currency }}</p>
   </mat-card-content>
 
-  <mat-card-actions>
+  <mat-card-actions align="end">
     <!-- Add to cart btn -->
     @if (countInCart() === 0) {
       <button
