@@ -1,9 +1,11 @@
 import { computed, Injectable, signal } from '@angular/core';
+import { ApiService } from "../core/api.service";
+import { HttpHeaders } from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root',
 })
-export class CartService {
+export class CartService extends ApiService {
   /** Key - item id, value - ordered amount */
   #cart = signal<Record<string, number>>({});
 
@@ -44,7 +46,21 @@ export class CartService {
     if (type === 1) {
       newVal[id] = ++newVal[id];
       this.#cart.set(newVal);
-      return;
+
+      this.http.put<string>(
+        this.getUrl('cart', 'cart'),
+        { items: [
+            {
+              product: {
+                id: id,
+                title: 'title',
+                description: 'string',
+                price: 3,
+              },
+              count: 1,
+            }
+          ] },
+        { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe();
     }
 
     if (newVal[id] === 0) {
