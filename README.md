@@ -51,3 +51,21 @@ Most likely you are getting a message
 > husky - commit-msg script failed (code 1)
 
 To fix it you either need to follow conventional commit messages rules, or remove `.husky/pre-commit` file which enables the aforementioned rule.
+
+### AWS INFO
+
+The `cdk.json` file tells the CDK Toolkit how to execute your app.
+
+## Useful commands
+
+- `npm run build` compile typescript to js
+- `npm run watch` watch for changes and compile
+- `npm run test` perform the jest unit tests
+- `npx cdk deploy` deploy this stack to your default AWS account/region
+- `npx cdk diff` compare deployed stack with current state
+- `npx cdk synth` emits the synthesized CloudFormation template
+
+## Deployed Application Links
+
+- S3-website -- http://deploywebappstack-deploymentfrontendbucket67ceb713-90d5r7u2acmn.s3-website.eu-north-1.amazonaws.com/
+- CloudFront URL -- https://d20l9t6lkwgn1d.cloudfront.net/
