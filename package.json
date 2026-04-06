@@ -4,12 +4,14 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prefix frontend",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "prepare": "husky",
-    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged"
+    "lint:format": "npx --no-install lint-staged && npx --no-install pretty-quick --staged",
+    "cdk:deploy": "npm run build && cd cdk && cdk deploy",
+    "cdk:destroy": "cd cdk && cdk destroy"
   },
   "private": true,
   "dependencies": {
