@@ -1,6 +1,15 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ProductItemComponent } from './product-item.component';
+import { Product } from '../product.interface';
+
+const mockProduct: Product = {
+  id: '1',
+  title: 'Test',
+  description: 'Test product',
+  price: 10,
+  count: 5,
+};
 
 describe('ProductItemComponent', () => {
   let component: ProductItemComponent;
@@ -14,6 +23,8 @@ describe('ProductItemComponent', () => {
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ProductItemComponent);
+    fixture.componentRef.setInput('product', mockProduct);
+    fixture.componentRef.setInput('index', 0);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
