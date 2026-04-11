@@ -15,7 +15,6 @@ import { MatIconButton } from '@angular/material/button';
   templateUrl: './cart-count-controls.component.html',
   styleUrls: ['./cart-count-controls.component.scss'],
   exportAs: 'countControls',
-  standalone: true,
   imports: [MatIconButton, MatTooltip, MatIcon],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

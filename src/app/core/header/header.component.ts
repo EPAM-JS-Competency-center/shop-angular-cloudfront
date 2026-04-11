@@ -13,7 +13,6 @@ import { MatToolbar } from '@angular/material/toolbar';
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
-  standalone: true,
   imports: [
     MatToolbar,
     RouterLink,

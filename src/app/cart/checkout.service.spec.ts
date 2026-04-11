@@ -1,9 +1,13 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { CheckoutService } from './checkout.service';
 import { CONFIG_TOKEN } from '../core/injection-tokens/config.token';
 import { Config } from '../../environments/config.interface';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 
 const mockConfig: Config = {
   production: false,
@@ -22,8 +26,12 @@ describe('CheckoutService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [{ provide: CONFIG_TOKEN, useValue: mockConfig }],
+      imports: [],
+      providers: [
+        { provide: CONFIG_TOKEN, useValue: mockConfig },
+        provideHttpClient(withInterceptorsFromDi()),
+        provideHttpClientTesting(),
+      ],
     });
     service = TestBed.inject(CheckoutService);
   });

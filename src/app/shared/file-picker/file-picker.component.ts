@@ -5,7 +5,6 @@ import { MatButton } from '@angular/material/button';
   selector: 'app-file-picker',
   templateUrl: './file-picker.component.html',
   styleUrls: ['./file-picker.component.scss'],
-  standalone: true,
   imports: [MatButton],
 })
 export class FilePickerComponent {

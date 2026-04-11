@@ -13,7 +13,6 @@ import { MatCard } from '@angular/material/card';
   selector: 'app-product-item-checkout',
   templateUrl: './product-item-checkout.component.html',
   styleUrls: ['./product-item-checkout.component.scss'],
-  standalone: true,
   imports: [MatCard, CartCountControlsComponent, DecimalPipe, CurrencyPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

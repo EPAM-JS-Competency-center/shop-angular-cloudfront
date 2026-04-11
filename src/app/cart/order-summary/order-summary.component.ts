@@ -12,7 +12,6 @@ import { CurrencyPipe, DecimalPipe } from '@angular/common';
   selector: 'app-order-summary',
   templateUrl: './order-summary.component.html',
   styleUrls: ['./order-summary.component.scss'],
-  standalone: true,
   imports: [ProductItemCheckoutComponent, DecimalPipe, CurrencyPipe],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -32,7 +32,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
       useValue: { displayDefaultIndicatorType: false },
     },
   ],
-  standalone: true,
   imports: [
     MatCard,
     MatCardTitle,

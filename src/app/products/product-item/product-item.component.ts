@@ -29,7 +29,6 @@ import {
   selector: 'app-product-item',
   templateUrl: './product-item.component.html',
   styleUrls: ['./product-item.component.scss'],
-  standalone: true,
   imports: [
     MatCard,
     MatCardImage,

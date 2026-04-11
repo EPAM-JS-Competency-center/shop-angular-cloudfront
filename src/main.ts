@@ -1,4 +1,4 @@
-import { Provider } from '@angular/core';
+import { Provider, provideZoneChangeDetection } from '@angular/core';
 
 import { environment } from './environments/environment';
 import { AppComponent } from './app/app.component';
@@ -24,6 +24,7 @@ const interceptors: Provider[] = [
 
 bootstrapApplication(AppComponent, {
   providers: [
+    provideZoneChangeDetection(),
     provideRouter(appRoutes, withComponentInputBinding()),
     interceptors,
     {

@@ -7,7 +7,6 @@ import { HeaderComponent } from './core/header/header.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [HeaderComponent, RouterOutlet],
 })
 export class AppComponent {}

@@ -38,7 +38,6 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   templateUrl: './edit-product.component.html',
   styleUrls: ['./edit-product.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  standalone: true,
   imports: [
     MatCard,
     MatCardTitle,
@@ -55,6 +54,12 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
   ],
 })
 export class EditProductComponent implements OnInit {
+  private readonly activatedRoute = inject(ActivatedRoute);
+  private readonly fb = inject(UntypedFormBuilder);
+  private readonly notificationService = inject(NotificationService);
+  private readonly productsService = inject(ProductsService);
+  private readonly router = inject(Router);
+
   #destroyRef = inject(DestroyRef);
 
   productId = input<string>();
@@ -69,14 +74,6 @@ export class EditProductComponent implements OnInit {
   requestInProgress = false;
 
   loaded = signal(false);
-
-  constructor(
-    private readonly activatedRoute: ActivatedRoute,
-    private readonly fb: UntypedFormBuilder,
-    private readonly notificationService: NotificationService,
-    private readonly productsService: ProductsService,
-    private readonly router: Router,
-  ) {}
 
   get countCtrl(): AbstractControl {
     return this.form.get('count') as AbstractControl;

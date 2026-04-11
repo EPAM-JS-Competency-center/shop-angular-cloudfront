@@ -7,7 +7,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'app-products',
   templateUrl: './products.component.html',
   styleUrls: ['./products.component.scss'],
-  standalone: true,
   imports: [ProductItemComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

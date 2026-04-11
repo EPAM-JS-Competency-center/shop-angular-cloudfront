@@ -18,7 +18,6 @@ import { toSignal } from '@angular/core/rxjs-interop';
   selector: 'app-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss'],
-  standalone: true,
   imports: [
     MatTable,
     MatColumnDef,
