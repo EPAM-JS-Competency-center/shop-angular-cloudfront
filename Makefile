@@ -10,3 +10,7 @@ build:
 .PHONY: build-prod
 build-prod:
 	cd client && npx ng build --configuration production
+
+.PHONY: deploy
+deploy: build-prod
+	cd infra && npx cdk deploy $(if $(PROFILE),--profile $(PROFILE),)
