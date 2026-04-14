@@ -1,0 +1,10 @@
+{
+  "hosted-zone:account=217881743440:domainName=shop-angular-cloudfront.fun:region=us-east-1": {
+    "Id": "/hostedzone/Z0658991REFTU9HBNJFC",
+    "Name": "shop-angular-cloudfront.fun."
+  },
+  "hosted-zone:account=217881743440:domainName=shop-angular-cloudfront.tech:region=us-east-1": {
+    "Id": "/hostedzone/Z06865612H2ZXWW4Q1GXU",
+    "Name": "shop-angular-cloudfront.tech."
+  }
+}

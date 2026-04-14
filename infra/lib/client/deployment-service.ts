@@ -1,11 +1,27 @@
-import { aws_cloudfront, aws_cloudfront_origins, aws_s3, aws_s3_deployment, CfnOutput, RemovalPolicy } from "aws-cdk-lib";
+import {
+    aws_cloudfront,
+    aws_cloudfront_origins,
+    aws_route53,
+    aws_route53_targets,
+    aws_s3,
+    aws_s3_deployment,
+    CfnOutput,
+    RemovalPolicy,
+} from "aws-cdk-lib";
 import { Construct } from "constructs";
+import { DOMAIN_NAME } from "../shared/config";
+import { createDomainResources } from "../shared/domain";
 
 const path = './../client/dist';
 
 export class DeploymentService extends Construct {
     constructor(scope: Construct, id: string) {
         super(scope, id);
+
+        const { hostedZone, certificate } = createDomainResources(this, {
+            domainName: DOMAIN_NAME,
+            // subjectAlternativeNames: [WWW_DOMAIN_NAME],
+        });
 
         const hostingBucket = new aws_s3.Bucket(this, "FrontendBucket", {
             // Block all public access to the bucket
@@ -31,6 +47,10 @@ export class DeploymentService extends Construct {
                     viewerProtocolPolicy: aws_cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
                 },
 
+                // Custom domain and SSL certificate
+                domainNames: [DOMAIN_NAME],
+                certificate,
+
                 // Set the default root object to index.html
                 defaultRootObject: 'index.html',
 
@@ -44,6 +64,23 @@ export class DeploymentService extends Construct {
                 ],
             }
         );
+
+        // DNS A record for root domain -> CloudFront
+        new aws_route53.ARecord(this, 'AliasRecord', {
+            zone: hostedZone,
+            target: aws_route53.RecordTarget.fromAlias(
+                new aws_route53_targets.CloudFrontTarget(distribution),
+            ),
+        });
+
+        // // DNS A record for www -> CloudFront
+        // new aws_route53.ARecord(this, 'WwwAliasRecord', {
+        //     zone: hostedZone,
+        //     recordName: 'www',
+        //     target: aws_route53.RecordTarget.fromAlias(
+        //         new aws_route53_targets.CloudFrontTarget(distribution),
+        //     ),
+        // });
 
         new aws_s3_deployment.BucketDeployment(this, 'BucketDeployment', {
             // Deploy the contents of the 'path' directory to the S3 bucket
@@ -73,5 +110,10 @@ export class DeploymentService extends Construct {
             exportName: 'BucketName',
         });
 
+        // Output the custom domain
+        new CfnOutput(this, 'DomainName', {
+            value: `https://${DOMAIN_NAME}`,
+            description: 'The custom domain URL',
+        });
     }
 }
