@@ -19,8 +19,7 @@ export class DeploymentService extends Construct {
         super(scope, id);
 
         const { hostedZone, certificate } = createDomainResources(this, {
-            domainName: DOMAIN_NAME,
-            // subjectAlternativeNames: [WWW_DOMAIN_NAME],
+            domainName: DOMAIN_NAME
         });
 
         const hostingBucket = new aws_s3.Bucket(this, "FrontendBucket", {
@@ -72,15 +71,6 @@ export class DeploymentService extends Construct {
                 new aws_route53_targets.CloudFrontTarget(distribution),
             ),
         });
-
-        // // DNS A record for www -> CloudFront
-        // new aws_route53.ARecord(this, 'WwwAliasRecord', {
-        //     zone: hostedZone,
-        //     recordName: 'www',
-        //     target: aws_route53.RecordTarget.fromAlias(
-        //         new aws_route53_targets.CloudFrontTarget(distribution),
-        //     ),
-        // });
 
         new aws_s3_deployment.BucketDeployment(this, 'BucketDeployment', {
             // Deploy the contents of the 'path' directory to the S3 bucket

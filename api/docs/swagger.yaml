@@ -1,0 +1,103 @@
+openapi: 3.0.0
+info:
+  title: Product Service API
+  description: API for managing products in the shop application
+  version: 1.0.0
+
+servers:
+  - url: https://api.shop-angular-cloudfront.tech
+    description: Production
+  - url: http://localhost:4200
+    description: Local development
+
+paths:
+  /products:
+    get:
+      summary: Get all products
+      description: Returns a list of all available products
+      operationId: getProductsList
+      responses:
+        "200":
+          description: A list of products
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Product"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+  /products/{productId}:
+    get:
+      summary: Get product by ID
+      description: Returns a single product by its ID
+      operationId: getProductById
+      parameters:
+        - name: productId
+          in: path
+          required: true
+          description: The product ID (UUID)
+          schema:
+            type: string
+            format: uuid
+            example: 7567ec4b-b10c-48c5-9345-fc73c48a80aa
+      responses:
+        "200":
+          description: Product found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Product"
+        "404":
+          description: Product not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+        "500":
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+
+components:
+  schemas:
+    Product:
+      type: object
+      required:
+        - id
+        - title
+        - description
+        - price
+        - count
+      properties:
+        id:
+          type: string
+          format: uuid
+          example: 7567ec4b-b10c-48c5-9345-fc73c48a80aa
+        title:
+          type: string
+          example: ProductOne
+        description:
+          type: string
+          example: Short Product Description1
+        price:
+          type: number
+          format: double
+          example: 2.4
+        count:
+          type: integer
+          example: 4
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          example: not found
