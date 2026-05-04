@@ -1,58 +1,58 @@
 [
   {
     "count": 4,
-    "description": "Short Product Description1",
+    "description": "A sleek vacuum-insulated flask designed to keep your beverages at the perfect temperature while you explore the cosmos.",
     "id": "7567ec4b-b10c-48c5-9345-fc73c48a80aa",
     "price": 2.4,
-    "title": "ProductOne"
+    "title": "Nebula Brew Flask"
   },
   {
     "count": 6,
-    "description": "Short Product Description3",
+    "description": "A precision-crafted blade with a stunning crimson finish perfect for both culinary arts and outdoor adventures.",
     "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a0",
     "price": 10,
-    "title": "ProductNew"
+    "title": "Crimson Edge Knife"
   },
   {
     "count": 7,
-    "description": "Short Product Description2",
+    "description": "Tactical gloves featuring advanced grip technology and breathable fabric for maximum control and comfort in any condition.",
     "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a2",
     "price": 23,
-    "title": "ProductTop"
+    "title": "Phantom Grip Gloves"
   },
   {
     "count": 12,
-    "description": "Short Product Description7",
+    "description": "An eco-friendly backpack equipped with integrated solar panels to keep your devices charged during long treks.",
     "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a1",
     "price": 15,
-    "title": "ProductTitle"
+    "title": "Solar Drift Backpack"
   },
   {
     "count": 7,
-    "description": "Short Product Description2",
+    "description": "A modern lamp with a flowing obsidian base that casts a soothing rhythmic light across your living space.",
     "id": "7567ec4b-b10c-48c5-9345-fc73c48a80a3",
     "price": 23,
-    "title": "Product"
+    "title": "Obsidian Wave Lamp"
   },
   {
     "count": 8,
-    "description": "Short Product Description4",
+    "description": "A rugged smartwatch built to withstand extreme cold featuring heart rate monitoring and GPS for the boldest explorers.",
     "id": "7567ec4b-b10c-48c5-9345-fc73348a80a1",
     "price": 15,
-    "title": "ProductTest"
+    "title": "Arctic Pulse Watch"
   },
   {
     "count": 2,
-    "description": "Short Product Descriptio1",
+    "description": "Handcrafted ceramic mug with a unique forge-fired glaze designed to keep your coffee hot and your hands warm.",
     "id": "7567ec4b-b10c-48c5-9445-fc73c48a80a2",
     "price": 23,
-    "title": "Product2"
+    "title": "Ember Forge Mug"
   },
   {
     "count": 3,
-    "description": "Short Product Description7",
+    "description": "High-fidelity wireless headset with adaptive noise cancellation and immersive spatial audio for the ultimate gaming experience.",
     "id": "7567ec4b-b10c-45c5-9345-fc73c48a80a1",
     "price": 15,
-    "title": "ProductName"
+    "title": "Zenith Coil Headset"
   }
 ]

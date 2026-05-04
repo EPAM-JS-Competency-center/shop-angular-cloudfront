@@ -3,8 +3,8 @@
 <ng-container>
   @for (product of products(); track $index) {
     <app-product-item-checkout
-      (add)="add.emit(product.id)"
-      (remove)="remove.emit(product.id)"
+      (add)="add.emit($event)"
+      (remove)="remove.emit($event)"
       [product]="product"
       [hideControls]="!showControls"
     />

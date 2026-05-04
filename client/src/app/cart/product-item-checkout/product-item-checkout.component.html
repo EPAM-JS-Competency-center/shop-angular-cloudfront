@@ -3,8 +3,8 @@
     @if (!hideControls()) {
       <div class="col-12 col-md-3 order-3 order-md-0 text-center">
         <app-cart-count-controls
-          (decrement)="remove.emit()"
-          (increment)="add.emit()"
+          (decrement)="remove.emit(product())"
+          (increment)="add.emit(product())"
           [productName]="product().title"
           [count]="product().orderedCount"
           [available]="product().count"

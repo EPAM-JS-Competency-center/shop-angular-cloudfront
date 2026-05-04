@@ -50,9 +50,9 @@ export class ApiService extends Construct {
         }
 
         // Create API Gateway
-        const api = new aws_apigateway.RestApi(this, "my-api", {
-            restApiName: "My API Gateway",
-            description: "This API serves the Lambda functions.",
+        const api = new aws_apigateway.RestApi(this, "product-api", {
+            restApiName: "Product API Gateway",
+            description: "This service serves a Product API.",
 
             // Custom domain name
             ...domainProps,

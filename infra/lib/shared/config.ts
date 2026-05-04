@@ -2,6 +2,7 @@ import { aws_lambda, Duration } from "aws-cdk-lib";
 
 export const DOMAIN_NAME = 'shop-angular-cloudfront.tech';
 export const API_DOMAIN_NAME = `api.${DOMAIN_NAME}`;
+export const CART_API_DOMAIN_NAME = `cart.${DOMAIN_NAME}`;
 
 // Lambda default configuration
 export const LambdaDefaultConfig = {

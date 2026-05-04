@@ -5,6 +5,8 @@ import { ClientStack } from '../lib/client/client-stack';
 import { DomainStack } from '../lib/shared/domain-stack';
 import { DOMAIN_NAME } from '../lib/shared/config';
 import { APIStack } from '../lib/api/api-stack';
+import { CartAPIStack } from '../lib/cart-api/cart-api-stack';
+import { AuthStack } from '../lib/shared/auth-stack';
 
 const app = new cdk.App();
 
@@ -23,4 +25,7 @@ new DomainStack(app, 'DomainStack', {
 
 new ClientStack(app, 'ClientStack', { env });
 
-new APIStack(app, 'APIStack', { env });
+const authStack = new AuthStack(app, 'AuthStack', { env });
+
+new APIStack(app, 'APIStack', { env, authStack });
+new CartAPIStack(app, 'CartAPIStack', { env, authStack });

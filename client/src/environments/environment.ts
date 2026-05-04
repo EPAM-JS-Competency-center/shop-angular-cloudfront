@@ -5,6 +5,7 @@
 import { Config } from './config.interface';
 
 const API_URL = 'https://y7k6etbh5d.execute-api.us-east-1.amazonaws.com/prod';
+const COGNITO_CLIENT_ID = '3fn9q5p11n3u8293cqbn48vgch';
 
 export const environment: Config = {
   production: false,
@@ -20,11 +21,11 @@ export const environment: Config = {
     order: false,
     import: true,
     bff: true,
-    cart: false,
+    cart: true,
   },
   cognito: {
     enabled: true,
-    loginUrl: 'https://shop-angular-cloudfront.auth.us-east-1.amazoncognito.com/login?client_id=27inoro6kgi2bolt4vo13tiqdu&response_type=token&scope=email+openid+profile&redirect_uri=http://localhost:4200'
+    loginUrl: `https://shop-angular-cloudfront.auth.us-east-1.amazoncognito.com/login?client_id=${COGNITO_CLIENT_ID}&response_type=token&scope=email+openid+profile&redirect_uri=http://localhost:4200`
   }
 };
 

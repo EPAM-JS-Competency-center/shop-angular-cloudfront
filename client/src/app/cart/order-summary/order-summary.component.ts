@@ -21,7 +21,7 @@ export class OrderSummaryComponent {
   totalPrice = input.required<number>();
 
   /** Add productId */
-  add = output<string>();
+  add = output<ProductCheckout>();
   /** Remove productId */
-  remove = output<string>();
+  remove = output<ProductCheckout>();
 }

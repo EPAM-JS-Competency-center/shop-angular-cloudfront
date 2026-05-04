@@ -1,0 +1,32 @@
+@baseUrl = https://j41sktu9vk.execute-api.us-east-1.amazonaws.com/prod/api
+# @baseUrl = http://localhost:4000/api
+
+
+
+GET {{baseUrl}}
+
+
+
+## AUTH
+
+### LOGIN
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "username": "oleh",
+  "password": "123"
+}
+
+### REGISTER
+POST {{baseUrl}}/auth/register
+Content-Type: application/json
+
+{
+  "name": "oleh",
+  "password": "123"
+}
+
+### CART 
+
+GET {{baseUrl}}/profile/cart

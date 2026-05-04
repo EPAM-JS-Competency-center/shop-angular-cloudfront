@@ -4,6 +4,10 @@ GO_BUILD := CGO_ENABLED=0  GOOS=linux GOARCH=arm64 go build -tags lambda.norpc -
 build-ui:
 	cd client && npm ci && npx ng build --configuration production
 
+.PHONY: build-cart-ui
+build-cart-ui:
+	cd cart-api && npm ci && npm run build
+
 .PHONY: build-api
 build-api:
 	cd api &&  \
@@ -18,7 +22,7 @@ build-api:
 	$(GO_BUILD) -o ./dist/basicAuthorizer/bootstrap ./cmd/basicAuthorizer/main.go
 
 .PHONY: deploy
-deploy: build-ui build-api
+deploy: build-ui build-cart-ui build-api
 	cd infra && npx cdk deploy --all --require-approval never $(if $(PROFILE),--profile $(PROFILE),)
 
 .PHONY: seed

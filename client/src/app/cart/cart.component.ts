@@ -21,6 +21,8 @@ import {
 import { MatCard, MatCardContent, MatCardTitle } from '@angular/material/card';
 import { AsyncPipe } from '@angular/common';
 import { toSignal } from '@angular/core/rxjs-interop';
+import { Product } from '../products/product.interface';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cart',
@@ -52,6 +54,7 @@ export class CartComponent {
   private readonly fb = inject(UntypedFormBuilder);
   private readonly checkoutService = inject(CheckoutService);
   private readonly cartService = inject(CartService);
+  private readonly router = inject(Router);
 
   products = toSignal(this.checkoutService.getProductsForCheckout(), {
     initialValue: [],
@@ -87,11 +90,16 @@ export class CartComponent {
     return this.shippingInfo.value.comment;
   }
 
-  add(id: string): void {
-    this.cartService.addItem(id);
+  add(product: Product): void {
+    this.cartService.addItem(product);
   }
 
-  remove(id: string): void {
-    this.cartService.removeItem(id);
+  remove(product: Product): void {
+    this.cartService.removeItem(product);
+  }
+
+  async submitOrder(): Promise<void> {
+    await this.cartService.checkout(this.shippingInfo.value as any);
+    this.router.navigate(['/admin/products']); // Wait, where should I navigate?
   }
 }

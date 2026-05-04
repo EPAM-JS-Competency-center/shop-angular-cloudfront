@@ -20,6 +20,6 @@ export class ProductItemCheckoutComponent {
   product = input.required<ProductCheckout>();
   hideControls = input(false);
 
-  add = output();
-  remove = output();
+  add = output<ProductCheckout>();
+  remove = output<ProductCheckout>();
 }
